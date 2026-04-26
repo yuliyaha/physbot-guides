@@ -174,7 +174,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div class="topic-row"><div class="t-num reg">9</div><div><div class="t-text">Функциональные резервы гемокардиореспираторной системы в газообмене</div><div class="t-date">06.04 – 10.04</div></div></div>
       <div class="topic-row fin"><div class="t-num fin">10</div><div><div class="t-text">Итоговое занятие: «Физиология кровообращения. Физиология дыхания»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">13.04 – 17.04</div></div></div>
       <div class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Общая характеристика системы пищеварения. Регуляция пищевого поведения. Пищеварение в полости рта и желудке</div><div class="t-date">20.04 – 24.04</div></div></div>
-      <div class="topic-row current"><div class="t-num cur">12</div><div><div class="t-text">Роль печени и поджелудочной железы в пищеварении. Пищеварение в тонком и толстом кишечнике<span class="current-badge">◉ сейчас</span></div><div class="t-date">27.04 – 30.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">12</div><div><div class="t-text">Роль печени и поджелудочной железы в пищеварении. Пищеварение в тонком и толстом кишечнике</div><div class="t-date">27.04 – 30.04</div></div></div>
       <div class="topic-row"><div class="t-num reg">13</div><div><div class="t-text">Обмен веществ и энергии. Питание. Регуляция массы тела. Терморегуляция</div><div class="t-date">04.05 – 08.05</div></div></div>
       <div class="topic-row"><div class="t-num reg">14</div><div><div class="t-text">Физиология выделения</div><div class="t-date">11.05 – 15.05</div></div></div>
       <div class="topic-row fin"><div class="t-num fin">15</div><div><div class="t-text">Итоговое занятие: «Физиология пищеварения. Обмен веществ и энергии. Терморегуляция. Выделение»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">18.05 – 22.05</div></div></div>
@@ -424,6 +424,45 @@ function showLec(id, btn) {
   document.getElementById(id).style.display = 'block';
   btn.classList.add('active');
 }
+
+// Динамическая подсветка текущей темы — МФИУ Леч весна 2026
+const mfiuLechWeeks = [
+  { n:1,  from:'2026-02-07', to:'2026-02-13' },
+  { n:2,  from:'2026-02-14', to:'2026-02-20' },
+  { n:3,  from:'2026-02-21', to:'2026-02-27' },
+  { n:4,  from:'2026-02-28', to:'2026-03-06' },
+  { n:5,  from:'2026-03-07', to:'2026-03-13' },
+  { n:6,  from:'2026-03-14', to:'2026-03-20' },
+  { n:7,  from:'2026-03-21', to:'2026-03-27' },
+  { n:8,  from:'2026-03-28', to:'2026-04-03' },
+  { n:9,  from:'2026-04-04', to:'2026-04-10' },
+  { n:10, from:'2026-04-11', to:'2026-04-19' },
+  { n:11, from:'2026-04-20', to:'2026-04-24' },
+  { n:12, from:'2026-04-25', to:'2026-05-01' },
+  { n:13, from:'2026-05-02', to:'2026-05-08' },
+  { n:14, from:'2026-05-09', to:'2026-05-15' },
+  { n:15, from:'2026-05-16', to:'2026-05-22' },
+  { n:16, from:'2026-05-23', to:'2026-05-29' },
+  { n:17, from:'2026-05-30', to:'2026-06-14' },
+];
+(function() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const cur = mfiuLechWeeks.find(w => today >= new Date(w.from) && today <= new Date(w.to));
+  if (!cur) return;
+  document.querySelectorAll('#schedule .topic-row').forEach(row => {
+    const num = row.querySelector('.t-num');
+    if (num && num.textContent.trim() === String(cur.n)) {
+      row.classList.add('current');
+      num.classList.remove('reg','fin'); num.classList.add('cur');
+      const t = row.querySelector('.t-text');
+      if (t && !t.querySelector('.current-badge')) {
+        const b = document.createElement('span');
+        b.className = 'current-badge'; b.textContent = '◉ сейчас';
+        t.appendChild(b);
+      }
+    }
+  });
+})();
 </script>
 </body>
 </html>
