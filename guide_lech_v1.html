@@ -21,7 +21,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 }
 .wrap { max-width: 740px; margin: 0 auto; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
 .hero { padding: 32px 32px 26px; background: var(--bg-card); border-bottom: 1px solid var(--border-light); position: relative; overflow: hidden; }
-.hero-watermark { position: absolute; right: -10px; top: -18px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; }
+.hero-watermark { position: absolute; right: -10px; top: -18px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; z-index: 0; }
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bg-card); background: var(--accent); padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; }
 .hero-title { font-family: 'Lora', serif; font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1.08; position: relative; }
 .hero-sub { font-size: 15px; color: var(--ink-2); margin-top: 6px; position: relative; }
@@ -167,8 +167,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
     <button class="active" onclick="show('schedule',this)">Темы</button>
     <button onclick="show('groups',this)">Группы</button>
     <button onclick="show('lectures',this)">Лекции</button>
-    <button onclick="show('scale',this)">Шкала оценок</button>
     <button onclick="show('criteria',this)">Критерии</button>
+    <button onclick="show('scale',this)">Шкала (тест)</button>
     <button onclick="show('zachet',this)">Зачёт</button>
     <button onclick="show('exams',this)">Экзамен</button>
   </nav>
@@ -402,12 +402,40 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 
     <!-- ЭКЗАМЕНЫ -->
     <div id="exams" class="section" style="display:none;">
-      <div class="sec-header">
-        <div class="sec-title">Расписание экзаменов</div>
-        <span class="sec-count">Лето 2026</span>
+      <div class="sec-header"><div class="sec-title">Экзамен</div></div>
+      <div class="rule-block">
+        <p class="rule-title">Допуск к экзамену</p>
+        <div class="rule-item hi">Успешно сдан зачёт за предыдущий семестр</div>
+        <div class="rule-item hi">Положительная текущая аттестация текущего семестра</div>
+        <div class="rule-item hi">Нет неотработанных пропусков занятий и лекций</div>
+        <div class="rule-item hi">Предоставлен конспект лекций УСР</div>
+        <div class="rule-item hi">Успешно защищены протоколы практических занятий</div>
       </div>
-      <p style="font-size:13px;color:var(--ink-2);margin-bottom:16px;">Экзамен — устно. Начало в 09:00.</p>
+      <div class="rule-block">
+        <p class="rule-title">Форма экзамена · Леч / Пед / ВМИ</p>
+        <div class="exam-row"><span class="exam-lbl">Форма</span><span>Устно, без предварительного тестирования</span></div>
+        <div class="exam-row"><span class="exam-lbl">Билет</span><span>3 вопроса: 2 вопроса по механизмам регуляции функций + методы исследования с задачей</span></div>
+        <div class="exam-row"><span class="exam-lbl">Предъявить</span><span>Заполненный практикум + конспект лекций УСР</span></div>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Итоговая экзаменационная отметка</div></div>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:10px;">Итоговая экзаменационная отметка (О<sub>экз</sub>) рассчитывается с учётом рейтинга студента за два семестра (Р<sub>обуч</sub>) и отметки за второй этап экзамена (О<sub>2й_этап</sub>) с округлением до ближайшего целого:</p>
+      <div class="formula-box">О<sub>экз</sub> = (О<sub>2й_этап</sub> + Р<sub>обуч</sub>) / 2 &nbsp;+&nbsp; Б − Ш</div>
+      <p style="font-size:13px;color:var(--ink-2);margin-bottom:14px;">где <b>Б</b> — бонусные баллы, <b>Ш</b> — штрафные баллы.</p>
+      <div class="formula-box">Р<sub>обуч</sub> = (Р<sub>акад</sub> + Р<sub>практ</sub> + Р<sub>текущ</sub>) / 3</div>
 
+      <div class="divider"></div>
+      <div class="auto-block">
+        <div class="auto-title">Отметка 9 или 10 баллов на экзамене — дополнительные условия</div>
+        <div style="font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:12px;">Студентам на экзамене может быть также выставлена отметка 9 или 10 баллов при выполнении следующих условий:</div>
+        <div class="auto-item">Все итоговые занятия (теория и практика) сданы с первой попытки в обоих семестрах</div>
+        <div class="auto-item">Средний балл текущей аттестации (среднее за коллоквиумы) — 7,0 и выше</div>
+        <div class="auto-item">Рейтинг за два семестра (Р<sub>обуч</sub>) — 7,0 и выше</div>
+        <div class="auto-item">По итогам двух семестров студент вошёл в число 20% лучших на факультете по величине рейтингового балла (Р<sub>обуч</sub>)</div>
+        <div style="font-size:12.5px;color:var(--ink-2);font-style:italic;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light);">Решение принимается экзаменатором и заведующим кафедрой совместно после подготовки ответа на вопрос экзаменационного билета.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Расписание экзаменов</div><span class="sec-count">Лето 2026</span></div>
       <div class="rule-block">
         <p class="rule-title">15 июня · понедельник · Леч 3 поток</p>
         <div class="exam-row"><span class="exam-lbl">09:00</span><span class="exam-groups">1221, 1222</span></div>
@@ -465,28 +493,20 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <div class="exam-row"><span class="exam-lbl">09:30</span><span class="exam-groups">2217, 8101</span></div>
       </div>
 
-      <div class="divider"></div>
-      <div class="rule-block">
-        <p class="rule-title">Допуск к экзамену</p>
-        <div class="rule-item hi">Успешно сдан зачёт за предыдущий семестр</div>
-        <div class="rule-item hi">Положительная текущая аттестация текущего семестра</div>
-        <div class="rule-item hi">Нет неотработанных пропусков занятий и лекций</div>
-        <div class="rule-item hi">Предоставлен конспект лекций УСР</div>
-        <div class="rule-item hi">Успешно защищены протоколы практических занятий</div>
-      </div>
-      <div class="rule-block">
-        <p class="rule-title">Форма экзамена · Леч / Пед / ВМИ</p>
-        <div class="exam-row"><span class="exam-lbl">Форма</span><span>Устно, без предварительного тестирования</span></div>
-        <div class="exam-row"><span class="exam-lbl">Билет</span><span>3 вопроса: 2 вопроса механизмы регуляции функций + методы исследования с задачей</span></div>
-        <div class="exam-row"><span class="exam-lbl">Предъявить</span><span>Заполненный практикум + конспект лекций УСР</span></div>
-      </div>
     </div>
 
     <!-- ШКАЛА -->
     <div id="scale" class="section" style="display:none;">
-      <div class="sec-header">
-        <div class="sec-title">Шкала оценок</div>
-        <span class="sec-count">тест · итоговые</span>
+      <div class="rule-block" style="margin-bottom:16px;">
+        <p class="rule-title">Отметки на занятии</p>
+        <p style="font-size:13.5px;color:var(--ink);line-height:1.5;padding:5px 0 8px 0;">На занятии студенту может быть выставлено до трёх отметок:</p>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">1. за выполнение контрольного тестового задания;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">2. за выполнение и защиту практической работы;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;line-height:1.5;">3. за устный либо письменный ответ по теме занятия.</div>
+      </div>
+      <div class="sec-header" style="margin-top:16px;">
+        <div class="sec-title">Шкала отметок за тест</div>
+        <span class="sec-count">% правильных ответов → балл</span>
       </div>
       <div class="scale-row"><span class="scale-pct">98 – 100 %</span><span class="scale-mark">9 баллов</span><div class="bar-wrap"><div class="bar" style="width:100%;background:#5a9922;"></div></div><span class="tag tag-pass">зачтено</span></div>
       <div class="scale-row"><span class="scale-pct">92 – 97 %</span><span class="scale-mark">8 баллов</span><div class="bar-wrap"><div class="bar" style="width:97%;background:#5a9922;"></div></div><span class="tag tag-pass">зачтено</span></div>
@@ -498,30 +518,6 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div class="scale-row"><span class="scale-pct">21 – 40 %</span><span class="scale-mark">2 балла</span><div class="bar-wrap"><div class="bar" style="width:40%;background:#c05050;"></div></div><span class="tag tag-fail">незачтено</span></div>
       <div class="scale-row"><span class="scale-pct">0 – 20 %</span><span class="scale-mark">1 балл</span><div class="bar-wrap"><div class="bar" style="width:20%;background:#b03030;"></div></div><span class="tag tag-fail">незачтено</span></div>
       <p class="note" style="margin-top:10px;">* Отметка может быть изменена по результатам устного собеседования. На тест — до 28 минут.</p>
-      <div class="divider"></div>
-      <div class="sec-header"><div class="sec-title">Итоговая экзаменационная отметка</div></div>
-      <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:10px;">Итоговая экзаменационная отметка (О<sub>экз</sub>) рассчитывается с учётом рейтинга студента за два семестра (Р<sub>обуч</sub>) и отметки за второй этап экзамена (О<sub>2й_этап</sub>) с округлением до ближайшего целого:</p>
-      <div class="formula-box">О<sub>экз</sub> = (О<sub>2й_этап</sub> + Р<sub>обуч</sub>) / 2 &nbsp;+&nbsp; Б − Ш</div>
-      <p style="font-size:13px;color:var(--ink-2);margin-bottom:14px;">где <b>Б</b> — бонусные баллы, <b>Ш</b> — штрафные баллы.</p>
-      <div class="formula-box">Р<sub>обуч</sub> = (Р<sub>акад</sub> + Р<sub>практ</sub> + Р<sub>текущ</sub>) / 3</div>
-
-      <div class="divider"></div>
-      <div class="sec-header"><div class="sec-title">Бонусные баллы (Б)</div><span class="sec-count">макс. 1 балл</span></div>
-      <div class="rule-block">
-        <p class="rule-title">За что начисляются бонусы</p>
-        <div class="rule-item hi">Таблицы, наглядные пособия, учебные видеофильмы, компьютерные программы, флэш-карточки (не менее 20 карточек по теме занятия) и т.п., одобренные кафедрой — <b>0,1 балла</b> за единицу</div>
-        <div class="rule-item hi">Выступление на заседании СНК кафедры — <b>0,05 балла</b> за одно выступление</div>
-        <div class="rule-item hi">Выступление на студенческой научной конференции БГМУ с реферативным докладом — <b>0,1 балла</b> за одно выступление</div>
-        <div class="rule-item hi">Выступление на конференции БГМУ с результатами исследовательской работы или за пределами БГМУ — <b>0,2 балла</b> за одно выступление<br><span style="font-size:12px;color:var(--ink-3);">Дипломантам дополнительно: 1-е место / лауреат +0,3 · 2-е место +0,2 · 3-е место +0,1</span></div>
-        <div class="rule-item hi">Подготовка работы на Республиканский смотр-конкурс, принятой преподавателем — <b>0,4 балла</b></div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="sec-header"><div class="sec-title">Штрафные баллы (Ш)</div><span class="sec-count">макс. 1 балл</span></div>
-      <div class="rule-block">
-        <p class="rule-title">За что начисляются штрафы</p>
-        <div class="rule-item" style="color:var(--red-ink);">Нарушение правил поведения на лекциях и практических занятиях — <b>0,5 балла</b> за каждое нарушение</div>
-      </div>
     </div>
 
     <!-- ЗАЧЁТ -->
@@ -546,7 +542,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
     <!-- КРИТЕРИИ -->
     <div id="criteria" class="section" style="display:none;">
       <div class="sec-header">
-        <div class="sec-title">Критерии оценки на экзамене</div>
+        <div class="sec-title">Критерии оценки знаний</div>
         <span class="sec-count">10-балльная шкала</span>
       </div>
       <div class="cr-row"><div class="cr-mark cm10">10</div><div class="cr-text">Систематизированные, глубокие и полные знания по всем разделам; точная терминология; свободное решение сложных и нестандартных задач; безупречные практические навыки; активная творческая работа. <span class="tag tag-accent">подтверждается у зав. кафедрой</span></div></div>
@@ -560,14 +556,21 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div class="cr-row"><div class="cr-mark cm2">2</div><div class="cr-text">Фрагментарные знания, грубые логические ошибки, неумение решать стандартные задачи.</div></div>
       <div class="cr-row"><div class="cr-mark cm1">1</div><div class="cr-text">Отсутствие знаний, отказ от ответа, неявка без уважительной причины или нарушение дисциплины.</div></div>
       <div class="divider"></div>
-      <div class="auto-block">
-        <div class="auto-title">Отметка 9 или 10 баллов на экзамене — дополнительные условия</div>
-        <div style="font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:12px;">Студентам на экзамене может быть также выставлена отметка 9 или 10 баллов при выполнении следующих условий:</div>
-        <div class="auto-item">Все итоговые занятия (теория и практика) сданы с первой попытки в обоих семестрах</div>
-        <div class="auto-item">Средний балл текущей аттестации (среднее за коллоквиумы) — 7,0 и выше</div>
-        <div class="auto-item">Рейтинг за два семестра (Р<sub>обуч</sub>) — 7,0 и выше</div>
-        <div class="auto-item">По итогам двух семестров студент вошёл в число 20% лучших на факультете по величине рейтингового балла (Р<sub>обуч</sub>)</div>
-        <div style="font-size:12.5px;color:var(--ink-2);font-style:italic;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light);">Решение принимается экзаменатором и заведующим кафедрой совместно после подготовки ответа на вопрос экзаменационного билета.</div>
+      <div class="sec-header"><div class="sec-title">Бонусные баллы (Б)</div><span class="sec-count">макс. 1 балл</span></div>
+      <div class="rule-block">
+        <p class="rule-title">За что начисляются бонусы</p>
+        <div class="rule-item hi">Таблицы, наглядные пособия, учебные видеофильмы, компьютерные программы, флэш-карточки (не менее 20 карточек по теме занятия) и т.п., одобренные кафедрой — <b>0,1 балла</b> за единицу</div>
+        <div class="rule-item hi">Выступление на заседании СНК кафедры — <b>0,05 балла</b> за одно выступление</div>
+        <div class="rule-item hi">Выступление на студенческой научной конференции БГМУ с реферативным докладом — <b>0,1 балла</b> за одно выступление</div>
+        <div class="rule-item hi">Выступление на конференции БГМУ с результатами исследовательской работы или за пределами БГМУ — <b>0,2 балла</b> за одно выступление<br><span style="font-size:12px;color:var(--ink-3);">Дипломантам дополнительно: 1-е место / лауреат +0,3 · 2-е место +0,2 · 3-е место +0,1</span></div>
+        <div class="rule-item hi">Подготовка работы на Республиканский смотр-конкурс, принятой преподавателем — <b>0,4 балла</b></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Штрафные баллы (Ш)</div><span class="sec-count">макс. 1 балл</span></div>
+      <div class="rule-block">
+        <p class="rule-title">За что начисляются штрафы</p>
+        <div class="rule-item" style="color:var(--red-ink);">Нарушение правил поведения на лекциях и практических занятиях — <b>0,5 балла</b> за каждое нарушение</div>
       </div>
     </div>
 
