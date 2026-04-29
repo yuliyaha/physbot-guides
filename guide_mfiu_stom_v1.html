@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Нормальная физиология — Стом МФИУ | Гайд БГМУ 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height: 100vh; padding: 20px 16px 40px; }
+:root {
+  --bg-page: #e4eaf2; --bg-card: #f0f4f8; --bg-muted: #dce5ef; --bg-accent: #ccd8e8;
+  --border: #b0c4d8; --border-light: #ccd8e8; --ink: #0e1f2e; --ink-2: #3a5a78; --ink-3: #7090a8;
+  --accent: #2a5a8a; --accent-light: #7aaad0;
+  --green-bg: #d4e8c2; --green-ink: #2d5a12; --red-bg: #f0d4d4; --red-ink: #7a2020;
+  --blue-bg: #d8e8f5; --blue-ink: #1a4a7a; --warn-bg: #e8f0fa; --warn-ink: #1a4a7a;
+  --current-bg: #fff8e8; --current-border: #d4a040;
+  --shadow: 0 2px 24px rgba(14,31,46,0.10); --radius: 14px;
+}
+.wrap { max-width: 740px; margin: 0 auto; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.hero { padding: 32px 32px 26px; background: var(--bg-card); border-bottom: 1px solid var(--border-light); position: relative; overflow: hidden; }
+.hero-watermark { position: absolute; right: -10px; top: -18px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; z-index: 0; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bg-card); background: var(--accent); padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; position: relative; z-index: 1; }
+.hero-title { font-family: 'Lora', serif; font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1.08; position: relative; }
+.hero-sub { font-size: 15px; color: var(--ink-2); margin-top: 6px; position: relative; }
+.hero-meta { display: flex; gap: 6px; margin-top: 16px; position: relative; flex-wrap: wrap; }
+.meta-chip { font-size: 12px; color: var(--ink-2); background: var(--bg-muted); border: 1px solid var(--border); padding: 4px 10px; border-radius: 3px; font-weight: 500; }
+.nav { display: flex; background: var(--bg-muted); border-bottom: 1px solid var(--border); flex-wrap: wrap; padding: 6px 8px; gap: 4px; }
+.nav button { font-size: 13px; font-weight: 500; padding: 7px 14px; border: 1px solid transparent; background: transparent; color: var(--ink-2); cursor: pointer; font-family: 'Inter', sans-serif; border-radius: 5px; transition: all 0.15s; white-space: nowrap; }
+.nav button.active { background: var(--bg-card); color: var(--ink); border-color: var(--border); box-shadow: 0 1px 4px rgba(46,31,20,0.08); }
+.nav button:hover:not(.active) { background: var(--bg-accent); color: var(--ink); }
+.body { padding: 24px 28px; }
+.section { animation: fadeIn 0.22s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.sec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+.sec-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--ink); }
+.sec-count { font-size: 11px; font-weight: 500; color: var(--ink-3); background: var(--bg-muted); padding: 3px 9px; border-radius: 3px; border: 1px solid var(--border-light); }
+/* TOPICS */
+.topic-row { display: flex; gap: 14px; padding: 11px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; border-radius: 6px; margin: 0 -4px; }
+.topic-row:last-child { border-bottom: none; }
+.topic-row:hover { background: var(--bg-muted); }
+.topic-row.current { background: var(--current-bg); border: 1px solid var(--current-border) !important; border-radius: 8px; padding: 12px 14px; margin: 4px -4px; }
+.t-num { min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.t-num.reg { background: var(--bg-muted); color: var(--ink-2); border: 1px solid var(--border); }
+.t-num.fin { background: var(--ink); color: var(--bg-card); }
+.t-num.cur { background: var(--current-border); color: #fff; box-shadow: 0 0 0 3px #fde89a; }
+.t-text { font-size: 14.5px; color: var(--ink); line-height: 1.5; flex: 1; }
+.t-date { font-size: 11px; color: var(--ink-3); margin-top: 3px; font-weight: 500; }
+.current-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--warn-ink); background: var(--warn-bg); border: 1px solid #e0c080; padding: 2px 8px; border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+/* LECTURES */
+.lec-row { display: flex; gap: 16px; padding: 12px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
+.lec-row:last-child { border-bottom: none; }
+.lec-date { text-align: center; min-width: 44px; }
+.lec-date-d { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; color: var(--ink); }
+.lec-date-w { font-size: 10px; color: var(--ink-3); text-transform: uppercase; font-weight: 600; letter-spacing: 0.06em; }
+.lec-body { flex: 1; }
+.lec-teacher { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.lec-topic { font-size: 14px; color: var(--ink); line-height: 1.5; }
+/* GROUPS TABLE */
+.group-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 4px; }
+.group-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); padding: 8px 10px; border-bottom: 2px solid var(--border); background: var(--bg-muted); }
+.group-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.group-table tr:last-child td { border-bottom: none; }
+.group-table tr:hover td { background: var(--bg-muted); }
+.group-num { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); }
+.room-badge { background: var(--bg-muted); border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; font-size: 12px; font-weight: 500; color: var(--ink-2); }
+.stream-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); padding: 14px 10px 6px; background: none; }
+.av { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+.av-sin { background: #dae8f5; color: #1a4a7a; }
+.av-pva { background: #f5dae8; color: #7a1a4a; }
+.av-viv { background: #daf5e8; color: #1a7a4a; }
+.av-tg  { background: #f5f0da; color: #7a6a1a; }
+.av-yuv { background: #f0daf5; color: #5a1a7a; }
+.av-pta { background: #daf5f5; color: #1a6a7a; }
+.av-ag  { background: #f5dada; color: #7a2020; }
+.av-mig { background: #e8f5da; color: #3a6a1a; }
+.av-fvn { background: #fae0c8; color: #7a4010; }
+.av-dad { background: #e0e8fa; color: #204080; }
+.av-da  { background: #e8f0fa; color: #203a6a; }
+.av-mo  { background: #faf0e0; color: #6a4a10; }
+.av-tp  { background: #f0fae0; color: #3a5a10; }
+.av-gal { background: #fde8f8; color: #6a1a5a; }
+.av-pai { background: #e8fde8; color: #1a5a2a; }
+.t-chip { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); padding: 4px 0; }
+.group-teacher-bar { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; padding: 12px 14px; background: var(--bg-muted); border-radius: 8px; border: 1px solid var(--border-light); }
+/* SCALE */
+.scale-row { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-bottom: 1px solid var(--border-light); }
+.scale-row:last-of-type { border-bottom: none; }
+.scale-pct { font-size: 13px; font-weight: 500; color: var(--ink-2); min-width: 90px; }
+.scale-mark { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); min-width: 80px; }
+.bar-wrap { flex: 1; height: 6px; background: var(--bg-accent); border-radius: 3px; overflow: hidden; }
+.bar { height: 100%; border-radius: 3px; }
+.tag { display: inline-flex; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+.tag-pass { background: var(--green-bg); color: var(--green-ink); }
+.tag-fail { background: var(--red-bg); color: var(--red-ink); }
+.tag-warn { background: var(--warn-bg); color: var(--warn-ink); }
+.tag-accent { background: var(--blue-bg); color: var(--blue-ink); }
+.note { font-size: 12px; color: var(--ink-3); font-style: italic; }
+.divider { height: 1px; background: var(--border-light); margin: 20px 0; }
+/* CRITERIA */
+.cr-row { display: flex; gap: 14px; padding: 11px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
+.cr-row:last-of-type { border-bottom: none; }
+.cr-mark { min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 16px; font-weight: 600; flex-shrink: 0; }
+.cm10 { background: #1a5c14; color: #fff; }
+.cm9  { background: #2e7a20; color: #fff; }
+.cm8  { background: #469a30; color: #fff; }
+.cm7  { background: #68b048; color: #fff; }
+.cm6  { background: #90c060; color: #fff; }
+.cm5  { background: #b8d080; color: #3a4a20; }
+.cm4  { background: #d8e0a0; color: #4a4820; }
+.cm3  { background: #e8b880; color: #5a3010; }
+.cm2  { background: #e09060; color: #4a1808; }
+.cm1  { background: #c85050; color: #fff; }
+.cr-text { font-size: 14px; color: var(--ink); line-height: 1.55; flex: 1; padding-top: 6px; }
+.auto-block { background: var(--warn-bg); border: 1px solid #e0c090; border-radius: 10px; padding: 16px 18px; margin-top: 16px; }
+.auto-title { font-size: 13.5px; font-weight: 600; color: var(--warn-ink); margin-bottom: 10px; }
+.auto-item { font-size: 13px; color: var(--ink); padding: 6px 0 6px 18px; border-bottom: 1px solid rgba(208,160,80,0.25); position: relative; line-height: 1.5; }
+.auto-item::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.auto-item:last-child { border-bottom: none; }
+/* ADMISSION */
+.rule-block { background: var(--bg-muted); border-radius: 8px; border: 1px solid var(--border-light); padding: 14px 16px; margin-bottom: 14px; }
+.rule-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 10px; }
+.rule-item { font-size: 13.5px; color: var(--ink); padding: 5px 0 5px 20px; position: relative; border-bottom: 1px solid var(--border-light); line-height: 1.5; }
+.rule-item:last-child { border-bottom: none; }
+.rule-item::before { content: '—'; position: absolute; left: 0; color: var(--ink-3); }
+.rule-item.hi::before { content: '✓'; color: var(--green-ink); font-weight: 700; }
+.exam-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border-light); font-size: 13.5px; }
+.exam-row:last-child { border-bottom: none; }
+.exam-lbl { font-weight: 600; color: var(--ink-2); min-width: 90px; flex-shrink: 0; }
+.lec-subnav { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.lec-tab { font-size: 12px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); background: var(--bg-muted); color: var(--ink-2); cursor: pointer; font-family: 'Inter', sans-serif; border-radius: 5px; transition: all 0.15s; }
+.lec-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.lec-tab:hover:not(.active) { background: var(--bg-accent); color: var(--ink); }
+.lec-meta { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--warn-bg); border: 1px solid #e0c090; padding: 6px 12px; border-radius: 5px; margin-bottom: 12px; display: inline-block; }
+/* FORMULA */
+.formula-box { font-family: 'Lora', serif; font-size: 17px; text-align: center; padding: 14px; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; color: var(--ink); margin: 14px 0; }
+/* EXAMS TABLE */
+.exam-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.exam-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); padding: 8px 10px; border-bottom: 2px solid var(--border); background: var(--bg-muted); }
+.exam-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.5; }
+.exam-table tr:last-child td { border-bottom: none; }
+.exam-table tr:hover td { background: var(--bg-muted); }
+.exam-date { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); }
+.exam-day { font-size: 11px; color: var(--ink-3); }
+.exam-groups { font-weight: 600; color: var(--ink); font-size: 13px; }
+.exam-commission { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+.av-ag  { background: #f5dada; color: #7a2020; }
+.av-mig { background: #e8f5da; color: #3a6a1a; }
+.av-gal { background: #fde8f8; color: #6a1a5a; }
+.av-yuy { background: #dcc8f0; color: #4a1a7a; }
+.av-emo { background: #f0c8e8; color: #6a1a5a; }
+.av-vak { background: #ececec; color: #666; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-watermark">МФИУ</div>
+    <div class="hero-eyebrow">БГМУ · Кафедра нормальной физиологии</div>
+    <div class="hero-title">Нормальная физиология</div>
+    <div class="hero-sub">МФИУ · Стоматология (русский язык обучения) — 1 курс, весна 2026</div>
+    <div class="hero-meta">
+      <span class="meta-chip">18 занятий</span>
+      <span class="meta-chip">10 лекций</span>
+      <span class="meta-chip">3 часа / занятие</span>
+      <span class="meta-chip">Зачёт — 102 ч / 3 з.е.</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <button class="active" onclick="show('schedule',this)">Темы</button>
+    <button onclick="show('groups',this)">Группы</button>
+    <button onclick="show('lectures',this)">Лекции</button>
+    <button onclick="show('criteria',this)">Критерии</button>
+    <button onclick="show('scale',this)">Шкала (тест)</button>
+    <button onclick="show('zachet',this)">Зачёт</button>
+    <button onclick="show('exams',this)">Экзамен</button>
+  </nav>
+
+  <div class="body">
+
+    <!-- ЗАНЯТИЯ -->
+    <div id="schedule" class="section">
+      <div class="sec-header">
+        <div class="sec-title">Темы практических занятий</div>
+        <span class="sec-count">18 недель · 3 ч/занятие</span>
+      </div>
+      <div class="topic-row"><div class="t-num reg">1</div><div><div class="t-text">Введение. Предмет и задачи нормальной физиологии. Гомеостаз. Физико-химические свойства крови.</div><div class="t-date">09.02 – 13.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">2</div><div><div class="t-text">Физиологические функции эритроцитов. Гемопоэз. Эритроцитопоэз. Физиологические функции тромбоцитов. Тромбоцитопоэз. Система гемостаза.</div><div class="t-date">16.02 – 20.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">3</div><div><div class="t-text">Физиологические функции лейкоцитов. Лейкопоэз. Неспецифическая и специфическая резистентность организма человека. Физиологическая оценка результатов общего анализа крови.</div><div class="t-date">23.02 – 27.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">4</div><div><div class="t-text">Группы крови. Системы АВ0; резус (Rh) и другие. Физиологическое обоснование подбора донорской крови.</div><div class="t-date">02.03 – 06.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">5</div><div><div class="t-text">Основы информационного обмена клетки с окружающей средой. Химическая сигнализация. Общая физиология эндокринной системы.</div><div class="t-date">09.03 – 13.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">6</div><div><div class="t-text">Частная физиология эндокринной системы (щитовидная железа, надпочечники, поджелудочная железа, половые железы).</div><div class="t-date">16.03 – 20.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">7</div><div><div class="t-text">Физиология костной ткани и регуляция кальций-фосфорного обмена.</div><div class="t-date">23.03 – 27.03</div></div></div>
+      <div class="topic-row"><div class="t-num fin">8</div><div><div class="t-text">Итоговое занятие по разделам «Введение. Основные понятия физиологии», «Жидкие среды организма. Физиология системы крови», «Механизмы регуляции физиологических функций. Гуморальная регуляция»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">30.03 – 03.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">9</div><div><div class="t-text">Электрическая сигнализация. Законы реагирования возбудимых тканей. Биологические потенциалы. Изменение возбудимости при возбуждении.</div><div class="t-date">06.04 – 10.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">10</div><div><div class="t-text">Проведение возбуждения по нервным волокнам. Нервно-мышечный синапс.</div><div class="t-date">13.04 – 17.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Физиология скелетных мышц.</div><div class="t-date">22.04 – 25.04</div></div></div>
+      <div class="topic-row current"><div class="t-num cur">12</div><div><div class="t-text">Физиология мышц челюстно-лицевой области. Гладкие мышцы. Понятие о миоэпителиальных и железистых клетках.<span class="current-badge">◉ сейчас</span></div><div class="t-date">27.04 – 30.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">13</div><div><div class="t-text">Общая физиология центральной нервной системы.</div><div class="t-date">04.05 – 08.05</div></div></div>
+      <div class="topic-row"><div class="t-num fin">14</div><div><div class="t-text">Итоговое занятие по разделу «Общая физиология»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">15</div><div><div class="t-text">Роль и функции спинного мозга, ствола мозга и мозжечка.</div><div class="t-date">18.05 – 22.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">Частная физиология центральной нервной системы (промежуточный мозг, конечный мозг).</div><div class="t-date">25.05 – 29.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Физиология автономной (вегетативной) нервной системы.</div><div class="t-date">01.06 – 05.06</div></div></div>
+      <div class="topic-row"><div class="t-num fin">18</div><div><div class="t-text">Итоговое занятие по разделу «Механизмы регуляции физиологических функций. Нервная регуляция»<span class="tag tag-warn" style="margin-left:8px;">зачёт</span></div><div class="t-date">08.06 – 12.06</div></div></div>
+    </div>
+
+    <!-- ГРУППЫ -->
+    <div id="groups" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Расписание практических занятий</div><span class="sec-count">Группы 6140–6147, 6155</span></div>
+      <div class="group-teacher-bar">
+        <div class="t-chip"><div class="av av-pai">ПАИ</div>Печурский А.И. — 6140</div>
+        <div class="t-chip"><div class="av av-yuy">ЮЮ</div>Юшкевич Ю.Ю. — 6141, 6144</div>
+        <div class="t-chip"><div class="av av-emo">ЕМО</div>Корниенко Е.М.О. — 6142</div>
+        <div class="t-chip"><div class="av av-dad">ДАД</div>Данченко А.Д. — 6143, 6145</div>
+        <div class="t-chip"><div class="av av-mig">МИГ</div>Гаптарь М.И. — 6146</div>
+        <div class="t-chip"><div class="av av-ag">АГ</div>Чабан А.Г. — 6147</div>
+        <div class="t-chip"><div class="av av-gal">ГАЛ</div>Григорьян А.Л. — 6155</div>
+        <div class="t-chip"><div class="av av-vak">Вак</div>Вакансия — 6154</div>
+      </div>
+      <table class="group-table">
+        <thead><tr><th>Группа</th><th>День / время</th><th>Преподаватель</th><th>Ауд.</th></tr></thead>
+        <tbody>
+          <tr><td><span class="group-num">6140</span></td><td>Чт 15:30–17:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-pai">ПАИ</div>Печурский А.И.</div></td><td><span class="room-badge">129</span></td></tr>
+          <tr><td><span class="group-num">6141</span></td><td>Ср 16:00–18:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-yuy">ЮЮ</div>Юшкевич Ю.Ю.</div></td><td><span class="room-badge">127</span></td></tr>
+          <tr><td><span class="group-num">6142</span></td><td>Пт 15:30–17:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-emo">ЕМО</div>Корниенко Е.М.О.</div></td><td><span class="room-badge">102</span></td></tr>
+          <tr><td><span class="group-num">6143</span></td><td>Вт 08:00–10:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-dad">ДАД</div>Данченко А.Д.</div></td><td><span class="room-badge">142-2</span></td></tr>
+          <tr><td><span class="group-num">6144</span></td><td>Вт 16:00–18:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-yuy">ЮЮ</div>Юшкевич Ю.Ю.</div></td><td><span class="room-badge">130</span></td></tr>
+          <tr><td><span class="group-num">6145</span></td><td>Вт 10:30–12:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-dad">ДАД</div>Данченко А.Д.</div></td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6146</span></td><td>Пт 10:30–12:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-mig">МИГ</div>Гаптарь М.И.</div></td><td><span class="room-badge">128</span></td></tr>
+          <tr><td><span class="group-num">6147</span></td><td>Пн 10:30–12:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-ag">АГ</div>Чабан А.Г.</div></td><td><span class="room-badge">127</span></td></tr>
+          <tr><td><span class="group-num">6154</span></td><td>Пт 13:00–15:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-vak">Вак</div>Вакансия</div></td><td><span class="room-badge">129</span></td></tr>
+          <tr><td><span class="group-num">6155</span></td><td>Пн 10:30–12:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-gal">ГАЛ</div>Григорьян А.Л.</div></td><td><span class="room-badge">102</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ЛЕКЦИИ -->
+    <div id="lectures" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Лекции</div><span class="sec-count">Ср · 14:40–15:40 · ауд. 6</span></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">11.02</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Голодок Т.П.</div><div class="lec-topic">1. Предмет и задачи нормальной физиологии. Жидкие среды. Физиология системы крови.</div></div></div>
+      <div class="lec-row" style="opacity:0.6;"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">УСР</div></div><div class="lec-body"><div class="lec-teacher">управляемая самостоятельная работа</div><div class="lec-topic">2. Физиологические функции клеток крови. Гемопоэз. Система гемостаза.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">18.03</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Чабан А.Г.</div><div class="lec-topic">3. Физиология эндокринной системы. Физиология костной ткани и регуляция кальций-фосфорного обмена.</div></div></div>
+      <div class="lec-row" style="opacity:0.6;"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">УСР</div></div><div class="lec-body"><div class="lec-teacher">управляемая самостоятельная работа</div><div class="lec-topic">4. Группы крови. Физиологическое обоснование подбора донорской крови.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">15.04</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Фоменко В.Н.</div><div class="lec-topic">5. Проведение возбуждения по нервным волокнам. Синаптическая передача.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">22.04</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Гаптарь М.И.</div><div class="lec-topic">6. Физиология скелетных и гладких мышц. Особенности мышц челюстно-лицевой области.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">06.05</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Фоменко В.Н.</div><div class="lec-topic">7. Понятие о регуляции физиологических функций. Общая физиология ЦНС.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">13.05</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Чабан А.Г.</div><div class="lec-topic">8. Нервная регуляция вегетативных функций.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">20.05</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Фоменко В.Н.</div><div class="lec-topic">9. Законы гемодинамики. Давление крови.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">27.05</div><div class="lec-date-w">Ср</div></div><div class="lec-body"><div class="lec-teacher">Фоменко В.Н.</div><div class="lec-topic">10. Физиологические свойства и особенности миокарда. Регуляция сердечной деятельности.</div></div></div>
+    </div>
+
+    <!-- ЭКЗАМЕНЫ -->
+    <div id="zachet" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Расписание зачёта</div><span class="sec-count">08–13 июня 2026</span></div>
+      <p style="font-size:13px;color:var(--ink-2);margin-bottom:14px;">Зачёт проводится в рамках занятия №18 — в обычное время группы.</p>
+      <div class="rule-block"><p class="rule-title">Понедельник 08.06</p><div class="exam-row"><span class="exam-lbl">10:30–12:45</span><span class="exam-groups">6147, 6155</span></div></div>
+      <div class="rule-block"><p class="rule-title">Вторник 10.06</p><div class="exam-row"><span class="exam-lbl">08:00–10:15</span><span class="exam-groups">6143</span></div><div class="exam-row"><span class="exam-lbl">10:30–12:45</span><span class="exam-groups">6145</span></div><div class="exam-row"><span class="exam-lbl">16:00–18:15</span><span class="exam-groups">6144</span></div></div>
+      <div class="rule-block"><p class="rule-title">Среда 11.06</p><div class="exam-row"><span class="exam-lbl">16:00–18:15</span><span class="exam-groups">6141</span></div></div>
+      <div class="rule-block"><p class="rule-title">Четверг 12.06</p><div class="exam-row"><span class="exam-lbl">15:30–17:45</span><span class="exam-groups">6140</span></div></div>
+      <div class="rule-block"><p class="rule-title">Пятница 13.06</p><div class="exam-row"><span class="exam-lbl">10:30–12:45</span><span class="exam-groups">6146</span></div><div class="exam-row"><span class="exam-lbl">13:00–15:15</span><span class="exam-groups">6154</span></div><div class="exam-row"><span class="exam-lbl">15:30–17:45</span><span class="exam-groups">6142</span></div></div>
+      <div class="divider"></div>
+      <div class="rule-block"><p class="rule-title">Допуск к зачёту</p><div class="rule-item hi">Положительная текущая аттестация по всем итоговым занятиям</div><div class="rule-item hi">Нет неотработанных пропусков занятий и лекций</div><div class="rule-item hi">Предоставлен конспект лекций УСР</div><div class="rule-item hi">Успешно защищены протоколы практических занятий</div><div class="rule-item">Не нарушались производственная дисциплина и правила ТБ</div></div>
+      <div class="rule-block"><p class="rule-title">Выставление зачёта</p><div class="rule-item hi">Если коллоквиумы сданы с первой попытки на положительную отметку — выставляется «зачтено».</div><div class="rule-item">Если со второй попытки и более — проводится компьютерное тестирование по темам всего семестра. В случае успешного прохождения (60% и более) выставляется «зачтено».</div><div class="rule-item">Первая пересдача зачёта проводится в форме компьютерного тестирования.</div><div class="rule-item">Вторая пересдача принимается комиссией устно в соответствии с Правилами аттестации.</div></div>
+    </div>
+
+    <!-- ШКАЛА -->
+    <div id="scale" class="section" style="display:none;">
+      <div class="rule-block" style="margin-bottom:16px;">
+        <p class="rule-title">Отметки на занятии</p>
+        <p style="font-size:13.5px;color:var(--ink);line-height:1.5;padding:5px 0 8px 0;">На занятии студенту может быть выставлено до трёх отметок:</p>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">1. за выполнение контрольного тестового задания;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">2. за выполнение и защиту практической работы;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;line-height:1.5;">3. за устный либо письменный ответ по теме занятия.</div>
+      </div>
+      <div class="sec-header">
+        <div class="sec-title">Шкала отметок за тест</div>
+        <span class="sec-count">% правильных ответов → балл</span>
+      </div>
+      <div class="scale-row"><span class="scale-pct">98 – 100 %</span><span class="scale-mark">9 баллов</span><div class="bar-wrap"><div class="bar" style="width:100%;background:#5a9922;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">92 – 97 %</span><span class="scale-mark">8 баллов</span><div class="bar-wrap"><div class="bar" style="width:97%;background:#5a9922;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">84 – 91 %</span><span class="scale-mark">7 баллов</span><div class="bar-wrap"><div class="bar" style="width:91%;background:#6aac28;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">76 – 83 %</span><span class="scale-mark">6 баллов</span><div class="bar-wrap"><div class="bar" style="width:83%;background:#7cc040;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">68 – 75 %</span><span class="scale-mark">5 баллов</span><div class="bar-wrap"><div class="bar" style="width:75%;background:#98cc60;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">60 – 67 %</span><span class="scale-mark">4 балла</span><div class="bar-wrap"><div class="bar" style="width:67%;background:#b8d880;"></div></div><span class="tag tag-pass">зачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">41 – 59 %</span><span class="scale-mark">3 балла</span><div class="bar-wrap"><div class="bar" style="width:59%;background:#d07070;"></div></div><span class="tag tag-fail">незачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">21 – 40 %</span><span class="scale-mark">2 балла</span><div class="bar-wrap"><div class="bar" style="width:40%;background:#c05050;"></div></div><span class="tag tag-fail">незачтено</span></div>
+      <div class="scale-row"><span class="scale-pct">0 – 20 %</span><span class="scale-mark">1 балл</span><div class="bar-wrap"><div class="bar" style="width:20%;background:#b03030;"></div></div><span class="tag tag-fail">незачтено</span></div>
+      <p class="note" style="margin-top:10px;">* Отметка может быть изменена по результатам устного собеседования. На тест — до 28 минут.</p>
+    </div>
+    </div>
+    <div id="exams" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Допуск к экзамену и форма</div></div>
+      <div class="rule-block"><p class="rule-title">Допуск к экзамену</p><div class="rule-item hi">Успешно сдан зачёт за предыдущий семестр</div><div class="rule-item hi">Положительная текущая аттестация текущего семестра</div><div class="rule-item hi">Нет неотработанных пропусков занятий и лекций</div><div class="rule-item hi">Предоставлен конспект лекций УСР</div><div class="rule-item hi">Успешно защищены протоколы практических занятий</div></div>
+      <div class="rule-block"><p class="rule-title">Форма экзамена · Стом МФИУ</p><div class="exam-row"><span class="exam-lbl">1-й этап</span><span>Компьютерный тест — 60 вопросов, 40 минут. В случае успешного прохождения тестирования (60% и более) студент допускается ко 2-му устному этапу. При результате ниже 60% — выставляется отметка 1, к устному этапу студент не допускается.</span></div><div class="exam-row"><span class="exam-lbl">2-й этап</span><span>Устное собеседование по билету — 2 вопроса: механизмы регуляции функций + методы исследования с задачей. При отказе от ответа — отметка 1.</span></div><div class="exam-row"><span class="exam-lbl">Предъявить</span><span>Заполненный практикум + конспект лекций УСР</span></div></div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Итоговая экзаменационная отметка</div></div>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:10px;">Итоговая экзаменационная отметка (О<sub>экз</sub>) рассчитывается с учётом рейтинга студента за два семестра (Р<sub>обуч</sub>) и отметки за второй этап экзамена (О<sub>2й_этап</sub>) с округлением до ближайшего целого:</p>
+      <div class="formula-box">О<sub>экз</sub> = (О<sub>2й_этап</sub> + Р<sub>обуч</sub>) / 2 &nbsp;+&nbsp; Б − Ш</div>
+      <p style="font-size:13px;color:var(--ink-2);margin-bottom:14px;">где <b>Б</b> — бонусные баллы, <b>Ш</b> — штрафные баллы.</p>
+      <div class="formula-box">Р<sub>обуч</sub> = (Р<sub>акад</sub> + Р<sub>практ</sub> + Р<sub>текущ</sub>) / 3</div>
+
+      <div class="divider"></div>
+      <div class="auto-block">
+        <div class="auto-title">Отметка 9 или 10 баллов на экзамене — дополнительные условия</div>
+        <div style="font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:12px;">Студентам на экзамене может быть также выставлена отметка 9 или 10 баллов при выполнении следующих условий:</div>
+        <div class="auto-item">Все итоговые занятия (теория и практика) сданы с первой попытки в обоих семестрах</div>
+        <div class="auto-item">Средний балл текущей аттестации (среднее за коллоквиумы) — 7,0 и выше</div>
+        <div class="auto-item">Рейтинг за два семестра (Р<sub>обуч</sub>) — 7,0 и выше</div>
+        <div class="auto-item">По итогам двух семестров студент вошёл в число 20% лучших на факультете по величине рейтингового балла (Р<sub>обуч</sub>)</div>
+        <div style="font-size:12.5px;color:var(--ink-2);font-style:italic;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light);">Решение принимается экзаменатором и заведующим кафедрой совместно после подготовки ответа на вопрос экзаменационного билета.</div>
+      </div>
+    </div>
+
+    <!-- КРИТЕРИИ -->
+    <div id="criteria" class="section" style="display:none;">
+      <div class="sec-header">
+        <div class="sec-title">Критерии оценки знаний</div>
+        <span class="sec-count">10-балльная шкала</span>
+      </div>
+      <div class="cr-row"><div class="cr-mark cm10">10</div><div class="cr-text">Систематизированные, глубокие и полные знания по всем разделам; точная терминология; свободное решение сложных и нестандартных задач; безупречные практические навыки; активная творческая работа. <span class="tag tag-accent">подтверждается у зав. кафедрой</span></div></div>
+      <div class="cr-row"><div class="cr-mark cm9">9</div><div class="cr-text">Глубокие и полные знания по всем разделам, активная работа, творческое решение сложных задач. Допускаются единичные несущественные неточности.</div></div>
+      <div class="cr-row"><div class="cr-mark cm8">8</div><div class="cr-text">Глубокие и полные знания, самостоятельное решение сложных задач. Допускаются не более двух несущественных ошибок.</div></div>
+      <div class="cr-row"><div class="cr-mark cm7">7</div><div class="cr-text">Хорошие систематизированные знания, самостоятельное решение типовых задач. Не более трёх несущественных ошибок или одна существенная.</div></div>
+      <div class="cr-row"><div class="cr-mark cm6">6</div><div class="cr-text">Достаточно полные и систематизированные знания, умение решать типовые задачи. Не более двух существенных ошибок.</div></div>
+      <div class="cr-row"><div class="cr-mark cm5">5</div><div class="cr-text">Достаточные знания программы, решение типовых задач с небольшой помощью. Возможны существенные ошибки.</div></div>
+      <div class="cr-row"><div class="cr-mark cm4">4</div><div class="cr-text">Достаточный объём знаний, логичное изложение без существенных ошибок, работа под руководством преподавателя.</div></div>
+      <div class="cr-row"><div class="cr-mark cm3">3</div><div class="cr-text">Недостаточно полный объём знаний, существенные логические ошибки, слабое владение навыками.</div></div>
+      <div class="cr-row"><div class="cr-mark cm2">2</div><div class="cr-text">Фрагментарные знания, грубые логические ошибки, неумение решать стандартные задачи.</div></div>
+      <div class="cr-row"><div class="cr-mark cm1">1</div><div class="cr-text">Отсутствие знаний, отказ от ответа, неявка без уважительной причины или нарушение дисциплины.</div></div>
+   
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Бонусные баллы (Б)</div><span class="sec-count">макс. 1 балл</span></div>
+      <div class="rule-block">
+        <p class="rule-title">За что начисляются бонусы</p>
+        <div class="rule-item hi">Таблицы, наглядные пособия, учебные видеофильмы, компьютерные программы, флэш-карточки (не менее 20 карточек по теме занятия) и т.п., одобренные кафедрой — <b>0,1 балла</b> за единицу</div>
+        <div class="rule-item hi">Выступление на заседании СНК кафедры — <b>0,05 балла</b> за одно выступление</div>
+        <div class="rule-item hi">Выступление на студенческой научной конференции БГМУ с реферативным докладом — <b>0,1 балла</b> за одно выступление</div>
+        <div class="rule-item hi">Выступление на конференции БГМУ с результатами исследовательской работы или за пределами БГМУ — <b>0,2 балла</b> за одно выступление<br><span style="font-size:12px;color:var(--ink-3);">Дипломантам дополнительно: 1-е место / лауреат +0,3 · 2-е место +0,2 · 3-е место +0,1</span></div>
+        <div class="rule-item hi">Подготовка работы на Республиканский смотр-конкурс, принятой преподавателем — <b>0,4 балла</b></div>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Штрафные баллы (Ш)</div><span class="sec-count">макс. 1 балл</span></div>
+      <div class="rule-block">
+        <p class="rule-title">За что начисляются штрафы</p>
+        <div class="rule-item" style="color:var(--red-ink);">Нарушение правил поведения на лекциях и практических занятиях — <b>0,5 балла</b> за каждое нарушение</div>
+      </div>
+    </div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(function(el) { el.style.display = 'none'; });
+  document.querySelectorAll('.nav button').forEach(function(b) { b.classList.remove('active'); });
+  var next = document.getElementById(id);
+  next.style.display = 'block';
+  next.style.animation = 'none';
+  next.offsetHeight;
+  next.style.animation = '';
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
