@@ -21,8 +21,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 }
 .wrap { max-width: 740px; margin: 0 auto; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
 .hero { padding: 32px 32px 26px; background: var(--bg-card); border-bottom: 1px solid var(--border-light); position: relative; overflow: hidden; }
-.hero-watermark { position: absolute; right: -10px; top: -18px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; }
-.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; }
+.hero-watermark { position: absolute; right: -10px; top: -18px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; z-index: 0; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; position: relative; z-index: 1; }
 .hero-title { font-family: 'Lora', serif; font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1.08; position: relative; }
 .hero-sub { font-size: 15px; color: var(--ink-2); margin-top: 6px; position: relative; }
 .hero-meta { display: flex; gap: 6px; margin-top: 16px; position: relative; flex-wrap: wrap; }
@@ -163,23 +163,23 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <div class="sec-title">Темы практических занятий</div>
         <span class="sec-count">17 недель · 4 ч/занятие</span>
       </div>
-      <div class="topic-row"><div class="t-num reg">1</div><div><div class="t-text">Гемодинамика. Функциональные показатели кровообращения. Микроциркуляция</div><div class="t-date">09.02 – 13.02</div></div></div>
-      <div class="topic-row"><div class="t-num reg">2</div><div><div class="t-text">Физиологические свойства и особенности миокарда</div><div class="t-date">16.02 – 20.02</div></div></div>
-      <div class="topic-row"><div class="t-num reg">3</div><div><div class="t-text">Сердечный цикл. Методы исследования сердечной деятельности</div><div class="t-date">23.02 – 27.02</div></div></div>
-      <div class="topic-row"><div class="t-num reg">4</div><div><div class="t-text">Регуляция работы сердца</div><div class="t-date">02.03 – 06.03</div></div></div>
-      <div class="topic-row"><div class="t-num reg">5</div><div><div class="t-text">Регуляция кровообращения</div><div class="t-date">09.03 – 13.03</div></div></div>
-      <div class="topic-row"><div class="t-num reg">6</div><div><div class="t-text">Вентиляция лёгких</div><div class="t-date">16.03 – 20.03</div></div></div>
-      <div class="topic-row"><div class="t-num reg">7</div><div><div class="t-text">Газообмен в лёгких и тканях. Транспорт газов кровью</div><div class="t-date">23.03 – 27.03</div></div></div>
-      <div class="topic-row"><div class="t-num reg">8</div><div><div class="t-text">Регуляция дыхания</div><div class="t-date">30.03 – 03.04</div></div></div>
-      <div class="topic-row"><div class="t-num reg">9</div><div><div class="t-text">Функциональные резервы гемокардиореспираторной системы в газообмене</div><div class="t-date">06.04 – 10.04</div></div></div>
-      <div class="topic-row fin"><div class="t-num fin">10</div><div><div class="t-text">Итоговое занятие: «Физиология кровообращения. Физиология дыхания»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">13.04 – 17.04</div></div></div>
-      <div class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Общая характеристика системы пищеварения. Регуляция пищевого поведения. Пищеварение в полости рта и желудке</div><div class="t-date">20.04 – 24.04</div></div></div>
-      <div class="topic-row current"><div class="t-num cur">12</div><div><div class="t-text">Роль печени и поджелудочной железы в пищеварении. Пищеварение в тонком и толстом кишечнике<span class="current-badge">◉ сейчас</span></div><div class="t-date">27.04 – 30.04</div></div></div>
-      <div class="topic-row"><div class="t-num reg">13</div><div><div class="t-text">Обмен веществ и энергии. Питание. Регуляция массы тела. Терморегуляция</div><div class="t-date">04.05 – 08.05</div></div></div>
-      <div class="topic-row"><div class="t-num reg">14</div><div><div class="t-text">Физиология выделения</div><div class="t-date">11.05 – 15.05</div></div></div>
-      <div class="topic-row fin"><div class="t-num fin">15</div><div><div class="t-text">Итоговое занятие: «Физиология пищеварения. Обмен веществ и энергии. Терморегуляция. Выделение»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">18.05 – 22.05</div></div></div>
-      <div class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">Врождённые и приобретённые формы приспособительных реакций организма человека к изменению условий существования</div><div class="t-date">25.05 – 29.05</div></div></div>
-      <div class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Высшие интегративные функции мозга как физиологическая основа психических функций человека</div><div class="t-date">01.06 – 05.06</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">1</div><div><div class="t-text">Гемодинамика. Функциональные показатели кровообращения. Микроциркуляция</div><div class="t-date">09.02 – 13.02</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">2</div><div><div class="t-text">Физиологические свойства и особенности миокарда</div><div class="t-date">16.02 – 20.02</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">3</div><div><div class="t-text">Сердечный цикл. Методы исследования сердечной деятельности</div><div class="t-date">23.02 – 27.02</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">4</div><div><div class="t-text">Регуляция работы сердца</div><div class="t-date">02.03 – 06.03</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">5</div><div><div class="t-text">Регуляция кровообращения</div><div class="t-date">09.03 – 13.03</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">6</div><div><div class="t-text">Вентиляция лёгких</div><div class="t-date">16.03 – 20.03</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">7</div><div><div class="t-text">Газообмен в лёгких и тканях. Транспорт газов кровью</div><div class="t-date">23.03 – 27.03</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">8</div><div><div class="t-text">Регуляция дыхания</div><div class="t-date">30.03 – 03.04</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">9</div><div><div class="t-text">Функциональные резервы гемокардиореспираторной системы в газообмене</div><div class="t-date">06.04 – 10.04</div></div></div>
+      <div data-num-class="reg" class="topic-row fin"><div class="t-num fin">10</div><div><div class="t-text">Итоговое занятие: «Физиология кровообращения. Физиология дыхания»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">13.04 – 17.04</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Общая характеристика системы пищеварения. Регуляция пищевого поведения. Пищеварение в полости рта и желудке</div><div class="t-date">20.04 – 24.04</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">12</div><div><div class="t-text">Роль печени и поджелудочной железы в пищеварении. Пищеварение в тонком и толстом кишечнике</div><div class="t-date">27.04 – 30.04</div></div></div>
+      <div data-num-class="reg" class="topic-row current"><div class="t-num cur">13</div><div><div class="t-text">Обмен веществ и энергии. Питание. Регуляция массы тела. Терморегуляция<span class="current-badge">◉ сейчас</span></div><div class="t-date">04.05 – 08.05</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">14</div><div><div class="t-text">Физиология выделения</div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div data-num-class="reg" class="topic-row fin"><div class="t-num fin">15</div><div><div class="t-text">Итоговое занятие: «Физиология пищеварения. Обмен веществ и энергии. Терморегуляция. Выделение»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">18.05 – 22.05</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">Врождённые и приобретённые формы приспособительных реакций организма человека к изменению условий существования</div><div class="t-date">25.05 – 29.05</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Высшие интегративные функции мозга как физиологическая основа психических функций человека</div><div class="t-date">01.06 – 05.06</div></div></div>
     </div>
 
     <!-- ГРУППЫ -->
@@ -426,6 +426,53 @@ function showLec(id, btn) {
   document.getElementById(id).style.display = 'block';
   btn.classList.add('active');
 }
+
+// Dynamic current week highlight
+document.addEventListener('DOMContentLoaded', function() {
+  var WEEKS = [
+    ["2026-02-09","2026-02-13"],
+    ["2026-02-16","2026-02-20"],
+    ["2026-02-23","2026-02-27"],
+    ["2026-03-02","2026-03-06"],
+    ["2026-03-09","2026-03-13"],
+    ["2026-03-16","2026-03-20"],
+    ["2026-03-23","2026-03-27"],
+    ["2026-03-30","2026-04-03"],
+    ["2026-04-06","2026-04-10"],
+    ["2026-04-13","2026-04-17"],
+    ["2026-04-22","2026-04-25"],
+    ["2026-04-27","2026-04-30"],
+    ["2026-05-04","2026-05-08"],
+    ["2026-05-11","2026-05-15"],
+    ["2026-05-18","2026-05-22"],
+    ["2026-05-25","2026-05-29"],
+    ["2026-06-01","2026-06-05"],
+    ["2026-06-08","2026-06-12"]
+  ];
+  var today = new Date(); today.setHours(0,0,0,0);
+  if (today.getDay() === 6) today.setDate(today.getDate() + 2);
+  var cur = -1;
+  for (var i = 0; i < WEEKS.length; i++) {
+    var s = new Date(WEEKS[i][0]); var e = new Date(WEEKS[i][1]); e.setHours(23,59,59,999);
+    if (today >= s && today <= e) { cur = i; break; }
+  }
+  if (cur < 0) return;
+  var staticCur = 12;
+  if (cur === staticCur) return;
+  var rows = document.querySelectorAll('#schedule .topic-row');
+  rows.forEach(function(row, idx) {
+    row.classList.remove('current');
+    var num = row.querySelector('.t-num');
+    if (num) { num.classList.remove('cur'); var orig = row.getAttribute('data-num-class'); num.className = 't-num ' + (orig && orig !== 'cur' ? orig : 'reg'); }
+    var badge = row.querySelector('.current-badge'); if (badge) badge.remove();
+    if (idx === cur) {
+      row.classList.add('current');
+      if (num) { num.classList.remove('reg','fin','zan'); num.classList.add('cur'); }
+      var t = row.querySelector('.t-text');
+      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = '◉ сейчас'; t.appendChild(b); }
+    }
+  });
+});
 </script>
 </body>
 </html>
