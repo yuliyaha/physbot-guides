@@ -88,6 +88,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .exam-row{display:flex;gap:12px;padding:10px 0;border-bottom:0.5px solid var(--border);font-size:15px;align-items:flex-start;}
 .exam-row:last-child{border-bottom:none;}
 .exam-lbl{min-width:120px;font-size:13px;color:var(--ink3);font-style:italic;padding-top:1px;}
+.exam-groups{font-size:15px;color:var(--ink);font-weight:500;}
 .cr-row{display:flex;gap:14px;padding:10px 0;border-bottom:0.5px solid var(--border);font-size:15px;align-items:flex-start;}
 .cr-row:last-child{border-bottom:none;}
 .cr-mark{min-width:40px;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:17px;flex-shrink:0;font-family:Georgia,serif;}
@@ -179,6 +180,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.03</div><div class="lec-date-w">Пн</div></div><div class="lec-body"><div class="lec-teacher">Гаптарь М.И.</div><div class="lec-topic">14(2). Анатомия и физиология системы дыхания: внешнее дыхание, газообмен в лёгких, транспорт газов кровью, газообмен в тканях.</div></div></div>
       <div class="lec-row"><div class="lec-date"><div class="lec-date-d">06.04</div><div class="lec-date-w">Пн</div></div><div class="lec-body"><div class="lec-teacher">Гаптарь М.И.</div><div class="lec-topic">15(3). Строение и функции пищеварительной системы. Пищеварение, роль поджелудочной железы и печени. Всасывание.</div></div></div>
       <div class="lec-row"><div class="lec-date"><div class="lec-date-d">27.04</div><div class="lec-date-w">Пн</div></div><div class="lec-body"><div class="lec-teacher">Голодок Т.П.</div><div class="lec-topic">16(4). Физиология системы выделения.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">УСР</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink3);">управляемая самостоятельная работа</div><div class="lec-topic">17(5). Общая физиология сенсорных систем.</div></div></div>
+      <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">УСР</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink3);">управляемая самостоятельная работа</div><div class="lec-topic">18(6). Врождённые и приобретённые формы приспособительных реакций организма к изменению условий существования. Память. Типы ВНД.</div></div></div>
       <p class="note">Лекции 17(5) и 18(6) — УСР (конспект обязателен для допуска)</p>
     </div>
 
@@ -286,6 +289,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="exam-row"><span class="exam-lbl">Допуск</span><span>110 ч / 3 з.е.</span></div>
       </div>
       <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Расписание экзаменов</div><span class="sec-count">Лето 2026</span></div>
+      <div class="rule-block">
+        <p class="rule-title">26 июня · пятница · Фармацевтический факультет</p>
+        <div class="exam-row"><span class="exam-lbl">09:30</span><span class="exam-groups">8101</span></div>
+        <div class="exam-row"><span class="exam-lbl">10:00</span><span class="exam-groups">8102, 8103</span></div>
+        <div class="exam-row"><span class="exam-lbl">10:30</span><span class="exam-groups">8104, 8105</span></div>
+        <div class="exam-row"><span class="exam-lbl">11:00</span><span class="exam-groups">8106, 6160, 6162</span></div>
+        <p class="note" style="margin-top:8px;">Комиссия: Семененя И.Н., Переверзев В.А., Власенко В.И., Голодок Т.П., Чабан А.Г.</p>
+      </div>
+      <div class="rule-block">
+        <p class="rule-title">26 июня · пятница · МФИУ (Фармация)</p>
+        <div class="exam-row"><span class="exam-lbl">12:30</span><span class="exam-groups">6161EN, 6163EN</span></div>
+        <p class="note" style="margin-top:8px;">Комиссия: Александров Д.А., Северина Т.Г., Гайкович Ю.В., Пупа Т.А., Фоменко В.Н.</p>
+      </div>
+      <div class="divider"></div>
       <div class="sec-header"><div class="sec-title">Итоговая экзаменационная отметка</div></div>
       <p style="font-size:13.5px;color:var(--ink2);margin-bottom:10px;">Итоговая экзаменационная отметка (О<sub>экз</sub>) рассчитывается с учётом рейтинга студента за два семестра (Р<sub>обуч</sub>) и отметки за второй этап экзамена (О<sub>2й_этап</sub>) с округлением до ближайшего целого:</p>
       <div class="formula-box">О<sub>экз</sub> = (О<sub>2й_этап</sub> + Р<sub>обуч</sub>) / 2 &nbsp;+&nbsp; Б − Ш</div>
@@ -301,18 +319,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="auto-item">Студент входит в число 20% лучших на факультете по величине рейтингового балла (Р<sub>обуч</sub>)</div>
         <div style="font-size:12.5px;color:var(--ink2);font-style:italic;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">Решение принимается экзаменатором и заведующим кафедрой совместно после подготовки ответа на вопрос экзаменационного билета.</div>
       </div>
-
-      <div class="divider"></div>
-      <div class="sec-header"><div class="sec-title">Расписание экзаменов</div><span class="sec-count">Лето 2026</span></div>
-
-      <div class="rule-block">
-        <p class="rule-title">26 июня · пятница · Фармация + ВМИ</p>
-        <div class="exam-row"><span class="exam-lbl">09:30</span><span class="exam-groups">8101</span></div>
-        <div class="exam-row"><span class="exam-lbl">10:00</span><span class="exam-groups">8102, 8103</span></div>
-        <div class="exam-row"><span class="exam-lbl">10:30</span><span class="exam-groups">8104, 8105</span></div>
-        <div class="exam-row"><span class="exam-lbl">11:00</span><span class="exam-groups">8106, 6160, 6162</span></div>
-      </div>
-
     </div>
 
   </div>
