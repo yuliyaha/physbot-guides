@@ -6,767 +6,461 @@
 <title>Normal Physiology — General Medicine | BSMU Guide 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height: 100vh; padding: 20px 16px 40px; }
 :root {
-  --bg:           #f5f0e8;
-  --bg2:          #ede7d9;
-  --bg3:          #e5ddd0;
-  --card:         #faf7f2;
-  --border:       #c9bfab;
-  --border-light: #ddd6c8;
-  --text:         #2c2418;
-  --text2:        #5c5043;
-  --text3:        #8c7e6a;
-  --accent:       #7a5c35;
-  --accent2:      #9b6f45;
-  --accent-light: #c49a6c;
-  --green:        #3d7a52;
-  --green-bg:     #e8f4ed;
-  --red:          #8b3a3a;
-  --red-bg:       #f5e8e8;
-  --gold:         #a07028;
-  --now-bg:       #fffbf0;
-  --now-border:   #e8a020;
-  --now-text:     #7a4e00;
+  --bg-page: #ede8e1; --bg-card: #f5f0eb; --bg-muted: #e8e0d5; --bg-accent: #ddd4c4;
+  --border: #d0c4b0; --border-light: #e4dbd0; --ink: #2e1f14; --ink-2: #6b5340; --ink-3: #a08060;
+  --accent: #7a5c3a; --accent-light: #c8a87a;
+  --green-bg: #d4e8c2; --green-ink: #2d5a12; --red-bg: #f0d4d4; --red-ink: #7a2020;
+  --blue-bg: #d8e8f5; --blue-ink: #1a4a7a; --warn-bg: #f0e2cc; --warn-ink: #7a4a10;
+  --current-bg: #fff8e8; --current-border: #d4a040;
+  --shadow: 0 2px 24px rgba(46,31,20,0.10); --radius: 14px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'PT Sans', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  font-size: 18px;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-/* ── HEADER ── */
-.header {
-  background: linear-gradient(135deg, #3a2a15 0%, #5c4228 50%, #7a5c35 100%);
-  color: #f5f0e8;
-  padding: 28px 20px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.header-watermark {
-  position: absolute;
-  top: 14px; right: -10px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 120px; font-weight: 600;
-  opacity: 0.08; white-space: nowrap;
-  letter-spacing: -3px; line-height: 1;
-  pointer-events: none; user-select: none;
-}
-.hdr-dept {
-  font-size: 13px; font-weight: 400;
-  letter-spacing: 2px; opacity: 0.7;
-  margin-bottom: 12px; text-transform: uppercase;
-}
-.hdr-badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 3px; padding: 2px 12px;
-  font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; margin-bottom: 10px;
-}
-.hdr-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 40px; font-weight: 600; line-height: 1.15;
-  margin-bottom: 6px;
-}
-.hdr-sub { font-size: 20px; opacity: 0.85; margin-bottom: 22px; }
-.hdr-stats { display: flex; gap: 10px; flex-wrap: wrap; }
-.stat {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 7px; padding: 9px 16px; text-align: center;
-}
-.stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 600; line-height: 1; display: block;
-}
-.stat-lbl {
-  font-size: 11px; opacity: 0.75; letter-spacing: 0.5px;
-  text-transform: uppercase; margin-top: 2px; display: block;
-}
-
-/* ── TABS ── */
-.tabs {
-  background: var(--bg2); border-bottom: 2px solid var(--border);
-  display: flex; overflow-x: auto;
-  -webkit-overflow-scrolling: touch; scrollbar-width: none;
-  position: sticky; top: 0; z-index: 100;
-}
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
-  padding: 14px 18px; font-size: 14px; font-weight: 700;
-  letter-spacing: 0.5px; text-transform: uppercase;
-  color: var(--text3); cursor: pointer;
-  border-bottom: 3px solid transparent; margin-bottom: -2px;
-  white-space: nowrap; transition: all 0.2s; user-select: none;
-}
-.tab:hover { color: var(--accent); }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--bg); }
-
-/* ── CONTENT ── */
-.content { display: none; padding: 22px 16px 56px; }
-.content.active { display: block; }
-.sec-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px; font-weight: 600; color: var(--accent); margin-bottom: 4px;
-}
-.sec-sub { font-size: 16px; color: var(--text3); margin-bottom: 20px; }
-hr.div { border: none; border-top: 1px solid var(--border-light); margin: 26px 0; }
-
-/* ── TOPICS ── */
-.topic-item {
-  display: flex; gap: 14px; padding: 15px 16px;
-  background: var(--card); border: 1px solid var(--border-light);
-  border-radius: 10px; margin-bottom: 9px; align-items: flex-start;
-}
-.topic-item.t-exam { border-color: var(--gold); background: #fef9ee; }
-.topic-item.t-now {
-  background: var(--now-bg); border: 2px solid var(--now-border);
-  box-shadow: 0 2px 18px rgba(232,160,32,0.25);
-  animation: glow 2.5s ease-in-out infinite;
-}
-@keyframes glow {
-  0%,100% { box-shadow: 0 2px 18px rgba(232,160,32,0.25); }
-  50%      { box-shadow: 0 4px 28px rgba(232,160,32,0.50); }
-}
-.t-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px; font-weight: 600; color: var(--accent-light);
-  min-width: 30px; line-height: 1.1;
-}
-.t-now .t-num { color: var(--now-text); }
-.t-body { flex: 1; }
-.t-name { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.45; }
-.t-now .t-name { color: var(--now-text); }
-.t-date { font-size: 15px; color: var(--text3); margin-top: 4px; }
-.t-now .t-date { color: var(--now-text); opacity: 0.75; }
-.badge-now {
-  display: inline-block; font-size: 13px; font-weight: 700;
-  background: var(--now-border); color: #fff;
-  padding: 2px 11px; border-radius: 4px; margin-bottom: 5px;
-}
-.badge-exam {
-  display: inline-block; font-size: 12px; font-weight: 700;
-  background: #f5ecd0; color: var(--gold);
-  border: 1px solid #d4ac60; padding: 2px 9px;
-  border-radius: 4px; margin-left: 8px; vertical-align: middle;
-}
-
-/* ── GROUPS ── */
-.grp-title {
-  font-size: 13px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--text3);
-  padding: 6px 0; border-bottom: 1px solid var(--border-light); margin-bottom: 11px;
-}
-.teacher-card {
-  padding: 12px 16px; background: var(--card);
-  border: 1px solid var(--border-light); border-radius: 10px; margin-bottom: 8px;
-}
-.teacher-card .tn { font-size: 17px; font-weight: 700; }
-.teacher-card .tg { font-size: 15px; color: var(--text3); margin-top: 2px; }
-.grp-row {
-  display: grid; grid-template-columns: 88px 1fr 1fr 54px;
-  padding: 11px 15px; background: var(--card);
-  border: 1px solid var(--border-light); border-radius: 9px;
-  margin-bottom: 7px; align-items: center;
-}
-.grp-row .g  { font-size: 17px; font-weight: 700; color: var(--accent); }
-.grp-row .tm { font-size: 15px; color: var(--text2); }
-.grp-row .tc { font-size: 14px; color: var(--text2); }
-.grp-row .rm { font-size: 14px; font-weight: 700; color: var(--text3); text-align: right; }
-
-/* ── LECTURE SUB-TABS ── */
-.lec-tabs {
-  display: flex; overflow-x: auto;
-  -webkit-overflow-scrolling: touch; scrollbar-width: none;
-  border-bottom: 2px solid var(--border-light);
-}
-.lec-tabs::-webkit-scrollbar { display: none; }
-.lec-tab {
-  padding: 11px 17px; font-size: 14px; font-weight: 700;
-  color: var(--text3); cursor: pointer;
-  border-bottom: 3px solid transparent; margin-bottom: -2px;
-  white-space: nowrap; transition: all 0.2s;
-  text-transform: uppercase; letter-spacing: 0.4px;
-}
-.lec-tab:hover { color: var(--accent); }
-.lec-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-.lec-panel { display: none; }
-.lec-panel.active { display: block; }
-.lec-box { border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; }
-.lec-head {
-  background: var(--bg2); border-bottom: 1px solid var(--border);
-  padding: 12px 16px; font-size: 16px; font-weight: 700; color: var(--text2);
-}
-.lec-row {
-  display: flex; gap: 12px; padding: 12px 16px;
-  border-bottom: 1px solid var(--bg2);
-  background: var(--card); align-items: flex-start;
-}
+.wrap { max-width: 740px; margin: 0 auto; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.hero { padding: 32px 32px 26px; background: var(--bg-card); border-bottom: 1px solid var(--border-light); position: relative; overflow: hidden; }
+.hero-watermark { position: absolute; right: -10px; bottom: -20px; font-family: 'Lora', serif; font-size: 130px; font-weight: 600; color: var(--bg-accent); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -4px; z-index: 0; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bg-card); background: var(--accent); padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; }
+.hero-title { font-family: 'Lora', serif; font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1.08; position: relative; }
+.hero-sub { font-size: 15px; color: var(--ink-2); margin-top: 6px; position: relative; }
+.hero-meta { display: flex; gap: 6px; margin-top: 16px; position: relative; flex-wrap: wrap; }
+.meta-chip { font-size: 12px; color: var(--ink-2); background: var(--bg-muted); border: 1px solid var(--border); padding: 4px 10px; border-radius: 3px; font-weight: 500; }
+.nav { display: flex; background: var(--bg-muted); border-bottom: 1px solid var(--border); flex-wrap: wrap; padding: 6px 8px; gap: 4px; }
+.nav button { font-size: 13px; font-weight: 500; padding: 7px 14px; border: 1px solid transparent; background: transparent; color: var(--ink-2); cursor: pointer; font-family: 'Inter', sans-serif; border-radius: 5px; transition: all 0.15s; white-space: nowrap; }
+.nav button.active { background: var(--bg-card); color: var(--ink); border-color: var(--border); box-shadow: 0 1px 4px rgba(46,31,20,0.08); }
+.nav button:hover:not(.active) { background: var(--bg-accent); color: var(--ink); }
+.body { padding: 24px 28px; }
+.section { animation: fadeIn 0.22s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.sec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+.sec-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--ink); }
+.sec-count { font-size: 11px; font-weight: 500; color: var(--ink-3); background: var(--bg-muted); padding: 3px 9px; border-radius: 3px; border: 1px solid var(--border-light); }
+/* TOPICS */
+.topic-row { display: flex; gap: 14px; padding: 11px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; border-radius: 6px; margin: 0 -4px; }
+.topic-row:last-child { border-bottom: none; }
+.topic-row:hover { background: var(--bg-muted); }
+.topic-row.current { background: var(--current-bg); border: 1px solid var(--current-border) !important; border-radius: 8px; padding: 12px 14px; margin: 4px -4px; }
+.t-num { min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.t-num.reg { background: var(--bg-muted); color: var(--ink-2); border: 1px solid var(--border); }
+.t-num.fin { background: var(--ink); color: var(--bg-card); }
+.t-num.cur { background: var(--current-border); color: #fff; box-shadow: 0 0 0 3px #fde89a; }
+.t-text { font-size: 14.5px; color: var(--ink); line-height: 1.5; flex: 1; }
+.t-date { font-size: 11px; color: var(--ink-3); margin-top: 3px; font-weight: 500; }
+.current-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--warn-ink); background: var(--warn-bg); border: 1px solid #e0c080; padding: 2px 8px; border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+/* LECTURES */
+.lec-row { display: flex; gap: 16px; padding: 12px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
 .lec-row:last-child { border-bottom: none; }
-.lec-dt {
-  min-width: 58px; font-size: 15px; font-weight: 700;
-  color: var(--accent); text-align: center; line-height: 1.3;
-}
-.lec-dt .wd { font-size: 12px; font-weight: 400; color: var(--text3); }
-.lec-tp { flex: 1; font-size: 16px; color: var(--text); line-height: 1.45; }
-.lec-n  { font-size: 13px; color: var(--text3); margin-top: 3px; }
-
-/* USR row — точно как в лечь: серый фон, иконка "МСР" */
-.lec-msr {
-  background: var(--bg2); border-bottom: 1px solid var(--bg3);
-  padding: 10px 16px; display: flex; align-items: flex-start;
-  gap: 12px; font-size: 15px; color: var(--text3); line-height: 1.4;
-}
-.msr-pill {
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 4px; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.5px; padding: 3px 8px; color: var(--text3);
-  text-transform: uppercase; white-space: nowrap; margin-top: 1px;
-}
-
-/* ── CRITERIA — кружки как в лечь ── */
-.grade-wrap { border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
-.grade-row {
-  display: flex; gap: 16px; padding: 14px 16px;
-  border-bottom: 1px solid var(--bg2); background: var(--card); align-items: flex-start;
-}
-.grade-row:last-child { border-bottom: none; }
-.grade-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 600; line-height: 1;
-  width: 48px; height: 48px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; color: #fff;
-}
-.c10 { background: #2e7d50; }
-.c9  { background: #3d9162; }
-.c8  { background: #7a5c35; }
-.c7  { background: #9b6f45; }
-.c6  { background: #a07028; }
-.c5  { background: #b8861e; }
-.c4  { background: #c99a30; }
-.c3  { background: #c04040; }
-.c2  { background: #a03030; }
-.c1  { background: #7a2020; }
-.grade-body { flex: 1; padding-top: 2px; }
-.grade-text { font-size: 16px; color: var(--text2); line-height: 1.5; }
-.grade-hint { font-size: 14px; color: var(--text3); font-style: italic; margin-top: 4px; }
-.grade-hod {
-  display: inline-block; font-size: 11px; font-weight: 700;
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 4px; padding: 2px 8px; color: var(--text3);
-  margin-top: 6px; letter-spacing: 0.3px;
-}
-
-/* ── TEST SCALE — прогресс-бары как в лечь ── */
-.scale-wrap { margin-bottom: 16px; }
-.scale-row {
-  display: flex; align-items: center; gap: 14px;
-  padding: 10px 0; border-bottom: 1px solid var(--border-light);
-}
-.scale-row:last-child { border-bottom: none; }
-.scale-pct {
-  width: 88px; flex-shrink: 0;
-  font-size: 16px; color: var(--text3);
-}
-.scale-mark {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px; font-weight: 700;
-  width: 96px; flex-shrink: 0; white-space: nowrap; color: var(--text);
-}
-.scale-mark span {
-  font-family: 'PT Sans', sans-serif;
-  font-size: 14px; font-weight: 400; color: var(--text3); margin-left: 2px;
-}
-.scale-bar-wrap {
-  flex: 1; display: flex; align-items: center; gap: 10px;
-}
-.scale-bar-track {
-  flex: 1; height: 10px; border-radius: 5px;
-  background: var(--bg3); overflow: hidden;
-}
-.scale-bar-fill { height: 100%; border-radius: 5px; }
-.scale-bar-fill.p { background: var(--green); }
-.scale-bar-fill.f { background: var(--red); }
-.scale-badge {
-  flex-shrink: 0; font-size: 13px; font-weight: 700;
-  padding: 3px 10px; border-radius: 5px; white-space: nowrap;
-}
-.scale-badge.p { background: var(--green-bg); color: var(--green); }
-.scale-badge.f { background: var(--red-bg);   color: var(--red); }
-
-/* ── RULE BLOCK ── */
-.rule-block {
-  background: var(--card); border: 1px solid var(--border-light);
-  border-radius: 10px; padding: 16px 18px; margin-bottom: 14px;
-}
-.rule-title {
-  font-size: 18px; font-weight: 700; color: var(--accent);
-  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
-}
-.rule-title::before {
-  content: ''; display: block; width: 4px; height: 18px;
-  background: var(--accent); border-radius: 2px;
-}
-.rule-list { list-style: none; }
-.rule-list li {
-  padding: 7px 0 7px 20px; position: relative;
-  font-size: 16px; color: var(--text2);
-  border-bottom: 1px solid var(--bg2); line-height: 1.5;
-}
-.rule-list li:last-child { border-bottom: none; }
-.rule-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent-light); }
-
-/* ── INFO TABLE (exam format) — как в лечь ── */
-.info-table { width: 100%; border-collapse: collapse; font-size: 16px; margin-bottom: 4px; }
-.info-table td {
-  padding: 10px 14px; border-bottom: 1px solid var(--bg2);
-  background: var(--card); vertical-align: top; line-height: 1.5;
-}
-.info-table tr:last-child td { border-bottom: none; }
-.info-table td:first-child {
-  font-weight: 700; color: var(--text2); white-space: nowrap;
-  width: 120px; border-right: 1px solid var(--border-light);
-}
-.info-wrap { border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
-
-/* ── FORMULA ── */
-.formula {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 9px; padding: 15px 18px; text-align: center;
-  margin: 14px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px; color: var(--text); line-height: 1.5;
-}
-.formula small {
-  display: block; font-family: 'PT Sans', sans-serif;
-  font-size: 14px; color: var(--text3); margin-top: 5px;
-}
-.f-def { font-size: 16px; color: var(--text2); line-height: 1.6; margin: 10px 0; }
-.f-def p { margin-bottom: 5px; }
-
-/* ── BONUS ── */
-.bonus-wrap { border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; margin-bottom: 18px; }
-.bonus-head {
-  background: var(--bg2); padding: 10px 16px;
-  font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-  text-transform: uppercase; color: var(--text3);
-  border-bottom: 1px solid var(--border-light);
-}
-.bonus-row {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 12px 16px; border-bottom: 1px solid var(--bg2);
-  background: var(--card); font-size: 16px;
-}
-.bonus-row:last-child { border-bottom: none; }
-.bval {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 600; min-width: 58px;
-  color: var(--green); white-space: nowrap;
-}
-.bval.neg { color: var(--red); }
-.btxt { flex: 1; color: var(--text2); line-height: 1.5; }
-
-/* ── EXAM CARD ── */
-.exam-card { background: var(--card); border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
-.exam-bar {
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
-  color: #fff; padding: 12px 16px; font-size: 17px; font-weight: 700;
-}
-.exam-bar span { font-size: 14px; opacity: 0.85; margin-left: 8px; font-weight: 400; }
-.exam-row { display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-bottom: 1px solid var(--bg2); font-size: 16px; }
+.lec-date { text-align: center; min-width: 44px; }
+.lec-date-d { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; color: var(--ink); }
+.lec-date-w { font-size: 10px; color: var(--ink-3); text-transform: uppercase; font-weight: 600; letter-spacing: 0.06em; }
+.lec-body { flex: 1; }
+.lec-teacher { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.lec-topic { font-size: 14px; color: var(--ink); line-height: 1.5; }
+/* GROUPS TABLE */
+.group-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 4px; }
+.group-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); padding: 8px 10px; border-bottom: 2px solid var(--border); background: var(--bg-muted); }
+.group-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.group-table tr:last-child td { border-bottom: none; }
+.group-table tr:hover td { background: var(--bg-muted); }
+.group-num { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); }
+.room-badge { background: var(--bg-muted); border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; font-size: 12px; font-weight: 500; color: var(--ink-2); }
+.stream-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); padding: 14px 10px 6px; background: none; }
+/* SCALE */
+.scale-row { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-bottom: 1px solid var(--border-light); }
+.scale-row:last-of-type { border-bottom: none; }
+.scale-pct { font-size: 13px; font-weight: 500; color: var(--ink-2); min-width: 90px; }
+.scale-mark { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); min-width: 80px; }
+.bar-wrap { flex: 1; height: 6px; background: var(--bg-accent); border-radius: 3px; overflow: hidden; }
+.bar { height: 100%; border-radius: 3px; }
+.tag { display: inline-flex; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+.tag-pass { background: var(--green-bg); color: var(--green-ink); }
+.tag-fail { background: var(--red-bg); color: var(--red-ink); }
+.tag-warn { background: var(--warn-bg); color: var(--warn-ink); }
+.tag-accent { background: var(--blue-bg); color: var(--blue-ink); }
+.note { font-size: 12px; color: var(--ink-3); font-style: italic; }
+.divider { height: 1px; background: var(--border-light); margin: 20px 0; }
+/* CRITERIA */
+.cr-row { display: flex; gap: 14px; padding: 11px 4px; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
+.cr-row:last-of-type { border-bottom: none; }
+.cr-mark { min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 16px; font-weight: 600; flex-shrink: 0; }
+.cm10 { background: #1a5c14; color: #fff; }
+.cm9  { background: #2e7a20; color: #fff; }
+.cm8  { background: #469a30; color: #fff; }
+.cm7  { background: #68b048; color: #fff; }
+.cm6  { background: #90c060; color: #fff; }
+.cm5  { background: #b8d080; color: #3a4a20; }
+.cm4  { background: #d8e0a0; color: #4a4820; }
+.cm3  { background: #e8b880; color: #5a3010; }
+.cm2  { background: #e09060; color: #4a1808; }
+.cm1  { background: #c85050; color: #fff; }
+.cr-text { font-size: 14px; color: var(--ink); line-height: 1.55; flex: 1; padding-top: 6px; }
+.auto-block { background: var(--warn-bg); border: 1px solid #e0c090; border-radius: 10px; padding: 16px 18px; margin-top: 16px; }
+.auto-title { font-size: 13.5px; font-weight: 600; color: var(--warn-ink); margin-bottom: 10px; }
+.auto-item { font-size: 13px; color: var(--ink); padding: 6px 0 6px 18px; border-bottom: 1px solid rgba(208,160,80,0.25); position: relative; line-height: 1.5; }
+.auto-item::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.auto-item:last-child { border-bottom: none; }
+/* ADMISSION */
+.rule-block { background: var(--bg-muted); border-radius: 8px; border: 1px solid var(--border-light); padding: 14px 16px; margin-bottom: 14px; }
+.rule-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 10px; }
+.rule-item { font-size: 13.5px; color: var(--ink); padding: 5px 0 5px 20px; position: relative; border-bottom: 1px solid var(--border-light); line-height: 1.5; }
+.rule-item:last-child { border-bottom: none; }
+.rule-item::before { content: '—'; position: absolute; left: 0; color: var(--ink-3); }
+.rule-item.hi::before { content: '✓'; color: var(--green-ink); font-weight: 700; }
+.exam-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border-light); font-size: 13.5px; }
 .exam-row:last-child { border-bottom: none; }
-.exam-t { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--accent); min-width: 58px; }
-.exam-g { flex: 1; font-weight: 700; }
-.commission { background: var(--bg2); border-top: 1px solid var(--border-light); padding: 10px 16px; font-size: 15px; color: var(--text3); }
-.commission strong { color: var(--text2); font-weight: 700; }
-
-/* ── NOTICE ── */
-.notice {
-  background: #fdf9ee; border: 1px solid #cdb870;
-  border-left: 4px solid var(--gold); border-radius: 7px;
-  padding: 13px 16px; font-size: 16px; color: var(--text2);
-  margin: 14px 0; line-height: 1.5;
-}
-.notice strong { color: var(--text); }
+.exam-lbl { font-weight: 600; color: var(--ink-2); min-width: 90px; flex-shrink: 0; }
+.lec-subnav { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.lec-tab { font-size: 12px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); background: var(--bg-muted); color: var(--ink-2); cursor: pointer; font-family: 'Inter', sans-serif; border-radius: 5px; transition: all 0.15s; }
+.lec-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.lec-tab:hover:not(.active) { background: var(--bg-accent); color: var(--ink); }
+.lec-meta { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--warn-bg); border: 1px solid #e0c090; padding: 6px 12px; border-radius: 5px; margin-bottom: 12px; display: inline-block; }
+/* FORMULA */
+.formula-box { font-family: 'Lora', serif; font-size: 17px; text-align: center; padding: 14px; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; color: var(--ink); margin: 14px 0; }
+/* EXAM GROUPS */
+.exam-groups { font-weight: 600; color: var(--ink); font-size: 13px; }
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="header-watermark">General Medicine</div>
-  <div class="hdr-dept">BSMU · Department of Normal Physiology</div>
-  <div class="hdr-badge">General Medicine</div>
-  <div class="hdr-title">Normal Physiology</div>
-  <div class="hdr-sub">General Medicine — 2nd year, Spring 2026</div>
-  <div class="hdr-stats">
-    <div class="stat"><span class="stat-num">17</span><span class="stat-lbl">Topics</span></div>
-    <div class="stat"><span class="stat-num">10</span><span class="stat-lbl">Lectures</span></div>
-    <div class="stat"><span class="stat-num">4 h</span><span class="stat-lbl">/ class</span></div>
-    <div class="stat"><span class="stat-num">Test + Oral</span><span class="stat-lbl">Exam</span></div>
-  </div>
-</div>
-
-<!-- TABS -->
-<div class="tabs">
-  <div class="tab active" onclick="show('topics',this)">Topics</div>
-  <div class="tab" onclick="show('groups',this)">Groups</div>
-  <div class="tab" onclick="show('lectures',this)">Lectures</div>
-  <div class="tab" onclick="show('criteria',this)">Criteria</div>
-  <div class="tab" onclick="show('scale',this)">Test Scale</div>
-  <div class="tab" onclick="show('credit',this)">Credit</div>
-  <div class="tab" onclick="show('exam',this)">Exam</div>
-</div>
-
-<!-- ══ TOPICS ══ -->
-<div id="topics" class="content active">
-  <p class="sec-title">Practical Class Topics</p>
-  <p class="sec-sub">17 weeks · 4 h / class</p>
-
-  <div class="topic-item"><div class="t-num">1</div><div class="t-body"><div class="t-name">Hemodynamics. Functional indices of blood circulation. Microcirculation</div><div class="t-date">09.02 – 13.02</div></div></div>
-  <div class="topic-item"><div class="t-num">2</div><div class="t-body"><div class="t-name">Physiological properties and peculiarities of the heart muscle</div><div class="t-date">16.02 – 20.02</div></div></div>
-  <div class="topic-item"><div class="t-num">3</div><div class="t-body"><div class="t-name">Cardiac cycle. Methods of the heart investigation</div><div class="t-date">23.02 – 27.02</div></div></div>
-  <div class="topic-item"><div class="t-num">4</div><div class="t-body"><div class="t-name">Regulation of the circulation 1 (regulation of the heart function)</div><div class="t-date">02.03 – 06.03</div></div></div>
-  <div class="topic-item"><div class="t-num">5</div><div class="t-body"><div class="t-name">Regulation of blood circulation 2 (regulation of the arterial blood pressure)</div><div class="t-date">09.03 – 13.03</div></div></div>
-  <div class="topic-item"><div class="t-num">6</div><div class="t-body"><div class="t-name">Lung ventilation and basic types of its disorder. Lung ventilation indices</div><div class="t-date">16.03 – 20.03</div></div></div>
-  <div class="topic-item"><div class="t-num">7</div><div class="t-body"><div class="t-name">Gas exchange in the lungs and tissues. Transport of gases by blood</div><div class="t-date">23.03 – 27.03</div></div></div>
-  <div class="topic-item"><div class="t-num">8</div><div class="t-body"><div class="t-name">Regulation of respiration</div><div class="t-date">30.03 – 03.04</div></div></div>
-  <div class="topic-item"><div class="t-num">9</div><div class="t-body"><div class="t-name">Functional reserves of the hemocardiorespiratory system in gas exchange</div><div class="t-date">06.04 – 10.04</div></div></div>
-  <div class="topic-item t-exam"><div class="t-num">10</div><div class="t-body"><div class="t-name">Concluding lesson: "Physiology of Circulation and Respiration" <span class="badge-exam">concluding</span></div><div class="t-date">13.04 – 17.04</div></div></div>
-  <div class="topic-item"><div class="t-num">11</div><div class="t-body"><div class="t-name">General characteristics of digestion. Regulation of eating behaviour. Digestion in the oral cavity and in the stomach</div><div class="t-date">22.04 – 25.04</div></div></div>
-  <div class="topic-item"><div class="t-num">12</div><div class="t-body"><div class="t-name">Digestion in the small and large intestine. The role of the pancreas and liver for digestion</div><div class="t-date">27.04 – 30.04</div></div></div>
-  <div class="topic-item t-now">
-    <div class="t-num">13</div>
-    <div class="t-body">
-      <div class="badge-now">◉ now</div>
-      <div class="t-name">Energy balance and metabolism. Principles of healthy nutrition. Thermoregulation</div>
-      <div class="t-date">04.05 – 08.05</div>
-    </div>
-  </div>
-  <div class="topic-item"><div class="t-num">14</div><div class="t-body"><div class="t-name">Physiology of excretion</div><div class="t-date">11.05 – 15.05</div></div></div>
-  <div class="topic-item t-exam"><div class="t-num">15</div><div class="t-body"><div class="t-name">Concluding lesson: "Physiology of Digestion. Substance and Energy Metabolism. Thermoregulation. Excretion" <span class="badge-exam">concluding</span></div><div class="t-date">18.05 – 22.05</div></div></div>
-  <div class="topic-item"><div class="t-num">16</div><div class="t-body"><div class="t-name">Innate and acquired adaptive reactions of the organism to changing environmental conditions. Types of higher nervous activity</div><div class="t-date">25.05 – 29.05</div></div></div>
-  <div class="topic-item"><div class="t-num">17</div><div class="t-body"><div class="t-name">Higher integrative brain functions as physiological basis of human mental functions</div><div class="t-date">01.06 – 05.06</div></div></div>
-</div>
-
-<!-- ══ GROUPS ══ -->
-<div id="groups" class="content">
-  <p class="sec-title">Class Schedule</p>
-  <p class="sec-sub">Groups 6211EN – 6236EN · Spring 2026</p>
-
-  <div class="teacher-card"><div class="tn">Severina T.G.</div><div class="tg">6218EN, 6214EN, 6230EN</div></div>
-  <div class="teacher-card"><div class="tn">Haikovich Y.V.</div><div class="tg">6217EN, 6219EN, 6211EN, 6231EN, 6233EN, 6216EN</div></div>
-  <div class="teacher-card"><div class="tn">Pupa T.A.</div><div class="tg">6215EN, 6228EN, 6212EN</div></div>
-  <div class="teacher-card"><div class="tn">Alexandrov D.A.</div><div class="tg">6232EN, 6229EN, 6234EN</div></div>
-  <div class="teacher-card"><div class="tn">Fomenko V.N.</div><div class="tg">6235EN, 6220EN, 6213EN</div></div>
-  <div class="teacher-card"><div class="tn">Grigoriyan A.L.</div><div class="tg">6236EN</div></div>
-
-  <hr class="div">
-  <div class="grp-title">Batch 3 — Groups 6211EN – 6220EN</div>
-  <div class="grp-row"><span class="g">6211EN</span><span class="tm">Thu 11:30–14:30</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6212EN</span><span class="tm">Fri 08:00–11:00</span><span class="tc">Pupa T.A.</span><span class="rm">142-2</span></div>
-  <div class="grp-row"><span class="g">6213EN</span><span class="tm">Fri 14:45–17:45</span><span class="tc">Fomenko V.N.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6214EN</span><span class="tm">Fri 14:40–17:40</span><span class="tc">Severina T.G.</span><span class="rm">142-2</span></div>
-  <div class="grp-row"><span class="g">6215EN</span><span class="tm">Tue 08:00–11:00</span><span class="tc">Pupa T.A.</span><span class="rm">102</span></div>
-  <div class="grp-row"><span class="g">6216EN</span><span class="tm">Fri 08:00–11:00</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6217EN</span><span class="tm">Mon 08:00–11:00</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6218EN</span><span class="tm">Wed 11:00–14:00</span><span class="tc">Severina T.G.</span><span class="rm">133</span></div>
-  <div class="grp-row"><span class="g">6219EN</span><span class="tm">Wed 11:30–14:30</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6220EN</span><span class="tm">Thu 14:50–17:50</span><span class="tc">Fomenko V.N.</span><span class="rm">142-1</span></div>
-
-  <hr class="div">
-  <div class="grp-title">Batch 4 — Groups 6228EN – 6236EN</div>
-  <div class="grp-row"><span class="g">6228EN</span><span class="tm">Wed 08:00–11:00</span><span class="tc">Pupa T.A.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6229EN</span><span class="tm">Wed 14:50–17:50</span><span class="tc">Alexandrov D.A.</span><span class="rm">143</span></div>
-  <div class="grp-row"><span class="g">6230EN</span><span class="tm">Mon 08:00–11:00</span><span class="tc">Severina T.G.</span><span class="rm">133</span></div>
-  <div class="grp-row"><span class="g">6231EN</span><span class="tm">Tue 13:00–16:00</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6232EN</span><span class="tm">Mon 11:20–14:20</span><span class="tc">Alexandrov D.A.</span><span class="rm">130</span></div>
-  <div class="grp-row"><span class="g">6233EN</span><span class="tm">Mon 11:20–14:20</span><span class="tc">Haikovich Y.V.</span><span class="rm">142-1</span></div>
-  <div class="grp-row"><span class="g">6234EN</span><span class="tm">Thu 14:50–17:50</span><span class="tc">Alexandrov D.A.</span><span class="rm">143</span></div>
-  <div class="grp-row"><span class="g">6235EN</span><span class="tm">Tue 13:00–16:00</span><span class="tc">Fomenko V.N.</span><span class="rm">142-2</span></div>
-  <div class="grp-row"><span class="g">6236EN</span><span class="tm">Wed 14:50–17:50</span><span class="tc">Grigoriyan A.L.</span><span class="rm">102</span></div>
-
-  <hr class="div">
-  <div class="grp-title">Batch 5 — Group 6230EN</div>
-  <div class="grp-row"><span class="g">6230EN</span><span class="tm">Mon 08:00–11:00</span><span class="tc">Severina T.G.</span><span class="rm">133</span></div>
-</div>
-
-<!-- ══ LECTURES ══ -->
-<div id="lectures" class="content">
-  <p class="sec-title">Lectures</p>
-  <p class="sec-sub">Lecturer — Associate Professor Severina T.G.</p>
-
-  <div class="lec-tabs">
-    <div class="lec-tab active" onclick="showLec('b3',this)">Batch 3 · Mon 13:20</div>
-    <div class="lec-tab" onclick="showLec('b4',this)">Batch 4 · Tue 10:50</div>
-    <div class="lec-tab" onclick="showLec('b5',this)">Batch 5 · Mon 11:10</div>
-  </div>
-
-  <div id="b3" class="lec-panel active">
-    <div class="lec-box">
-      <div class="lec-head">Monday · 13:20–14:20 · Aud. 4 · Severina T.G.</div>
-      <div class="lec-row"><div class="lec-dt">09.02<div class="wd">Mon</div></div><div class="lec-tp">Physiological properties and features of the myocardium<div class="lec-n">15 (1)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">02.03<div class="wd">Mon</div></div><div class="lec-tp">Regulation of blood circulation<div class="lec-n">16 (2)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Methods for studying cardiac activity. Electrocardiography — 17 (3)</div>
-      <div class="lec-row"><div class="lec-dt">09.03<div class="wd">Mon</div></div><div class="lec-tp">Physiology of respiration. External respiration<div class="lec-n">18 (4)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">16.03<div class="wd">Mon</div></div><div class="lec-tp">Gas exchange in the lungs and tissues. Transport of gases by the blood<div class="lec-n">19 (5)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">23.03<div class="wd">Mon</div></div><div class="lec-tp">Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange<div class="lec-n">20 (6)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">13.04<div class="wd">Mon</div></div><div class="lec-tp">Physiology of digestion. Regulation of eating behavior<div class="lec-n">21 (7)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine — 22 (8)</div>
-      <div class="lec-row"><div class="lec-dt">27.04<div class="wd">Mon</div></div><div class="lec-tp">Substance and energy metabolism. Thermoregulation<div class="lec-n">23 (9)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">04.05<div class="wd">Mon</div></div><div class="lec-tp">Physiology of excretion<div class="lec-n">24 (10)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">11.05<div class="wd">Mon</div></div><div class="lec-tp">Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence<div class="lec-n">25 (11)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Memory. Types of higher nervous activity — 26 (12)</div>
-      <div class="lec-row"><div class="lec-dt">18.05<div class="wd">Mon</div></div><div class="lec-tp">Higher integrative functions of the brain as the physiological basis of human mental functions<div class="lec-n">27 (13)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Thinking and speech. Pairing and functional asymmetry of the hemispheres — 28 (14)</div>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-watermark">Gen Med</div>
+    <div class="hero-eyebrow">BSMU · Department of Normal Physiology</div>
+    <div class="hero-title">Normal Physiology</div>
+    <div class="hero-sub">General Medicine — 2nd year, Spring 2026</div>
+    <div class="hero-meta">
+      <span class="meta-chip">17 practical class topics</span>
+      <span class="meta-chip">10 lectures</span>
+      <span class="meta-chip">4 h / class</span>
+      <span class="meta-chip">Exam: Test + Oral</span>
     </div>
   </div>
 
-  <div id="b4" class="lec-panel">
-    <div class="lec-box">
-      <div class="lec-head">Tuesday · 10:50–11:50 · Aud. 4 · Severina T.G.</div>
-      <div class="lec-row"><div class="lec-dt">10.02<div class="wd">Tue</div></div><div class="lec-tp">Physiological properties and features of the myocardium<div class="lec-n">15 (1)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">03.03<div class="wd">Tue</div></div><div class="lec-tp">Regulation of blood circulation<div class="lec-n">16 (2)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Methods for studying cardiac activity. Electrocardiography — 17 (3)</div>
-      <div class="lec-row"><div class="lec-dt">10.03<div class="wd">Tue</div></div><div class="lec-tp">Physiology of respiration. External respiration<div class="lec-n">18 (4)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">17.03<div class="wd">Tue</div></div><div class="lec-tp">Gas exchange in the lungs and tissues. Transport of gases by the blood<div class="lec-n">19 (5)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">24.03<div class="wd">Tue</div></div><div class="lec-tp">Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange<div class="lec-n">20 (6)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">14.04<div class="wd">Tue</div></div><div class="lec-tp">Physiology of digestion. Regulation of eating behavior<div class="lec-n">21 (7)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine — 22 (8)</div>
-      <div class="lec-row"><div class="lec-dt">28.04<div class="wd">Tue</div></div><div class="lec-tp">Substance and energy metabolism. Thermoregulation<div class="lec-n">23 (9)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">05.05<div class="wd">Tue</div></div><div class="lec-tp">Physiology of excretion<div class="lec-n">24 (10)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">12.05<div class="wd">Tue</div></div><div class="lec-tp">Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence<div class="lec-n">25 (11)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Memory. Types of higher nervous activity — 26 (12)</div>
-      <div class="lec-row"><div class="lec-dt">19.05<div class="wd">Tue</div></div><div class="lec-tp">Higher integrative functions of the brain as the physiological basis of human mental functions<div class="lec-n">27 (13)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Thinking and speech. Pairing and functional asymmetry of the hemispheres — 28 (14)</div>
+  <nav class="nav">
+    <button class="active" onclick="show('topics',this)">Topics</button>
+    <button onclick="show('groups',this)">Groups</button>
+    <button onclick="show('lectures',this)">Lectures</button>
+    <button onclick="show('criteria',this)">Criteria</button>
+    <button onclick="show('scale',this)">Test Scale</button>
+    <button onclick="show('credit',this)">Credit</button>
+    <button onclick="show('exams',this)">Exam</button>
+  </nav>
+
+  <div class="body">
+
+    <!-- TOPICS -->
+    <div id="topics" class="section">
+      <div class="sec-header">
+        <div class="sec-title">Practical Class Topics</div>
+        <span class="sec-count">17 weeks · 4 h / class</span>
+      </div>
+      <div class="topic-row"><div class="t-num reg">1</div><div><div class="t-text">Hemodynamics. Functional indices of blood circulation. Microcirculation</div><div class="t-date">09.02 – 13.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">2</div><div><div class="t-text">Physiological properties and peculiarities of the heart muscle</div><div class="t-date">16.02 – 20.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">3</div><div><div class="t-text">Cardiac cycle. Methods of the heart investigation</div><div class="t-date">23.02 – 27.02</div></div></div>
+      <div class="topic-row"><div class="t-num reg">4</div><div><div class="t-text">Regulation of the circulation 1 (regulation of the heart function)</div><div class="t-date">02.03 – 06.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">5</div><div><div class="t-text">Regulation of blood circulation 2 (regulation of the arterial blood pressure)</div><div class="t-date">09.03 – 13.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">6</div><div><div class="t-text">Lung ventilation and basic types of its disorder. Lung ventilation indices</div><div class="t-date">16.03 – 20.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">7</div><div><div class="t-text">Gas exchange in the lungs and tissues. Transport of gases by blood</div><div class="t-date">23.03 – 27.03</div></div></div>
+      <div class="topic-row"><div class="t-num reg">8</div><div><div class="t-text">Regulation of respiration</div><div class="t-date">30.03 – 03.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">9</div><div><div class="t-text">Functional reserves of the hemocardiorespiratory system in gas exchange</div><div class="t-date">06.04 – 10.04</div></div></div>
+      <div class="topic-row"><div class="t-num fin">10</div><div><div class="t-text">Concluding lesson: "Physiology of Circulation and Respiration"<span class="tag tag-warn" style="margin-left:8px;">concluding</span></div><div class="t-date">13.04 – 17.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">General characteristics of digestion. Regulation of eating behaviour. Digestion in the oral cavity and in the stomach</div><div class="t-date">22.04 – 25.04</div></div></div>
+      <div class="topic-row"><div class="t-num reg">12</div><div><div class="t-text">Digestion in the small and large intestine. The role of the pancreas and liver for digestion</div><div class="t-date">27.04 – 30.04</div></div></div>
+      <div class="topic-row current"><div class="t-num cur">13</div><div><div class="t-text">Energy balance and metabolism. Principles of healthy nutrition. Thermoregulation<span class="current-badge">◉ now</span></div><div class="t-date">04.05 – 08.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">14</div><div><div class="t-text">Physiology of excretion</div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div class="topic-row"><div class="t-num fin">15</div><div><div class="t-text">Concluding lesson: "Physiology of Digestion. Substance and Energy Metabolism. Thermoregulation. Excretion"<span class="tag tag-warn" style="margin-left:8px;">concluding</span></div><div class="t-date">18.05 – 22.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">Innate and acquired adaptive reactions of the organism to changing environmental conditions. Types of higher nervous activity</div><div class="t-date">25.05 – 29.05</div></div></div>
+      <div class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Higher integrative brain functions as physiological basis of human mental functions</div><div class="t-date">01.06 – 05.06</div></div></div>
     </div>
-  </div>
 
-  <div id="b5" class="lec-panel">
-    <div class="lec-box">
-      <div class="lec-head">Monday · 11:10–12:10 · Aud. 133 · Severina T.G.</div>
-      <div class="lec-row"><div class="lec-dt">09.02<div class="wd">Mon</div></div><div class="lec-tp">Physiological properties and features of the myocardium<div class="lec-n">15 (1)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">02.03<div class="wd">Mon</div></div><div class="lec-tp">Regulation of blood circulation<div class="lec-n">16 (2)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Methods for studying cardiac activity. Electrocardiography — 17 (3)</div>
-      <div class="lec-row"><div class="lec-dt">09.03<div class="wd">Mon</div></div><div class="lec-tp">Physiology of respiration. External respiration<div class="lec-n">18 (4)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">16.03<div class="wd">Mon</div></div><div class="lec-tp">Gas exchange in the lungs and tissues. Transport of gases by the blood<div class="lec-n">19 (5)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">23.03<div class="wd">Mon</div></div><div class="lec-tp">Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange<div class="lec-n">20 (6)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">13.04<div class="wd">Mon</div></div><div class="lec-tp">Physiology of digestion. Regulation of eating behavior<div class="lec-n">21 (7)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine — 22 (8)</div>
-      <div class="lec-row"><div class="lec-dt">27.04<div class="wd">Mon</div></div><div class="lec-tp">Substance and energy metabolism. Thermoregulation<div class="lec-n">23 (9)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">04.05<div class="wd">Mon</div></div><div class="lec-tp">Physiology of excretion<div class="lec-n">24 (10)</div></div></div>
-      <div class="lec-row"><div class="lec-dt">18.05<div class="wd">Mon</div></div><div class="lec-tp">Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence<div class="lec-n">25 (11)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Memory. Types of higher nervous activity — 26 (12)</div>
-      <div class="lec-row"><div class="lec-dt">25.05<div class="wd">Mon</div></div><div class="lec-tp">Higher integrative functions of the brain as the physiological basis of human mental functions<div class="lec-n">27 (13)</div></div></div>
-      <div class="lec-msr"><span class="msr-pill">MIW</span>Thinking and speech. Pairing and functional asymmetry of the hemispheres — 28 (14)</div>
-    </div>
-  </div>
+    <!-- GROUPS -->
+    <div id="groups" class="section" style="display:none;">
+      <div class="sec-header">
+        <div class="sec-title">Class Schedule</div>
+        <span class="sec-count">Batch 3 · Batch 4 · Batch 5</span>
+      </div>
 
-  <div class="notice" style="margin-top:16px;">
-    <strong>MIW — managed independent work:</strong> these lectures are not delivered in class. Students prepare written notes independently and present them at the exam.
-  </div>
-</div>
+      <div class="stream-header">Batch 3 — Groups 6211EN – 6220EN</div>
+      <table class="group-table">
+        <thead><tr><th>Group</th><th>Day / Time</th><th>Teacher</th><th>Room</th></tr></thead>
+        <tbody>
+          <tr><td><span class="group-num">6211EN</span></td><td>Thu 11:30–14:30</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6212EN</span></td><td>Fri 08:00–11:00</td><td>Pupa T.A.</td><td><span class="room-badge">142-2</span></td></tr>
+          <tr><td><span class="group-num">6213EN</span></td><td>Fri 14:45–17:45</td><td>Fomenko V.N.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6214EN</span></td><td>Fri 14:40–17:40</td><td>Severina T.G.</td><td><span class="room-badge">142-2</span></td></tr>
+          <tr><td><span class="group-num">6215EN</span></td><td>Tue 08:00–11:00</td><td>Pupa T.A.</td><td><span class="room-badge">102</span></td></tr>
+          <tr><td><span class="group-num">6216EN</span></td><td>Fri 08:00–11:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6217EN</span></td><td>Mon 08:00–11:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6218EN</span></td><td>Wed 11:00–14:00</td><td>Severina T.G.</td><td><span class="room-badge">133</span></td></tr>
+          <tr><td><span class="group-num">6219EN</span></td><td>Wed 11:30–14:30</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6220EN</span></td><td>Thu 14:50–17:50</td><td>Fomenko V.N.</td><td><span class="room-badge">142-1</span></td></tr>
+        </tbody>
+      </table>
 
-<!-- ══ CRITERIA ══ -->
-<div id="criteria" class="content">
-  <p class="sec-title">Grading Criteria</p>
-  <p class="sec-sub">10-point scale</p>
+      <div class="stream-header">Batch 4 — Groups 6228EN – 6236EN</div>
+      <table class="group-table">
+        <thead><tr><th>Group</th><th>Day / Time</th><th>Teacher</th><th>Room</th></tr></thead>
+        <tbody>
+          <tr><td><span class="group-num">6228EN</span></td><td>Wed 08:00–11:00</td><td>Pupa T.A.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6229EN</span></td><td>Wed 14:50–17:50</td><td>Alexandrov D.A.</td><td><span class="room-badge">143</span></td></tr>
+          <tr><td><span class="group-num">6230EN</span></td><td>Mon 08:00–11:00</td><td>Severina T.G.</td><td><span class="room-badge">133</span></td></tr>
+          <tr><td><span class="group-num">6231EN</span></td><td>Tue 13:00–16:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6232EN</span></td><td>Mon 11:20–14:20</td><td>Alexandrov D.A.</td><td><span class="room-badge">130</span></td></tr>
+          <tr><td><span class="group-num">6233EN</span></td><td>Mon 11:20–14:20</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+          <tr><td><span class="group-num">6234EN</span></td><td>Thu 14:50–17:50</td><td>Alexandrov D.A.</td><td><span class="room-badge">143</span></td></tr>
+          <tr><td><span class="group-num">6235EN</span></td><td>Tue 13:00–16:00</td><td>Fomenko V.N.</td><td><span class="room-badge">142-2</span></td></tr>
+          <tr><td><span class="group-num">6236EN</span></td><td>Wed 14:50–17:50</td><td>Grigoriyan A.L.</td><td><span class="room-badge">102</span></td></tr>
+        </tbody>
+      </table>
 
-  <div class="grade-wrap">
-    <div class="grade-row"><div class="grade-num c10">10</div><div class="grade-body"><div class="grade-text">Systematised, deep and complete knowledge across all sections; precise terminology; impeccable practical skills; creative solution of non-standard tasks; active creative work.</div><div class="grade-hod">confirmed at the exam by head of department</div></div></div>
-    <div class="grade-row"><div class="grade-num c9">9</div><div class="grade-body"><div class="grade-text">Deep and complete knowledge; creative solution of complex tasks; active independent work. No more than one minor inaccuracy per question.</div></div></div>
-    <div class="grade-row"><div class="grade-num c8">8</div><div class="grade-body"><div class="grade-text">Deep and complete knowledge; independent solution of complex tasks. No more than two minor errors per question.</div></div></div>
-    <div class="grade-row"><div class="grade-num c7">7</div><div class="grade-body"><div class="grade-text">Good systematised knowledge; independent solution of standard tasks. No more than three minor errors or one major error per question.</div></div></div>
-    <div class="grade-row"><div class="grade-num c6">6</div><div class="grade-body"><div class="grade-text">Sufficiently full and systematised knowledge; ability to solve typical tasks. No more than two major errors.</div></div></div>
-    <div class="grade-row"><div class="grade-num c5">5</div><div class="grade-body"><div class="grade-text">Sufficient knowledge; solves typical tasks with a little help. Errors including major ones are possible.</div></div></div>
-    <div class="grade-row"><div class="grade-num c4">4</div><div class="grade-body"><div class="grade-text">Sufficient knowledge; logical presentation without major errors; works under teacher's guidance. <em>Pass.</em></div></div></div>
-    <div class="grade-row"><div class="grade-num c3">3</div><div class="grade-body"><div class="grade-text">Incomplete knowledge; significant logical errors; weak mastery of practical skills.</div><div class="grade-hod">confirmed by head of department</div></div></div>
-    <div class="grade-row"><div class="grade-num c2">2</div><div class="grade-body"><div class="grade-text">Fragmentary knowledge; gross logical errors; cannot solve standard tasks.</div><div class="grade-hod">confirmed by head of department</div></div></div>
-    <div class="grade-row"><div class="grade-num c1">1</div><div class="grade-body"><div class="grade-text">No knowledge; refusal to answer; absent without valid reason; disciplinary violation.</div><div class="grade-hod">confirmed by head of department</div></div></div>
-  </div>
-
-  <hr class="div">
-  <p class="sec-title">Bonus Points (B)</p>
-  <p class="sec-sub">Cannot exceed 1 point in total</p>
-  <div class="bonus-wrap">
-    <div class="bonus-head">For what bonuses are awarded</div>
-    <div class="bonus-row"><div class="bval">+0.1</div><div class="btxt">Tables, visual aids, teaching videos, computer programs, flash-cards (≥ 20 per topic) approved by the department — <strong>0.1 per item</strong></div></div>
-    <div class="bonus-row"><div class="bval">+0.05</div><div class="btxt">Presenting a report at the department's Student Scientific Circle meetings — <strong>0.05 per presentation</strong></div></div>
-    <div class="bonus-row"><div class="bval">+0.1</div><div class="btxt">Presenting an abstract report at the Student Scientific Conference of BSMU (Normal Physiology section) — <strong>0.1 per presentation</strong></div></div>
-    <div class="bonus-row"><div class="bval">+0.2</div><div class="btxt">Presenting a report at BSMU Conference or in another organisation with thesis based on research results — <strong>0.2 per presentation.</strong> Diploma winners additionally: 1st place / laureate +0.3 · 2nd place +0.2 · 3rd place +0.1</div></div>
-    <div class="bonus-row"><div class="bval">+0.4</div><div class="btxt">Preparation of work for the Republican competition of student scientific works, approved by the teacher — <strong>0.4 points</strong></div></div>
-  </div>
-  <hr class="div">
-  <p class="sec-title">Penalty Points (P)</p>
-  <p class="sec-sub">Cannot exceed 1 point in total</p>
-  <div class="bonus-wrap">
-    <div class="bonus-head">For what penalties are charged</div>
-    <div class="bonus-row"><div class="bval neg">−0.5</div><div class="btxt">Violation of discipline during lectures and classes — <strong>0.5 per violation</strong></div></div>
-  </div>
-</div>
-
-<!-- ══ TEST SCALE ══ -->
-<div id="scale" class="content">
-  <p class="sec-title">Test Mark Scale</p>
-  <p class="sec-sub">% correct answers → mark</p>
-
-  <div class="scale-wrap">
-    <div class="scale-row"><div class="scale-pct">98 – 100 %</div><div class="scale-mark">9 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:99%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">92 – 97 %</div><div class="scale-mark">8 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:94%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">84 – 91 %</div><div class="scale-mark">7 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:87%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">76 – 83 %</div><div class="scale-mark">6 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:79%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">68 – 75 %</div><div class="scale-mark">5 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:71%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">60 – 67 %</div><div class="scale-mark">4 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:63%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">41 – 59 %</div><div class="scale-mark">3 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:50%"></div></div><div class="scale-badge f">fail</div></div></div>
-    <div class="scale-row"><div class="scale-pct">21 – 40 %</div><div class="scale-mark">2 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:30%"></div></div><div class="scale-badge f">fail</div></div></div>
-    <div class="scale-row"><div class="scale-pct">0 – 20 %</div><div class="scale-mark">1 <span>point</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:10%"></div></div><div class="scale-badge f">fail</div></div></div>
-  </div>
-  <div class="notice">* Mark may be changed based on oral or written interview results. Time for test: up to 28 minutes.</div>
-
-  <hr class="div">
-  <p class="sec-title">Exam Retake Scale</p>
-  <p class="sec-sub">Mark set without rating · 60 questions · 40 minutes</p>
-  <div class="scale-wrap">
-    <div class="scale-row"><div class="scale-pct">91 – 100 %</div><div class="scale-mark">5 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:95%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">60 – 90 %</div><div class="scale-mark">4 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill p" style="width:75%"></div></div><div class="scale-badge p">pass</div></div></div>
-    <div class="scale-row"><div class="scale-pct">41 – 59 %</div><div class="scale-mark">3 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:50%"></div></div><div class="scale-badge f">fail</div></div></div>
-    <div class="scale-row"><div class="scale-pct">21 – 40 %</div><div class="scale-mark">2 <span>points</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:30%"></div></div><div class="scale-badge f">fail</div></div></div>
-    <div class="scale-row"><div class="scale-pct">0 – 20 %</div><div class="scale-mark">1 <span>point</span></div><div class="scale-bar-wrap"><div class="scale-bar-track"><div class="scale-bar-fill f" style="width:10%"></div></div><div class="scale-badge f">fail</div></div></div>
-  </div>
-</div>
-
-<!-- ══ CREDIT ══ -->
-<div id="credit" class="content">
-  <p class="sec-title">Credit</p>
-  <p class="sec-sub">End of semester 1 · required before exam</p>
-
-  <div class="rule-block">
-    <div class="rule-title">Admission to Credit</div>
-    <ul class="rule-list">
-      <li>Positive current certification — all concluding classes / colloquiums passed</li>
-      <li>No unworked-off absences from classes and lectures</li>
-      <li>Notes of MIW lectures (managed independent work) presented</li>
-      <li>Protocols of practical classes completed and signed</li>
-      <li>No violations of discipline and safety rules</li>
-    </ul>
-  </div>
-  <div class="rule-block">
-    <div class="rule-title">Credit Procedure</div>
-    <ul class="rule-list">
-      <li>Passed current certification on the <strong>first attempt</strong> — "passed" mark based on current assessment results</li>
-      <li>Passed on the <strong>second attempt or later</strong> — oral or written interview on all semester sections</li>
-      <li><strong>Second retake:</strong> before the commission in accordance with the Certification Rules</li>
-    </ul>
-  </div>
-  <div class="notice">Marks at each class: up to 3 marks — (1) for the control test; (2) for practical work and defence; (3) for oral or written answer on the class topic.</div>
-</div>
-
-<!-- ══ EXAM ══ -->
-<div id="exam" class="content">
-  <p class="sec-title">Exam</p>
-  <p class="sec-sub">Summer 2026 · General Medicine · English groups</p>
-
-  <div class="rule-block">
-    <div class="rule-title">Admission to Exam</div>
-    <ul class="rule-list">
-      <li>Credit for the previous semester successfully passed</li>
-      <li>Positive current certification (colloquiums) for the current semester</li>
-      <li>MIW lecture notes submitted</li>
-      <li>No unworked-off absences from classes and lectures</li>
-      <li>No violations of discipline and safety rules</li>
-      <li>Protocols of practical classes completed and signed</li>
-    </ul>
-  </div>
-
-  <div class="rule-block">
-    <div class="rule-title">Exam Format · General Medicine (English groups)</div>
-    <div class="info-wrap">
-      <table class="info-table">
-        <tr><td>Stage 1</td><td><strong>Computer test</strong> — 60 questions, 40 minutes. Students who achieve a passing score (60% and more) are admitted to Stage 2. Students who do not achieve 60% receive <strong>1 (one) point</strong> in the record and are not admitted to Stage 2.</td></tr>
-        <tr><td>Stage 2</td><td><strong>Oral interview</strong> using examination tickets approved annually by the department. Ticket: 2 questions on "Mechanisms of regulation of functions" + 1 question on methods of physiological functions investigation.</td></tr>
-        <tr><td>Refusal</td><td>Refusal to give an oral answer → examination mark = <strong>1 (one) point.</strong></td></tr>
-        <tr><td>Present</td><td>Completed practical workbook + MIW lecture notes.</td></tr>
+      <div class="stream-header">Batch 5 — Group 6230EN</div>
+      <table class="group-table">
+        <thead><tr><th>Group</th><th>Day / Time</th><th>Teacher</th><th>Room</th></tr></thead>
+        <tbody>
+          <tr><td><span class="group-num">6230EN</span></td><td>Mon 08:00–11:00</td><td>Severina T.G.</td><td><span class="room-badge">133</span></td></tr>
+        </tbody>
       </table>
     </div>
-  </div>
 
-  <div class="rule-block">
-    <div class="rule-title">Final Examination Mark</div>
-    <div class="formula">
-      M<sub>exam</sub> = (M<sub>2nd stage</sub> + R<sub>study</sub>) / 2 + B − P
-      <small>rounded to the nearest integer</small>
+    <!-- LECTURES -->
+    <div id="lectures" class="section" style="display:none;">
+      <div class="sec-header">
+        <div class="sec-title">Lectures</div>
+        <span class="sec-count">10 lectures · 3 batches</span>
+      </div>
+
+      <div class="lec-subnav">
+        <button class="lec-tab active" onclick="showLec('b3',this)">Batch 3</button>
+        <button class="lec-tab" onclick="showLec('b4',this)">Batch 4</button>
+        <button class="lec-tab" onclick="showLec('b5',this)">Batch 5</button>
+      </div>
+
+      <!-- BATCH 3 -->
+      <div id="b3" class="lec-panel">
+        <div class="lec-meta">Monday · 13:20–14:20 · Aud. 4</div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.02</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">15 (1). Physiological properties and features of the myocardium</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">02.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">16 (2). Regulation of blood circulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">17 (3). Methods for studying cardiac activity. Electrocardiography</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">18 (4). Physiology of respiration. External respiration</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">16.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">19 (5). Gas exchange in the lungs and tissues. Transport of gases by the blood</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">23.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">20 (6). Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">13.04</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">21 (7). Physiology of digestion. Regulation of eating behavior</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">22 (8). Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">27.04</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">23 (9). Substance and energy metabolism. Thermoregulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">04.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">24 (10). Physiology of excretion</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">11.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">25 (11). Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">26 (12). Memory. Types of higher nervous activity</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">18.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">27 (13). Higher integrative functions of the brain as the physiological basis of human mental functions</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">28 (14). Thinking and speech. Pairing and functional asymmetry of the hemispheres</div></div></div>
+      </div>
+
+      <!-- BATCH 4 -->
+      <div id="b4" class="lec-panel" style="display:none;">
+        <div class="lec-meta">Tuesday · 10:50–11:50 · Aud. 4</div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">10.02</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">15 (1). Physiological properties and features of the myocardium</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">03.03</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">16 (2). Regulation of blood circulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">17 (3). Methods for studying cardiac activity. Electrocardiography</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">10.03</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">18 (4). Physiology of respiration. External respiration</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">17.03</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">19 (5). Gas exchange in the lungs and tissues. Transport of gases by the blood</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">24.03</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">20 (6). Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">14.04</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">21 (7). Physiology of digestion. Regulation of eating behavior</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">22 (8). Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">28.04</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">23 (9). Substance and energy metabolism. Thermoregulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">05.05</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">24 (10). Physiology of excretion</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">12.05</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">25 (11). Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">26 (12). Memory. Types of higher nervous activity</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">19.05</div><div class="lec-date-w">Tue</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">27 (13). Higher integrative functions of the brain as the physiological basis of human mental functions</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">28 (14). Thinking and speech. Pairing and functional asymmetry of the hemispheres</div></div></div>
+      </div>
+
+      <!-- BATCH 5 -->
+      <div id="b5" class="lec-panel" style="display:none;">
+        <div class="lec-meta">Monday · 11:10–12:10 · Aud. 133</div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.02</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">15 (1). Physiological properties and features of the myocardium</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">02.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">16 (2). Regulation of blood circulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">17 (3). Methods for studying cardiac activity. Electrocardiography</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">18 (4). Physiology of respiration. External respiration</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">16.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">19 (5). Gas exchange in the lungs and tissues. Transport of gases by the blood</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">23.03</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">20 (6). Regulation of respiration. Functional reserves of hemocardiorespiratory system in gas exchange</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">13.04</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">21 (7). Physiology of digestion. Regulation of eating behavior</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">22 (8). Digestion in the duodenum. The role of bile in digestion. Digestion in the small and large intestine</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">27.04</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">23 (9). Substance and energy metabolism. Thermoregulation</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">04.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">24 (10). Physiology of excretion</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">18.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">25 (11). Innate and acquired forms of adaptation reactions of the human organism to the changing conditions of existence</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">26 (12). Memory. Types of higher nervous activity</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">25.05</div><div class="lec-date-w">Mon</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">27 (13). Higher integrative functions of the brain as the physiological basis of human mental functions</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">—</div><div class="lec-date-w">MIW</div></div><div class="lec-body"><div class="lec-teacher" style="color:var(--ink-3);">managed independent work</div><div class="lec-topic">28 (14). Thinking and speech. Pairing and functional asymmetry of the hemispheres</div></div></div>
+      </div>
     </div>
-    <div class="formula">
-      R<sub>study</sub> = (R<sub>academ</sub> + R<sub>pract</sub> + R<sub>current</sub>) / 3
-      <small>rounded to the nearest tenth</small>
+
+    <!-- CRITERIA -->
+    <div id="criteria" class="section" style="display:none;">
+      <div class="sec-header">
+        <div class="sec-title">Grading Criteria</div>
+        <span class="sec-count">10-point scale</span>
+      </div>
+      <div class="cr-row"><div class="cr-mark cm10">10</div><div class="cr-text">Systematised, deep and complete knowledge across all sections; precise terminology; impeccable practical skills; creative solution of non-standard tasks; active creative work. <span class="tag tag-accent">confirmed at the exam by head of department</span></div></div>
+      <div class="cr-row"><div class="cr-mark cm9">9</div><div class="cr-text">Deep and complete knowledge; creative solution of complex tasks; active independent work. No more than one minor inaccuracy per question.</div></div>
+      <div class="cr-row"><div class="cr-mark cm8">8</div><div class="cr-text">Deep and complete knowledge; independent solution of complex tasks. No more than two minor errors per question.</div></div>
+      <div class="cr-row"><div class="cr-mark cm7">7</div><div class="cr-text">Good systematised knowledge; independent solution of standard tasks. No more than three minor errors or one major error per question.</div></div>
+      <div class="cr-row"><div class="cr-mark cm6">6</div><div class="cr-text">Sufficiently full and systematised knowledge; ability to solve typical tasks. No more than two major errors.</div></div>
+      <div class="cr-row"><div class="cr-mark cm5">5</div><div class="cr-text">Sufficient knowledge; solves typical tasks with a little help. Errors including major ones are possible.</div></div>
+      <div class="cr-row"><div class="cr-mark cm4">4</div><div class="cr-text">Sufficient knowledge; logical presentation without major errors; works under teacher's guidance. <em>Pass.</em></div></div>
+      <div class="cr-row"><div class="cr-mark cm3">3</div><div class="cr-text">Incomplete knowledge; significant logical errors; weak mastery of practical skills.</div></div>
+      <div class="cr-row"><div class="cr-mark cm2">2</div><div class="cr-text">Fragmentary knowledge; gross logical errors; cannot solve standard tasks.</div></div>
+      <div class="cr-row"><div class="cr-mark cm1">1</div><div class="cr-text">No knowledge; refusal to answer; absent without valid reason; disciplinary violation.</div></div>
+
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Bonus Points (B)</div><span class="sec-count">max 1 point</span></div>
+      <div class="rule-block">
+        <p class="rule-title">For what bonuses are awarded</p>
+        <div class="rule-item hi">Tables, visual aids, teaching videos, computer programs, flash-cards (≥ 20 per topic) approved by the department — <b>0.1 per item</b></div>
+        <div class="rule-item hi">Presenting a report at the department's Student Scientific Circle meetings — <b>0.05 per presentation</b></div>
+        <div class="rule-item hi">Presenting an abstract report at the Student Scientific Conference of BSMU (Normal Physiology section) — <b>0.1 per presentation</b></div>
+        <div class="rule-item hi">Presenting a report at BSMU Conference or in another organisation with thesis based on research results — <b>0.2 per presentation</b><br><span style="font-size:12px;color:var(--ink-3);">Diploma winners additionally: 1st place / laureate +0.3 · 2nd place +0.2 · 3rd place +0.1</span></div>
+        <div class="rule-item hi">Preparation of work for the Republican competition of student scientific works, approved by the teacher — <b>0.4 points</b></div>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Penalty Points (P)</div><span class="sec-count">max 1 point</span></div>
+      <div class="rule-block">
+        <p class="rule-title">For what penalties are charged</p>
+        <div class="rule-item" style="color:var(--red-ink);">Violation of discipline during lectures and classes — <b>0.5 per violation</b></div>
+      </div>
     </div>
-    <div class="f-def">
-      <p><strong>R<sub>academ</sub></strong> — average mark for theoretical material in concluding classes (1st mark) for two semesters</p>
-      <p><strong>R<sub>pract</sub></strong> — average mark for practical skills in concluding classes (2nd mark) for two semesters</p>
-      <p><strong>R<sub>current</sub></strong> — average grade for two semesters from the electronic journal</p>
-      <p><strong>B</strong> — bonus points · <strong>P</strong> — penalty points (see Criteria tab)</p>
+
+    <!-- TEST SCALE -->
+    <div id="scale" class="section" style="display:none;">
+      <div class="rule-block" style="margin-bottom:16px;">
+        <p class="rule-title">Marks at each class</p>
+        <p style="font-size:13.5px;color:var(--ink);line-height:1.5;padding:5px 0 8px 0;">At each class a student may receive up to three marks:</p>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">1. for the control test;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--border-light);line-height:1.5;">2. for practical work performance and defence;</div>
+        <div style="font-size:13.5px;color:var(--ink);padding:5px 0;line-height:1.5;">3. for oral or written answer on the class topic.</div>
+      </div>
+      <div class="sec-header" style="margin-top:16px;">
+        <div class="sec-title">Test Mark Scale</div>
+        <span class="sec-count">% correct answers → mark</span>
+      </div>
+      <div class="scale-row"><span class="scale-pct">98 – 100 %</span><span class="scale-mark">9 points</span><div class="bar-wrap"><div class="bar" style="width:100%;background:#5a9922;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">92 – 97 %</span><span class="scale-mark">8 points</span><div class="bar-wrap"><div class="bar" style="width:97%;background:#5a9922;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">84 – 91 %</span><span class="scale-mark">7 points</span><div class="bar-wrap"><div class="bar" style="width:91%;background:#6aac28;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">76 – 83 %</span><span class="scale-mark">6 points</span><div class="bar-wrap"><div class="bar" style="width:83%;background:#7cc040;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">68 – 75 %</span><span class="scale-mark">5 points</span><div class="bar-wrap"><div class="bar" style="width:75%;background:#98cc60;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">60 – 67 %</span><span class="scale-mark">4 points</span><div class="bar-wrap"><div class="bar" style="width:67%;background:#b8d880;"></div></div><span class="tag tag-pass">pass</span></div>
+      <div class="scale-row"><span class="scale-pct">41 – 59 %</span><span class="scale-mark">3 points</span><div class="bar-wrap"><div class="bar" style="width:59%;background:#d07070;"></div></div><span class="tag tag-fail">fail</span></div>
+      <div class="scale-row"><span class="scale-pct">21 – 40 %</span><span class="scale-mark">2 points</span><div class="bar-wrap"><div class="bar" style="width:40%;background:#c05050;"></div></div><span class="tag tag-fail">fail</span></div>
+      <div class="scale-row"><span class="scale-pct">0 – 20 %</span><span class="scale-mark">1 point</span><div class="bar-wrap"><div class="bar" style="width:20%;background:#b03030;"></div></div><span class="tag tag-fail">fail</span></div>
+      <p class="note" style="margin-top:10px;">* Mark may be changed based on oral or written interview results. Time for test: up to 28 minutes.</p>
     </div>
-  </div>
 
-  <div class="rule-block">
-    <div class="rule-title">Conditions for Mark 9 or 10</div>
-    <ul class="rule-list">
-      <li>All colloquiums passed <strong>on the first attempt in both semesters</strong></li>
-      <li>Average score of current certification (colloquiums) — <strong>7.0 or higher</strong></li>
-      <li>R<sub>study</sub> for two semesters — <strong>7.0 or higher</strong></li>
-      <li>Within the quota of <strong>20%</strong> of the total number of students in the faculty by R<sub>study</sub></li>
-    </ul>
-    <div class="notice">Marks of 9 or 10, as well as 3, 2, and 1 are given by joint decision of examiners and the head of department.</div>
-  </div>
+    <!-- CREDIT -->
+    <div id="credit" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Credit</div></div>
+      <div class="rule-block">
+        <p class="rule-title">Admission to Credit</p>
+        <div class="rule-item hi">Positive current certification — all concluding classes / colloquiums passed</div>
+        <div class="rule-item hi">No unworked-off absences from classes and lectures</div>
+        <div class="rule-item hi">Notes of MIW lectures (managed independent work) presented</div>
+        <div class="rule-item hi">Protocols of practical classes completed and signed</div>
+        <div class="rule-item">No violations of discipline and safety rules</div>
+      </div>
+      <div class="rule-block">
+        <p class="rule-title">Credit Procedure</p>
+        <div class="rule-item">Passed current certification on the <strong>first attempt</strong> — "passed" mark based on current assessment results.</div>
+        <div class="rule-item">Passed on the <strong>second attempt or later</strong> — oral or written interview on all semester sections.</div>
+        <div class="rule-item">Second retake — before the commission in accordance with the Certification Rules.</div>
+      </div>
+    </div>
 
-  <hr class="div">
-  <p class="sec-title">Exam Schedule — Summer 2026</p>
-  <p class="sec-sub">General Medicine · English groups</p>
+    <!-- EXAM -->
+    <div id="exams" class="section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Exam</div></div>
+      <div class="rule-block">
+        <p class="rule-title">Admission to Exam</p>
+        <div class="rule-item hi">Credit for the previous semester successfully passed</div>
+        <div class="rule-item hi">Positive current certification (colloquiums) for the current semester</div>
+        <div class="rule-item hi">No unworked-off absences from classes and lectures</div>
+        <div class="rule-item hi">MIW lecture notes submitted</div>
+        <div class="rule-item hi">Protocols of practical classes completed and signed</div>
+      </div>
+      <div class="rule-block">
+        <p class="rule-title">Exam Format · General Medicine (English groups)</p>
+        <div class="exam-row"><span class="exam-lbl">Stage 1</span><span><strong>Computer test</strong> — 60 questions, 40 minutes. Students who achieve a passing score (60% and more) are admitted to Stage 2. Students who do not achieve 60% receive <strong>1 (one) point</strong> in the record.</span></div>
+        <div class="exam-row"><span class="exam-lbl">Stage 2</span><span><strong>Oral interview</strong> using examination tickets approved annually by the department. Ticket: 2 questions on "Mechanisms of regulation of functions" + 1 question on methods of physiological functions investigation.</span></div>
+        <div class="exam-row"><span class="exam-lbl">Refusal</span><span>Refusal to give an oral answer → examination mark = <strong>1 (one) point.</strong></span></div>
+        <div class="exam-row"><span class="exam-lbl">Present</span><span>Completed practical workbook + MIW lecture notes.</span></div>
+      </div>
 
-  <div class="exam-card">
-    <div class="exam-bar">11 June 2026 · Thursday <span>6219EN, 6220EN, 6228EN, 6229EN</span></div>
-    <div class="exam-row"><div class="exam-t">8:30</div><div class="exam-g">6219EN, 6220EN</div></div>
-    <div class="exam-row"><div class="exam-t">9:00</div><div class="exam-g">6228EN, 6229EN</div></div>
-    <div class="commission"><strong>Commission:</strong> Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</div>
-  </div>
-  <div class="exam-card">
-    <div class="exam-bar">16 June 2026 · Tuesday <span>6211EN – 6236EN</span></div>
-    <div class="exam-row"><div class="exam-t">9:00</div><div class="exam-g">6211EN, 6212EN</div></div>
-    <div class="exam-row"><div class="exam-t">9:30</div><div class="exam-g">6213EN, 6214EN</div></div>
-    <div class="exam-row"><div class="exam-t">10:00</div><div class="exam-g">6231EN, 6232EN</div></div>
-    <div class="exam-row"><div class="exam-t">10:30</div><div class="exam-g">6233EN, 6234EN</div></div>
-    <div class="exam-row"><div class="exam-t">11:00</div><div class="exam-g">6235EN, 6236EN</div></div>
-    <div class="commission"><strong>Commission:</strong> Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</div>
-  </div>
-  <div class="exam-card">
-    <div class="exam-bar">26 June 2026 · Friday <span>6215EN – 6230EN</span></div>
-    <div class="exam-row"><div class="exam-t">11:30</div><div class="exam-g">6215EN, 6216EN</div></div>
-    <div class="exam-row"><div class="exam-t">12:00</div><div class="exam-g">6217EN, 6218EN</div></div>
-    <div class="exam-row"><div class="exam-t">12:30</div><div class="exam-g">6230EN</div></div>
-    <div class="commission"><strong>Commission:</strong> Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</div>
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Final Examination Mark</div></div>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:10px;">The final examination mark (M<sub>exam</sub>) is calculated taking into account the student rating for two semesters (R<sub>study</sub>) and the mark for Stage 2, rounded to the nearest integer:</p>
+      <div class="formula-box">M<sub>exam</sub> = (M<sub>2nd stage</sub> + R<sub>study</sub>) / 2 &nbsp;+&nbsp; B − P</div>
+      <p style="font-size:13px;color:var(--ink-2);margin-bottom:14px;">where <b>B</b> — bonus points, <b>P</b> — penalty points.</p>
+      <div class="formula-box">R<sub>study</sub> = (R<sub>academ</sub> + R<sub>pract</sub> + R<sub>current</sub>) / 3</div>
+      <p style="font-size:13px;color:var(--ink-2);margin-top:8px;margin-bottom:14px;">
+        <b>R<sub>academ</sub></b> — average mark for theoretical material in concluding classes (1st mark) for two semesters<br>
+        <b>R<sub>pract</sub></b> — average mark for practical skills in concluding classes (2nd mark) for two semesters<br>
+        <b>R<sub>current</sub></b> — average grade for two semesters from the electronic journal
+      </p>
+
+      <div class="divider"></div>
+      <div class="auto-block">
+        <div class="auto-title">Mark of 9 or 10 at the exam — additional conditions</div>
+        <div style="font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:12px;">A mark of 9 or 10 may also be awarded at the exam if all of the following conditions are met:</div>
+        <div class="auto-item">All concluding classes (theory and practical) passed on the first attempt in both semesters</div>
+        <div class="auto-item">Average score of current certification (colloquiums) — 7.0 or higher</div>
+        <div class="auto-item">R<sub>study</sub> for two semesters — 7.0 or higher</div>
+        <div class="auto-item">Student is among the top 20% of the faculty by R<sub>study</sub> over two semesters</div>
+        <div style="font-size:12.5px;color:var(--ink-2);font-style:italic;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light);">Decision is made jointly by examiners and the head of department after the student answers the examination ticket question.</div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-header"><div class="sec-title">Exam Schedule</div><span class="sec-count">Summer 2026</span></div>
+
+      <div class="rule-block">
+        <p class="rule-title">11 June · Thursday</p>
+        <div class="exam-row"><span class="exam-lbl">8:30</span><span class="exam-groups">6219EN, 6220EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">9:00</span><span class="exam-groups">6228EN, 6229EN</span></div>
+        <div class="exam-row" style="font-size:12px;color:var(--ink-3);"><span class="exam-lbl">Commission</span><span>Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</span></div>
+      </div>
+      <div class="rule-block">
+        <p class="rule-title">16 June · Tuesday</p>
+        <div class="exam-row"><span class="exam-lbl">9:00</span><span class="exam-groups">6211EN, 6212EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">9:30</span><span class="exam-groups">6213EN, 6214EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">10:00</span><span class="exam-groups">6231EN, 6232EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">10:30</span><span class="exam-groups">6233EN, 6234EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">11:00</span><span class="exam-groups">6235EN, 6236EN</span></div>
+        <div class="exam-row" style="font-size:12px;color:var(--ink-3);"><span class="exam-lbl">Commission</span><span>Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</span></div>
+      </div>
+      <div class="rule-block">
+        <p class="rule-title">26 June · Friday</p>
+        <div class="exam-row"><span class="exam-lbl">11:30</span><span class="exam-groups">6215EN, 6216EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">12:00</span><span class="exam-groups">6217EN, 6218EN</span></div>
+        <div class="exam-row"><span class="exam-lbl">12:30</span><span class="exam-groups">6230EN</span></div>
+        <div class="exam-row" style="font-size:12px;color:var(--ink-3);"><span class="exam-lbl">Commission</span><span>Alexandrov D.A., Severina T.G., Haikovich Y.V., Pupa T.A., Fomenko V.N.</span></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-function show(id, el) {
-  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  el.classList.add('active');
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => { s.style.display = 'none'; });
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  const next = document.getElementById(id);
+  next.style.display = 'block';
+  next.style.animation = 'none';
+  next.offsetHeight;
+  next.style.animation = '';
+  btn.classList.add('active');
 }
-function showLec(id, el) {
-  document.querySelectorAll('.lec-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.lec-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  el.classList.add('active');
+function showLec(id, btn) {
+  document.querySelectorAll('.lec-panel').forEach(p => { p.style.display = 'none'; });
+  document.querySelectorAll('.lec-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('active');
 }
 </script>
 </body>
