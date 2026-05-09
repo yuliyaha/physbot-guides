@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расписание экзаменов · Нормальная физиология · Лето 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1916;
+    --ink-2: #4a4740;
+    --ink-3: #8a8680;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --accent-muted: #c8d8ed;
+    --red: #8e2d2d;
+    --red-bg: #f6e8e8;
+    --green: #2d6e3a;
+    --green-bg: #e8f3eb;
+    --gold: #7a5c1a;
+    --gold-bg: #f5eedc;
+    --tag-eng: #2d5a8e;
+    --tag-eng-bg: #dde8f5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Onest', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 28px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'Экзамены';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Lora', serif;
+    font-size: 72px;
+    font-weight: 600;
+    opacity: 0.08;
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -2px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .hero-sub {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 14px;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .hero-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    padding: 0 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 12px 14px 10px;
+    font-family: 'Onest', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tab-btn .tb-day { font-size: 10px; font-weight: 400; opacity: 0.8; display: block; margin-top: 1px; }
+  .tab-btn:hover { color: var(--accent); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+  .tab-btn.today-tab { color: var(--red); }
+  .tab-btn.today-tab.active { border-bottom-color: var(--red); }
+
+  /* ── CONTENT ── */
+  .wrap { max-width: 560px; margin: 0 auto; }
+
+  .tab-panel { display: none; padding: 16px 16px 32px; }
+  .tab-panel.active { display: block; }
+
+  .date-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .date-big {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .date-meta { font-size: 13px; color: var(--ink-2); }
+  .date-weekday { font-weight: 500; }
+
+  /* ── SLOT CARD ── */
+  .slot-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .slot-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+  .slot-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .slot-time {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .slot-groups {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+  }
+  .group-tag {
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Onest', sans-serif;
+  }
+  .group-tag.eng {
+    background: var(--tag-eng-bg);
+    border-color: var(--accent-muted);
+    color: var(--tag-eng);
+  }
+  .slot-toggle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bg-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s, background 0.15s;
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+  .slot-card.open .slot-toggle { transform: rotate(180deg); background: var(--accent-light); color: var(--accent); }
+
+  .slot-body {
+    display: none;
+    border-top: 1px solid var(--border-light);
+    padding: 12px 14px;
+    background: var(--bg);
+  }
+  .slot-card.open .slot-body { display: block; }
+
+  .commission-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    margin-bottom: 7px;
+  }
+  .commission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .commission-item {
+    font-size: 13px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .commission-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-muted);
+    flex-shrink: 0;
+  }
+  .commission-item:first-child { color: var(--ink); font-weight: 500; }
+  .commission-item:first-child::before { background: var(--accent); }
+
+  .no-commission {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-muted);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--accent);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .summary-bar strong { font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    padding: 10px 16px 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .search-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Onest', sans-serif;
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--ink-3); }
+
+  .search-result-wrap { padding: 16px 16px 32px; }
+  .search-result-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+  }
+  .search-result-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+  .src-date { font-size: 11px; color: var(--ink-3); margin-bottom: 3px; }
+  .src-time { font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: var(--accent); }
+  .src-groups { margin: 5px 0 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .src-commission { font-size: 12px; color: var(--ink-2); }
+
+  #search-panel { display: none; }
+  #search-panel.active { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">БГМУ · Кафедра нормальной физиологии</div>
+    <div class="hero-title">Расписание экзаменов</div>
+    <div class="hero-sub">Нормальная физиология · Летняя сессия 2025/2026</div>
+    <div class="hero-chips">
+      <span class="hero-chip">11 июня – 26 июня</span>
+      <span class="hero-chip">11 дат</span>
+      <span class="hero-chip">43 слота</span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="🔍 Найти группу, например 1205 или 6211ENG…" autocomplete="off">
+  </div>
+
+  <div id="search-panel">
+    <div class="search-result-wrap">
+      <div class="search-result-title" id="searchResultTitle"></div>
+      <div id="searchResults"></div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <nav class="tab-nav" id="tabNav"></nav>
+    <div id="tabPanels"></div>
+  </div>
+
+  <div class="page-footer">
+    Кафедра нормальной физиологии БГМУ · 2025/2026
+  </div>
+</div>
+
+<script>
+const EXAM_DATA = [
+  {date:"2026-06-11",weekday:"четверг",slots:[
+    {time:"08:30",groups:["6219ENG","6220ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"09:00",groups:["6228ENG","6229ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"09:30",groups:["6209","6221"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:00",groups:["6222","6223"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:30",groups:["6224","6225"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]}
+  ]},
+  {date:"2026-06-15",weekday:"понедельник",slots:[
+    {time:"09:00",groups:["1221","1222"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"09:30",groups:["1223","1224"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:00",groups:["1225","1226"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:30",groups:["1227","1228"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Гаптарь М.И.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]}
+  ]},
+  {date:"2026-06-16",weekday:"вторник",slots:[
+    {time:"08:30",groups:["6226","6227"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"09:00",groups:["6211ENG","6212ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"09:30",groups:["6213ENG","6214ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"10:00",groups:["6231ENG","6232ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"10:30",groups:["6233ENG","6234ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"11:00",groups:["6235ENG","6236ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]}
+  ]},
+  {date:"2026-06-17",weekday:"среда",slots:[
+    {time:"08:30",groups:["4201","4202"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"09:00",groups:["4203","4204"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"09:30",groups:["6201","6202"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:00",groups:["6203","6204"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]},
+    {time:"10:30",groups:["6205","6206"],commission:["Семененя И.Н.","Переверзев В.А.","Александров Д.А.","Власенко В.И.","Северина Т.Г.","Гайкович Ю.В.","Голодок Т.П.","Пупа Т.А.","Фоменко В.Н.","Чабан А.Г."]}
+  ]},
+  {date:"2026-06-19",weekday:"пятница",slots:[
+    {time:"09:00",groups:["1201","1202"],commission:[]},
+    {time:"09:30",groups:["1203","1204"],commission:[]},
+    {time:"10:00",groups:["1205","1206"],commission:[]},
+    {time:"10:30",groups:["1207","1208"],commission:[]}
+  ]},
+  {date:"2026-06-20",weekday:"суббота",slots:[
+    {time:"09:00",groups:["1209","1210"],commission:[]},
+    {time:"09:30",groups:["1211","1212"],commission:[]},
+    {time:"10:00",groups:["1213","1214"],commission:[]},
+    {time:"10:30",groups:["1215","1216"],commission:[]}
+  ]},
+  {date:"2026-06-22",weekday:"понедельник",slots:[
+    {time:"09:30",groups:["1217","1218"],commission:[]},
+    {time:"10:00",groups:["1219","1220"],commission:[]}
+  ]},
+  {date:"2026-06-23",weekday:"вторник",slots:[
+    {time:"09:00",groups:["2201","2202"],commission:[]},
+    {time:"09:30",groups:["2203","2204"],commission:[]},
+    {time:"10:00",groups:["2205","2206"],commission:[]}
+  ]},
+  {date:"2026-06-24",weekday:"среда",slots:[
+    {time:"09:00",groups:["2207","2208"],commission:[]},
+    {time:"09:30",groups:["2209","2210"],commission:[]},
+    {time:"10:00",groups:["2211","2212"],commission:[]}
+  ]},
+  {date:"2026-06-26",weekday:"пятница",slots:[
+    {time:"08:30",groups:["2213","2214"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"09:00",groups:["2215","2216"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"09:30",groups:["2217","8101"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"10:00",groups:["8102","8103"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"10:30",groups:["8104","8105"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"11:00",groups:["8106","6160","6162"],commission:["Семененя И.Н.","Переверзев В.А.","Власенко В.И.","Голодок Т.П.","Чабан А.Г."]},
+    {time:"11:30",groups:["6215ENG","6216ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"12:00",groups:["6217ENG","6218ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]},
+    {time:"12:30",groups:["6230ENG","6161ENG","6163ENG"],commission:["Александров Д.А.","Северина Т.Г.","Гайкович Ю.В.","Пупа Т.А.","Фоменко В.Н."]}
+  ]}
+];
+
+const MONTH_NAMES = ["","января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+const SHORT_MONTHS = ["","янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+const WEEKDAYS_SHORT = {понедельник:"пн",вторник:"вт",среда:"ср",четверг:"чт",пятница:"пт",суббота:"сб",воскресенье:"вс"};
+
+function parseDate(str) {
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
+function formatDay(str) {
+  const [,m,d] = str.split('-').map(Number);
+  return `${d} ${SHORT_MONTHS[m]}`;
+}
+function formatDayFull(str) {
+  const [,m,d] = str.split('-').map(Number);
+  return `${d} ${MONTH_NAMES[m]}`;
+}
+
+function isEng(g) { return /ENG/i.test(g); }
+
+function groupTag(g) {
+  const cls = isEng(g) ? 'group-tag eng' : 'group-tag';
+  return `<span class="${cls}">${g}</span>`;
+}
+
+function slotCard(slot, idx, dateId) {
+  const id = `slot-${dateId}-${idx}`;
+  const groups = slot.groups.map(g => groupTag(g)).join(' ');
+  const commission = slot.commission.length
+    ? slot.commission.map((name,i) =>
+        `<div class="commission-item">${name}</div>`
+      ).join('')
+    : '<div class="no-commission">Состав комиссии уточняется</div>';
+
+  return `
+<div class="slot-card" id="${id}">
+  <div class="slot-header" onclick="toggleSlot('${id}')">
+    <div class="slot-time">${slot.time}</div>
+    <div class="slot-groups">${groups}</div>
+    <div class="slot-toggle">▼</div>
+  </div>
+  <div class="slot-body">
+    <div class="commission-label">Состав комиссии</div>
+    <div class="commission-list">${commission}</div>
+  </div>
+</div>`;
+}
+
+function toggleSlot(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function totalGroups(day) {
+  return day.slots.reduce((s,slot) => s + slot.groups.length, 0);
+}
+
+// Build tabs
+const tabNav = document.getElementById('tabNav');
+const tabPanels = document.getElementById('tabPanels');
+
+EXAM_DATA.forEach((day, di) => {
+  const dateId = `d${di}`;
+  const dayLabel = formatDay(day.date);
+  const wdShort = WEEKDAYS_SHORT[day.weekday] || day.weekday;
+
+  // Tab button
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (di === 0 ? ' active' : '');
+  btn.setAttribute('data-tab', dateId);
+  btn.innerHTML = `<span>${dayLabel}</span><span class="tb-day">${wdShort}</span>`;
+  btn.onclick = () => switchTab(dateId);
+  tabNav.appendChild(btn);
+
+  // Panel
+  const groupCount = totalGroups(day);
+  const slots = day.slots.map((s,i) => slotCard(s,i,dateId)).join('');
+  const panel = document.createElement('div');
+  panel.className = 'tab-panel' + (di === 0 ? ' active' : '');
+  panel.id = `panel-${dateId}`;
+  panel.innerHTML = `
+    <div class="date-header">
+      <div class="date-big">${formatDayFull(day.date)}</div>
+      <div class="date-meta"><span class="date-weekday">${day.weekday}</span></div>
+    </div>
+    <div class="summary-bar">
+      <span>Слотов: <strong>${day.slots.length}</strong></span>
+      <span>Групп: <strong>${groupCount}</strong></span>
+    </div>
+    ${slots}
+  `;
+  tabPanels.appendChild(panel);
+});
+
+function switchTab(dateId) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-tab') === dateId);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === `panel-${dateId}`);
+  });
+  // Scroll tab into view
+  const activeBtn = document.querySelector(`.tab-btn[data-tab="${dateId}"]`);
+  if (activeBtn) activeBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchPanel = document.getElementById('search-panel');
+const mainContent = document.getElementById('main-content');
+const searchResults = document.getElementById('searchResults');
+const searchResultTitle = document.getElementById('searchResultTitle');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) {
+    searchPanel.classList.remove('active');
+    mainContent.style.display = '';
+    return;
+  }
+  searchPanel.classList.add('active');
+  mainContent.style.display = 'none';
+
+  const found = [];
+  EXAM_DATA.forEach(day => {
+    day.slots.forEach(slot => {
+      const match = slot.groups.some(g => g.toLowerCase().includes(q));
+      if (match) found.push({day, slot});
+    });
+  });
+
+  if (!found.length) {
+    searchResultTitle.textContent = `По запросу «${q}» ничего не найдено`;
+    searchResults.innerHTML = '<div style="font-size:13px;color:var(--ink-3);padding:8px 0;">Проверьте номер группы.</div>';
+    return;
+  }
+
+  searchResultTitle.textContent = `Найдено: ${found.length} ${found.length === 1 ? 'запись' : 'записей'}`;
+  searchResults.innerHTML = found.map(({day,slot}) => {
+    const groups = slot.groups.map(g => groupTag(g)).join(' ');
+    const commission = slot.commission.length
+      ? slot.commission.join(', ')
+      : 'Состав комиссии уточняется';
+    return `
+<div class="search-result-card">
+  <div class="src-date">${formatDayFull(day.date)} · ${day.weekday}</div>
+  <div class="src-time">${slot.time}</div>
+  <div class="src-groups">${groups}</div>
+  <div class="src-commission">${commission}</div>
+</div>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
