@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Консультации перед экзаменами · Нормальная физиология · Лето 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1916;
+    --ink-2: #4a4740;
+    --ink-3: #8a8680;
+    --accent: #2d6e4e;
+    --accent-light: #e6f2ec;
+    --accent-muted: #b8d9c8;
+    --tag-eng: #2d5a8e;
+    --tag-eng-bg: #dde8f5;
+    --tag-eng-border: #b8cfe8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Onest', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 28px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'Консультации';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Lora', serif;
+    font-size: 56px;
+    font-weight: 600;
+    opacity: 0.08;
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -1px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .hero-sub {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 14px;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .hero-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    padding: 0 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 12px 14px 10px;
+    font-family: 'Onest', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tab-btn .tb-day { font-size: 10px; font-weight: 400; opacity: 0.8; display: block; margin-top: 1px; }
+  .tab-btn:hover { color: var(--accent); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    padding: 10px 16px 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .search-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Onest', sans-serif;
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--ink-3); }
+
+  /* ── CONTENT ── */
+  .wrap { max-width: 560px; margin: 0 auto; }
+
+  .tab-panel { display: none; padding: 16px 16px 32px; }
+  .tab-panel.active { display: block; }
+
+  .date-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .date-big {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .date-meta { font-size: 13px; color: var(--ink-2); }
+  .date-weekday { font-weight: 500; }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-muted);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--accent);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .summary-bar strong { font-weight: 600; }
+
+  /* ── GROUP CARD ── */
+  .group-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 12px;
+    align-items: start;
+    transition: box-shadow 0.15s;
+  }
+  .group-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+  .gc-time-col {
+    grid-row: span 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+    padding-top: 2px;
+  }
+  .gc-time {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .gc-time-end {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .gc-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .group-badge {
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Onest', sans-serif;
+    color: var(--ink);
+  }
+  .group-badge.eng {
+    background: var(--tag-eng-bg);
+    border-color: var(--tag-eng-border);
+    color: var(--tag-eng);
+  }
+
+  .gc-teacher {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .gc-teacher::before {
+    content: '👤';
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .gc-room {
+    font-size: 13px;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .gc-room::before {
+    content: '🚪';
+    font-size: 11px;
+    opacity: 0.7;
+  }
+  .room-badge {
+    background: var(--bg-muted);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+
+  /* ── SEARCH RESULTS ── */
+  #search-panel { display: none; }
+  #search-panel.active { display: block; }
+  .search-result-wrap { padding: 16px 16px 32px; }
+  .search-result-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">БГМУ · Кафедра нормальной физиологии</div>
+    <div class="hero-title">Консультации перед экзаменами</div>
+    <div class="hero-sub">Нормальная физиология · Летняя сессия 2025/2026</div>
+    <div class="hero-chips">
+      <span class="hero-chip">9 июня – 24 июня</span>
+      <span class="hero-chip" id="chip-dates"></span>
+      <span class="hero-chip" id="chip-groups"></span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput"
+      placeholder="🔍 Найти группу, например 1205 или 6211ENG…" autocomplete="off">
+  </div>
+
+  <div id="search-panel">
+    <div class="search-result-wrap">
+      <div class="search-result-title" id="searchResultTitle"></div>
+      <div id="searchResults"></div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <nav class="tab-nav" id="tabNav"></nav>
+    <div id="tabPanels"></div>
+  </div>
+
+  <div class="page-footer">
+    Кафедра нормальной физиологии БГМУ · 2025/2026
+  </div>
+</div>
+
+<script>
+const RAW = [
+  {date:"09.06.2026",weekday:"вторник",group:"6209",start:"9:00",end:"10:20",room:"128",teacher:"Семененя И.Н."},
+  {date:"09.06.2026",weekday:"вторник",group:"6221",start:"10:30",end:"11:50",room:"143",teacher:"Фоменко В.Н."},
+  {date:"09.06.2026",weekday:"вторник",group:"6222",start:"10:30",end:"11:50",room:"102",teacher:"Пупа Т.А."},
+  {date:"09.06.2026",weekday:"вторник",group:"6223",start:"10:30",end:"11:50",room:"130",teacher:"Вакансия / Григорьян А.Л."},
+  {date:"09.06.2026",weekday:"вторник",group:"6224",start:"10:30",end:"11:50",room:"128",teacher:"Гаптарь М.И."},
+  {date:"09.06.2026",weekday:"вторник",group:"6225",start:"10:30",end:"11:50",room:"127",teacher:"Абаимова М.О."},
+  {date:"09.06.2026",weekday:"вторник",group:"6219ENG",start:"9:00",end:"10:20",room:"133",teacher:"Гайкович Ю.В."},
+  {date:"09.06.2026",weekday:"вторник",group:"6220ENG",start:"9:00",end:"10:20",room:"143",teacher:"Фоменко В.Н."},
+  {date:"09.06.2026",weekday:"вторник",group:"6228ENG",start:"9:00",end:"10:20",room:"102",teacher:"Пупа Т.А."},
+  {date:"09.06.2026",weekday:"вторник",group:"6229ENG",start:"10:30",end:"11:50",room:"133",teacher:"Александров Д.А."},
+
+  {date:"12.06.2026",weekday:"пятница",group:"1221",start:"9:00",end:"10:20",room:"143",teacher:"Семененя И.Н."},
+  {date:"12.06.2026",weekday:"пятница",group:"1222",start:"10:30",end:"11:50",room:"143",teacher:"Семененя И.Н."},
+  {date:"12.06.2026",weekday:"пятница",group:"1223",start:"10:30",end:"11:50",room:"133",teacher:"Александров Д.А."},
+  {date:"12.06.2026",weekday:"пятница",group:"1224",start:"9:00",end:"10:20",room:"127",teacher:"Чабан А.Г."},
+  {date:"12.06.2026",weekday:"пятница",group:"1225",start:"9:00",end:"10:20",room:"130",teacher:"Переверзев В.А."},
+  {date:"12.06.2026",weekday:"пятница",group:"1226",start:"9:00",end:"10:20",room:"133",teacher:"Голодок Т.П."},
+  {date:"12.06.2026",weekday:"пятница",group:"1227",start:"12:00",end:"13:20",room:"143",teacher:"Семененя И.Н."},
+  {date:"12.06.2026",weekday:"пятница",group:"1228",start:"10:30",end:"11:50",room:"127",teacher:"Чабан А.Г."},
+
+  {date:"15.06.2026",weekday:"понедельник",group:"6226",start:"9:00",end:"10:20",room:"129",teacher:"Печурский А.И."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6227",start:"9:00",end:"10:20",room:"128",teacher:"Фоменко В.Н."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6211ENG",start:"12:00",end:"13:20",room:"143",teacher:"Гайкович Ю.В."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6212ENG",start:"13:30",end:"14:50",room:"102",teacher:"Пупа Т.А."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6213ENG",start:"12:00",end:"13:20",room:"128",teacher:"Фоменко В.Н."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6214ENG",start:"13:30",end:"14:50",room:"129",teacher:"Северина Т.Г."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6231ENG",start:"13:30",end:"14:50",room:"143",teacher:"Гайкович Ю.В."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6232ENG",start:"13:20",end:"14:40",room:"130",teacher:"Александров Д.А."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6233ENG",start:"15:00",end:"16:20",room:"143",teacher:"Гайкович Ю.В."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6234ENG",start:"14:50",end:"16:10",room:"130",teacher:"Александров Д.А."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6235ENG",start:"13:30",end:"14:50",room:"128",teacher:"Фоменко В.Н."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6236ENG",start:"9:00",end:"10:20",room:"102",teacher:"Григорьян А.Л."},
+  {date:"15.06.2026",weekday:"понедельник",group:"4201",start:"12:00",end:"13:20",room:"102",teacher:"Григорьян А.Л."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6201",start:"10:30",end:"11:50",room:"128",teacher:"Фоменко В.Н."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6202",start:"10:30",end:"11:50",room:"102",teacher:"Григорьян А.Л."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6203",start:"10:30",end:"11:50",room:"128 / 102 / 129",teacher:"Григорьян А.Л. / Печурский А.И. / Фоменко В.Н."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6204",start:"12:00",end:"13:20",room:"129",teacher:"Печурский А.И."},
+  {date:"15.06.2026",weekday:"понедельник",group:"6207",start:"10:30",end:"11:50",room:"129",teacher:"Печурский А.И."},
+
+  {date:"16.06.2026",weekday:"вторник",group:"4202",start:"10:30",end:"11:50",room:"143",teacher:"Власенко В.И."},
+  {date:"16.06.2026",weekday:"вторник",group:"4203",start:"9:00",end:"10:20",room:"130 / 143",teacher:"Власенко В.И. / Переверзев В.А."},
+  {date:"16.06.2026",weekday:"вторник",group:"4204",start:"9:00",end:"10:20",room:"143",teacher:"Власенко В.И."},
+  {date:"16.06.2026",weekday:"вторник",group:"6205",start:"9:00",end:"10:20",room:"130",teacher:"Переверзев В.А."},
+  {date:"16.06.2026",weekday:"вторник",group:"6206",start:"10:30",end:"11:50",room:"130",teacher:"Переверзев В.А."},
+  {date:"16.06.2026",weekday:"вторник",group:"6208",start:"10:30",end:"11:50",room:"129",teacher:"Чабан А.Г."},
+
+  {date:"17.06.2026",weekday:"среда",group:"1201",start:"13:30",end:"14:50",room:"128",teacher:"Семененя И.Н."},
+  {date:"17.06.2026",weekday:"среда",group:"1202",start:"9:00",end:"10:20",room:"102",teacher:"Печурский А.И."},
+  {date:"17.06.2026",weekday:"среда",group:"1203",start:"13:30",end:"14:50",room:"143",teacher:"Власенко В.И."},
+  {date:"17.06.2026",weekday:"среда",group:"1204",start:"13:30",end:"14:50",room:"130",teacher:"Переверзев В.А."},
+  {date:"17.06.2026",weekday:"среда",group:"1205",start:"13:30",end:"14:50",room:"143 / 102",teacher:"Власенко В.И. / Голодок Т.П."},
+  {date:"17.06.2026",weekday:"среда",group:"1206",start:"13:30",end:"14:50",room:"102",teacher:"Голодок Т.П."},
+  {date:"17.06.2026",weekday:"среда",group:"1207",start:"15:00",end:"16:20",room:"128",teacher:"Семененя И.Н."},
+  {date:"17.06.2026",weekday:"среда",group:"1208",start:"15:00",end:"16:20",room:"102",teacher:"Голодок Т.П."},
+
+  {date:"18.06.2026",weekday:"четверг",group:"1209",start:"9:00",end:"10:20",room:"129",teacher:"Чабан А.Г."},
+  {date:"18.06.2026",weekday:"четверг",group:"1210",start:"10:30",end:"11:50",room:"130",teacher:"Переверзев В.А."},
+  {date:"18.06.2026",weekday:"четверг",group:"1211",start:"9:00",end:"10:20",room:"130",teacher:"Переверзев В.А."},
+  {date:"18.06.2026",weekday:"четверг",group:"1212",start:"10:30",end:"11:50",room:"102",teacher:"Григорьян А.Л."},
+  {date:"18.06.2026",weekday:"четверг",group:"1213",start:"10:30",end:"11:50",room:"102 / 130",teacher:"Григорьян А.Л. / Переверзев В.А."},
+  {date:"18.06.2026",weekday:"четверг",group:"1214",start:"9:00",end:"10:20",room:"102 / 133 / 130",teacher:"Григорьян А.Л. / Власенко В.И. / Переверзев В.А."},
+  {date:"18.06.2026",weekday:"четверг",group:"1215",start:"9:00",end:"10:20",room:"133",teacher:"Власенко В.И."},
+  {date:"18.06.2026",weekday:"четверг",group:"1216",start:"10:30",end:"11:50",room:"129",teacher:"Чабан А.Г."},
+
+  {date:"19.06.2026",weekday:"пятница",group:"1217",start:"9:00",end:"10:20",room:"102",teacher:"Данченко А.Д."},
+  {date:"19.06.2026",weekday:"пятница",group:"1218",start:"13:30",end:"14:50",room:"130",teacher:"Переверзев В.А."},
+  {date:"19.06.2026",weekday:"пятница",group:"1219",start:"13:30",end:"14:50",room:"102",teacher:"Голодок Т.П."},
+  {date:"19.06.2026",weekday:"пятница",group:"1220",start:"13:30",end:"14:50",room:"128",teacher:"Семененя И.Н."},
+
+  {date:"22.06.2026",weekday:"понедельник",group:"2201",start:"11:00",end:"12:20",room:"102",teacher:"Гайкович Ю.В."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2202",start:"12:30",end:"13:50",room:"102",teacher:"Северина Т.Г."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2203",start:"9:00",end:"10:20",room:"102",teacher:"Григорьян А.Л."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2204",start:"11:30",end:"12:50",room:"130",teacher:"Голодок Т.П."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2205",start:"11:00",end:"12:20",room:"128",teacher:"Чабан А.Г."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2206",start:"11:00",end:"12:20",room:"127",teacher:"Данченко А.Д."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2207",start:"11:00",end:"12:20",room:"143",teacher:"Власенко В.И."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2208",start:"11:00",end:"12:20",room:"133",teacher:"Пупа Т.А."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2209",start:"11:00",end:"12:20",room:"129",teacher:"Абаимова М.О."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2210",start:"9:00",end:"10:20",room:"129",teacher:"Абаимова М.О."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2211",start:"12:30",end:"13:50",room:"143",teacher:"Александров Д.А."},
+  {date:"22.06.2026",weekday:"понедельник",group:"2212",start:"12:30",end:"13:50",room:"129 / 143",teacher:"Александров Д.А. / Абаимова М.О."},
+
+  {date:"23.06.2026",weekday:"вторник",group:"6161ENG",start:"12:30",end:"13:50",room:"102",teacher:"Гайкович Ю.В."},
+  {date:"23.06.2026",weekday:"вторник",group:"6163ENG",start:"12:30",end:"13:50",room:"133",teacher:"Пупа Т.А."},
+  {date:"23.06.2026",weekday:"вторник",group:"6160",start:"14:00",end:"15:20",room:"102",teacher:"Пупа Т.А."},
+  {date:"23.06.2026",weekday:"вторник",group:"6216ENG",start:"14:00",end:"15:20",room:"133",teacher:"Гайкович Ю.В."},
+
+  {date:"24.06.2026",weekday:"среда",group:"2213",start:"12:00",end:"13:20",room:"129",teacher:"Абаимова М.О."},
+  {date:"24.06.2026",weekday:"среда",group:"2214",start:"13:30",end:"14:50",room:"128 / 129",teacher:"Семененя И.Н. / Абаимова М.О."},
+  {date:"24.06.2026",weekday:"среда",group:"2215",start:"13:30",end:"14:50",room:"128",teacher:"Семененя И.Н."},
+  {date:"24.06.2026",weekday:"среда",group:"2216",start:"13:30",end:"14:50",room:"129",teacher:"Абаимова М.О."},
+  {date:"24.06.2026",weekday:"среда",group:"2217",start:"12:00",end:"13:20",room:"128",teacher:"Семененя И.Н."},
+  {date:"24.06.2026",weekday:"среда",group:"6215ENG",start:"12:30",end:"13:50",room:"102",teacher:"Пупа Т.А."},
+  {date:"24.06.2026",weekday:"среда",group:"6217ENG",start:"14:00",end:"15:20",room:"133",teacher:"Гайкович Ю.В."},
+  {date:"24.06.2026",weekday:"среда",group:"6218ENG",start:"14:00",end:"15:20",room:"127",teacher:"Северина Т.Г."},
+  {date:"24.06.2026",weekday:"среда",group:"6230ENG",start:"12:30",end:"13:50",room:"127",teacher:"Северина Т.Г."},
+  {date:"24.06.2026",weekday:"среда",group:"8101",start:"13:00",end:"14:20",room:"130",teacher:"Фоменко В.Н."},
+  {date:"24.06.2026",weekday:"среда",group:"8102",start:"11:30",end:"12:50",room:"143",teacher:"Голодок Т.П."},
+  {date:"24.06.2026",weekday:"среда",group:"8103",start:"9:00",end:"10:20",room:"129",teacher:"Абаимова М.О."},
+  {date:"24.06.2026",weekday:"среда",group:"8104",start:"12:30",end:"13:50",room:"133",teacher:"Гайкович Ю.В."},
+  {date:"24.06.2026",weekday:"среда",group:"8105",start:"10:30",end:"11:50",room:"129",teacher:"Абаимова М.О."},
+  {date:"24.06.2026",weekday:"среда",group:"8106",start:"13:00",end:"14:20",room:"143",teacher:"Голодок Т.П."},
+  {date:"24.06.2026",weekday:"среда",group:"6162",start:"11:30",end:"12:50",room:"130",teacher:"Юшкевич Ю.Ю."},
+];
+
+const MONTH_NAMES = ["","января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+const SHORT_MONTHS = ["","янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+const WD_SHORT = {понедельник:"пн",вторник:"вт",среда:"ср",четверг:"чт",пятница:"пт",суббота:"сб",воскресенье:"вс"};
+
+function parseDay(str) { // "09.06.2026"
+  const [d,m,y] = str.split('.').map(Number);
+  return {d,m,y, key: str};
+}
+function formatFull(str) {
+  const {d,m} = parseDay(str);
+  return `${d} ${MONTH_NAMES[m]}`;
+}
+function formatShort(str) {
+  const {d,m} = parseDay(str);
+  return `${d} ${SHORT_MONTHS[m]}`;
+}
+function isEng(g) { return /ENG/i.test(g); }
+
+// Group by date
+const byDate = {};
+const dateOrder = [];
+RAW.forEach(r => {
+  if (!byDate[r.date]) { byDate[r.date] = []; dateOrder.push(r.date); }
+  byDate[r.date].push(r);
+});
+// Sort each date's rows by start_minutes (use start time string)
+Object.values(byDate).forEach(rows => {
+  rows.sort((a,b) => {
+    const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+    return toMin(a.start) - toMin(b.start);
+  });
+});
+
+// Update chips
+document.getElementById('chip-dates').textContent = `${dateOrder.length} дат`;
+document.getElementById('chip-groups').textContent = `${RAW.length} групп`;
+
+function groupCard(row) {
+  const engClass = isEng(row.group) ? ' eng' : '';
+  const rooms = row.room.trim();
+  const teachers = row.teacher.trim();
+  return `
+<div class="group-card">
+  <div class="gc-time-col">
+    <div class="gc-time">${row.start}</div>
+    <div class="gc-time-end">${row.end}</div>
+  </div>
+  <div class="gc-group">
+    <span class="group-badge${engClass}">${row.group}</span>
+  </div>
+  <div class="gc-teacher">${teachers}</div>
+  <div class="gc-room">каб. <span class="room-badge">${rooms}</span></div>
+</div>`;
+}
+
+const tabNav = document.getElementById('tabNav');
+const tabPanels = document.getElementById('tabPanels');
+
+dateOrder.forEach((date, di) => {
+  const rows = byDate[date];
+  const wd = rows[0].weekday;
+  const wdShort = WD_SHORT[wd] || wd;
+
+  // Tab button
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (di === 0 ? ' active' : '');
+  btn.setAttribute('data-tab', `d${di}`);
+  btn.innerHTML = `<span>${formatShort(date)}</span><span class="tb-day">${wdShort}</span>`;
+  btn.onclick = () => switchTab(`d${di}`);
+  tabNav.appendChild(btn);
+
+  // Panel
+  const panel = document.createElement('div');
+  panel.className = 'tab-panel' + (di === 0 ? ' active' : '');
+  panel.id = `panel-d${di}`;
+  panel.innerHTML = `
+    <div class="date-header">
+      <div class="date-big">${formatFull(date)}</div>
+      <div class="date-meta"><span class="date-weekday">${wd}</span></div>
+    </div>
+    <div class="summary-bar">
+      <span>Групп: <strong>${rows.length}</strong></span>
+      <span>ENG: <strong>${rows.filter(r=>isEng(r.group)).length}</strong></span>
+    </div>
+    ${rows.map(groupCard).join('')}
+  `;
+  tabPanels.appendChild(panel);
+});
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === id));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${id}`));
+  const btn = document.querySelector(`.tab-btn[data-tab="${id}"]`);
+  if (btn) btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchPanel = document.getElementById('search-panel');
+const mainContent = document.getElementById('main-content');
+const searchResults = document.getElementById('searchResults');
+const searchResultTitle = document.getElementById('searchResultTitle');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) {
+    searchPanel.classList.remove('active');
+    mainContent.style.display = '';
+    return;
+  }
+  searchPanel.classList.add('active');
+  mainContent.style.display = 'none';
+
+  const found = RAW.filter(r => r.group.toLowerCase().includes(q) || r.teacher.toLowerCase().includes(q));
+
+  if (!found.length) {
+    searchResultTitle.textContent = `По запросу «${q}» ничего не найдено`;
+    searchResults.innerHTML = '<div style="font-size:13px;color:var(--ink-3);padding:8px 0;">Проверьте номер группы или фамилию.</div>';
+    return;
+  }
+
+  searchResultTitle.textContent = `Найдено: ${found.length} ${found.length===1?'запись':'записей'}`;
+  searchResults.innerHTML = found.map(r => {
+    const engClass = isEng(r.group) ? ' eng' : '';
+    return `
+<div class="group-card">
+  <div class="gc-time-col">
+    <div class="gc-time">${r.start}</div>
+    <div class="gc-time-end">${r.end}</div>
+    <div style="font-size:10px;color:var(--ink-3);margin-top:3px;text-align:center;">${formatShort(r.date)}</div>
+  </div>
+  <div class="gc-group">
+    <span class="group-badge${engClass}">${r.group}</span>
+    <span style="font-size:11px;color:var(--ink-3);">${r.weekday}</span>
+  </div>
+  <div class="gc-teacher">${r.teacher}</div>
+  <div class="gc-room">каб. <span class="room-badge">${r.room}</span></div>
+</div>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
