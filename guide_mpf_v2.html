@@ -83,6 +83,9 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 .av-tp  { background: #f0fae0; color: #3a5a10; }
 .av-gal { background: #fde8f8; color: #6a1a5a; }
 .av-pai { background: #e8fde8; color: #1a5a2a; }
+.av-yuyu { background: #fae8d0; color: #7a4010; }
+.av-emo { background: #f0e0f5; color: #5a2070; }
+.av-ia  { background: #f5e8d0; color: #7a4520; }
 .t-chip { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); padding: 4px 0; }
 .group-teacher-bar { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; padding: 12px 14px; background: var(--bg-muted); border-radius: 8px; border: 1px solid var(--border-light); }
 /* SCALE */
@@ -193,8 +196,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">10</div><div><div class="t-text">Нейрон: структура и функции, нейроглия. Проведение возбуждения по нервным волокнам. Синаптическая передача.</div><div class="t-date">13.04 – 17.04</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Физиология скелетных мышц.</div><div class="t-date">22.04 – 25.04</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">12</div><div><div class="t-text">Основы биомеханики. Сила и работа мышц, режимы их сокращения. Физиология гладких мышц.</div><div class="t-date">27.04 – 30.04</div></div></div>
-      <div data-num-class="reg" class="topic-row current"><div class="t-num cur">13</div><div><div class="t-text">Общая физиология нервной системы.<span class="current-badge">◉ сейчас</span></div><div class="t-date">04.05 – 08.05</div></div></div>
-      <div data-num-class="reg" class="topic-row"><div class="t-num fin">14</div><div><div class="t-text">Итоговое занятие: «Физиология возбудимых тканей»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span></div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div data-num-class="reg" class="topic-row"><div class="t-num reg">13</div><div><div class="t-text">Общая физиология нервной системы.</div><div class="t-date">04.05 – 08.05</div></div></div>
+      <div data-num-class="reg" class="topic-row current"><div class="t-num cur">14</div><div><div class="t-text">Итоговое занятие: «Физиология возбудимых тканей»<span class="tag tag-warn" style="margin-left:8px;">итоговое</span><span class="current-badge">◉ сейчас</span></div><div class="t-date">11.05 – 15.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">15</div><div><div class="t-text">Роль и функции спинного мозга, ствола мозга и мозжечка.</div><div class="t-date">18.05 – 22.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">Роль и функции промежуточного и переднего мозга. Системные механизмы регуляции тонуса мышц и движений.</div><div class="t-date">25.05 – 29.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Физиология автономной (вегетативной) нервной системы.</div><div class="t-date">01.06 – 05.06</div></div></div>
@@ -208,10 +211,10 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <span class="sec-count">8 групп</span>
       </div>
       <div class="group-teacher-bar">
-        <div class="t-chip"><div class="av av-dad">ДАД</div>Данченко А.Д. — 3101, 3103, 3107</div>
         <div class="t-chip"><div class="av av-gal">ГАЛ</div>Григорьян А.Л. — 3102</div>
-        <div class="t-chip"><div class="av av-pai">ПАИ</div>Печурский А.И. — 3104, 3105, 3108(вак)</div>
         <div class="t-chip"><div class="av av-mig">МИГ</div>Гаптарь М.И. — 3106</div>
+        <div class="t-chip"><div class="av av-dad">ДАД</div>Данченко А.Д. — 3101, 3103, 3107(вак)</div>
+        <div class="t-chip"><div class="av av-pai">ПАИ</div>Печурский А.И. — 3104, 3105, 3108(вак)</div>
       </div>
       <table class="group-table">
         <thead><tr><th>Группа</th><th>День / время</th><th>Преподаватель</th><th>Ауд.</th></tr></thead>
@@ -222,7 +225,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
           <tr><td><span class="group-num">3104</span></td><td>Вт 08:00–10:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-pai">ПАИ</div>Печурский А.И.</div></td><td><span class="room-badge">129</span></td></tr>
           <tr><td><span class="group-num">3105</span></td><td>Вт 10:25–12:40</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-pai">ПАИ</div>Печурский А.И.</div></td><td><span class="room-badge">129</span></td></tr>
           <tr><td><span class="group-num">3106</span></td><td>Пн 10:30–12:45</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-mig">МИГ</div>Гаптарь М.И.</div></td><td><span class="room-badge">128</span></td></tr>
-          <tr><td><span class="group-num">3107</span></td><td>Чт 08:00–10:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-dad">ДАД</div>Данченко А.Д.</div></td><td><span class="room-badge">143</span></td></tr>
+          <tr><td><span class="group-num">3107</span></td><td>Чт 08:00–10:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-dad">ДАД</div>Данченко А.Д. (вак)</div></td><td><span class="room-badge">143</span></td></tr>
           <tr><td><span class="group-num">3108</span></td><td>Вт 08:00–10:15</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="av av-pai">Вак</div>Вакансия / Печурский А.И.</div></td><td><span class="room-badge">129</span></td></tr>
         </tbody>
       </table>
@@ -367,7 +370,7 @@ function showLec(id, btn) {
   btn.classList.add('active');
 }
 
-// Dynamic current week highlight
+// Dynamic current week highlight (sat-fri week)
 document.addEventListener('DOMContentLoaded', function() {
   var WEEKS = [
     ["2026-02-09","2026-02-13"],
@@ -389,15 +392,18 @@ document.addEventListener('DOMContentLoaded', function() {
     ["2026-06-01","2026-06-05"],
     ["2026-06-08","2026-06-12"]
   ];
+  var BADGE = '◉ сейчас';
   var today = new Date(); today.setHours(0,0,0,0);
-  if (today.getDay() === 6) today.setDate(today.getDate() + 2);
+  var dow = today.getDay();
+  if (dow === 6) today.setDate(today.getDate() + 2);
+  else if (dow === 0) today.setDate(today.getDate() + 1);
   var cur = -1;
   for (var i = 0; i < WEEKS.length; i++) {
     var s = new Date(WEEKS[i][0]); var e = new Date(WEEKS[i][1]); e.setHours(23,59,59,999);
     if (today >= s && today <= e) { cur = i; break; }
   }
   if (cur < 0) return;
-  var staticCur = 12;
+  var staticCur = 13;
   if (cur === staticCur) return;
   var rows = document.querySelectorAll('#schedule .topic-row');
   rows.forEach(function(row, idx) {
@@ -409,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
       row.classList.add('current');
       if (num) { num.classList.remove('reg','fin','zan'); num.classList.add('cur'); }
       var t = row.querySelector('.t-text');
-      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = '◉ сейчас'; t.appendChild(b); }
+      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = BADGE; t.appendChild(b); }
     }
   });
 });

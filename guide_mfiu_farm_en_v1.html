@@ -122,6 +122,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 .exam-lbl { font-weight: 600; color: var(--ink-2); min-width: 90px; flex-shrink: 0; }
 .formula-box { font-family: 'Lora', serif; font-size: 17px; text-align: center; padding: 14px; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; color: var(--ink); margin: 14px 0; }
 .bonus-num { color: #8b0000; font-weight: 700; }
+
+.tname-badge { display: inline-block; padding: 2px 8px; background: #e8e8e8; color: #333; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 8px; border: 1px solid #ccc; }
 </style>
 </head>
 <body>
@@ -171,7 +173,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">29 (11)</div><div><div class="t-text">The metabolism of substances and energy. The physiological basis of healthy nutrition. Physiology of thermoregulation.</div><div class="t-date">22.04 – 25.04</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">30 (12)</div><div><div class="t-text">Physiology of excretion.</div><div class="t-date">27.04 – 30.04</div></div></div>
       <div data-num-class="fin" class="topic-row"><div class="t-num fin">31 (13)</div><div><div class="t-text">Concluding class — «Digestive system. Metabolism and energy. Thermoregulation. Excretion» <span class="tag tag-concluding" style="margin-left:8px;">concluding</span></div><div class="t-date">04.05 – 08.05</div></div></div>
-      <div data-num-class="reg" class="topic-row"><div class="t-num reg">32 (14)</div><div><div class="t-text">General principles of structure and function of sensory systems. Structure and functions of visual system.</div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div data-num-class="reg" class="topic-row current"><div class="t-num cur">32 (14)</div><div><div class="t-text">General principles of structure and function of sensory systems. Structure and functions of visual system.<span class="current-badge">◉ now</span></div><div class="t-date">11.05 – 15.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">33 (15)</div><div><div class="t-text">Special physiology of sensory systems. Auditory, vestibular, olfactory, taste, somatovisceral systems. Nociception. Nociceptive and antinociceptive systems.</div><div class="t-date">18.05 – 22.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">34 (16)</div><div><div class="t-text">Innate and acquired adaptive reactions of the organism to environmental changes.</div><div class="t-date">25.05 – 29.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">35 (17)</div><div><div class="t-text">Higher integrative brain functions as physiological bases of human psychic functions.</div><div class="t-date">01.06 – 05.06 / 08.06</div></div></div>
@@ -184,8 +186,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <span class="sec-count">Groups 6161EN, 6163EN</span>
       </div>
       <div class="group-teacher-bar">
-        <div class="t-chip">Haikovich Y.V. — 6161EN (Thu 08:00, aud. 142-1)</div>
-        <div class="t-chip">Pupa T.A. — 6163EN (Tue 17:00, aud. 102)</div>
+        <div class="t-chip"><span class="tname-badge" style="background:#daf5f5;color:#1a6a7a;border-color:#1a6a7a33;">Pupa T.A.</span> — 6163EN</div>
+        <div class="t-chip"><span class="tname-badge" style="background:#f0daf5;color:#5a1a7a;border-color:#5a1a7a33;">Haikovich Y.V.</span> — 6161EN</div>
       </div>
       <table class="group-table">
         <thead>
@@ -193,7 +195,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         </thead>
         <tbody>
           <tr><td><span class="group-num">6161EN</span></td><td>Thu 08:00–10:15</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
-          <tr><td><span class="group-num">6163EN</span></td><td>Tue 17:00–19:15</td><td>Pupa T.A.</td><td><span class="room-badge">102</span></td></tr>
+          <tr><td><span class="group-num">6163EN</span></td><td>Tue 14:35–16:50</td><td>Pupa T.A.</td><td><span class="room-badge">102</span></td></tr>
         </tbody>
       </table>
       <p style="font-size:12px;color:var(--ink-3);margin-top:12px;">* Last class (35/17) for 6161EN — Thu 04.06; for 6163EN — Tue 08.06.</p>
@@ -429,46 +431,51 @@ function showLec(id, btn) {
   btn.classList.add('active');
 }
 
-// Dynamic current week highlight
+// Dynamic current week highlight (sat-fri week)
 document.addEventListener('DOMContentLoaded', function() {
-  // Weeks 19–35 of the academic year
   var WEEKS = [
-    ["2026-02-09","2026-02-13"],  // 19(1)
-    ["2026-02-16","2026-02-20"],  // 20(2)
-    ["2026-02-23","2026-02-27"],  // 21(3)
-    ["2026-03-02","2026-03-06"],  // 22(4)
-    ["2026-03-09","2026-03-13"],  // 23(5)
-    ["2026-03-16","2026-03-20"],  // 24(6)
-    ["2026-03-23","2026-03-27"],  // 25(7)
-    ["2026-03-30","2026-04-03"],  // 26(8) concluding
-    ["2026-04-06","2026-04-10"],  // 27(9)
-    ["2026-04-13","2026-04-17"],  // 28(10)
-    ["2026-04-22","2026-04-25"],  // 29(11)
-    ["2026-04-27","2026-04-30"],  // 30(12)
-    ["2026-05-04","2026-05-08"],  // 31(13) concluding
-    ["2026-05-11","2026-05-15"],  // 32(14)
-    ["2026-05-18","2026-05-22"],  // 33(15)
-    ["2026-05-25","2026-05-29"],  // 34(16)
-    ["2026-06-01","2026-06-08"]   // 35(17)
+    ["2026-02-09","2026-02-13"],
+    ["2026-02-16","2026-02-20"],
+    ["2026-02-23","2026-02-27"],
+    ["2026-03-02","2026-03-06"],
+    ["2026-03-09","2026-03-13"],
+    ["2026-03-16","2026-03-20"],
+    ["2026-03-23","2026-03-27"],
+    ["2026-03-30","2026-04-03"],
+    ["2026-04-06","2026-04-10"],
+    ["2026-04-13","2026-04-17"],
+    ["2026-04-22","2026-04-25"],
+    ["2026-04-27","2026-04-30"],
+    ["2026-05-04","2026-05-08"],
+    ["2026-05-11","2026-05-15"],
+    ["2026-05-18","2026-05-22"],
+    ["2026-05-25","2026-05-29"],
+    ["2026-06-01","2026-06-05"]
   ];
+  var BADGE = '◉ now';
   var today = new Date(); today.setHours(0,0,0,0);
+  var dow = today.getDay();
+  if (dow === 6) today.setDate(today.getDate() + 2);
+  else if (dow === 0) today.setDate(today.getDate() + 1);
   var cur = -1;
   for (var i = 0; i < WEEKS.length; i++) {
     var s = new Date(WEEKS[i][0]); var e = new Date(WEEKS[i][1]); e.setHours(23,59,59,999);
     if (today >= s && today <= e) { cur = i; break; }
   }
   if (cur < 0) return;
+  var staticCur = 13;
+  if (cur === staticCur) return;
   var rows = document.querySelectorAll('#schedule .topic-row');
   rows.forEach(function(row, idx) {
     row.classList.remove('current');
     var num = row.querySelector('.t-num');
-    if (num) { num.classList.remove('cur'); var orig = row.getAttribute('data-num-class'); num.className = 't-num ' + (orig ? orig : 'reg'); }
+    if (num) { num.classList.remove('cur'); var orig = row.getAttribute('data-num-class'); num.className = 't-num ' + (orig && orig !== 'cur' ? orig : 'reg'); }
     var badge = row.querySelector('.current-badge'); if (badge) badge.remove();
     if (idx === cur) {
       row.classList.add('current');
-      if (num) { num.classList.remove('reg','fin'); num.classList.add('cur'); }
+      if (num) { num.classList.remove('reg','fin','zan'); num.classList.add('cur'); }
       var t = row.querySelector('.t-text');
-      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = '◉ now'; t.appendChild(b); }
+      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = BADGE; t.appendChild(b); }
     }
   });
 });

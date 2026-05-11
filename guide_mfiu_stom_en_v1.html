@@ -122,6 +122,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
 /* FORMULA */
 .bonus-num { color: #8b0000; font-weight: 700; }
 .formula-box { font-family: 'Lora', serif; font-size: 17px; text-align: center; padding: 14px; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; color: var(--ink); margin: 14px 0; }
+
+.tname-badge { display: inline-block; padding: 2px 8px; background: #e8e8e8; color: #333; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 8px; border: 1px solid #ccc; }
 </style>
 </head>
 <body>
@@ -171,7 +173,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">11</div><div><div class="t-text">Physiology of skeletal muscles.</div><div class="t-date">22.04 – 25.04</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">12</div><div><div class="t-text">Physiology of the muscles of the maxillofacial region. Smooth muscles. The concept of myoepithelial and glandular cells.</div><div class="t-date">27.04 – 30.04</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">13</div><div><div class="t-text">General physiology of the central nervous system.</div><div class="t-date">04.05 – 08.05</div></div></div>
-      <div data-num-class="fin" class="topic-row"><div class="t-num fin">14</div><div><div class="t-text">Concluding lesson on section «General Physiology» <span class="tag tag-concluding" style="margin-left:8px;">concluding</span></div><div class="t-date">11.05 – 15.05</div></div></div>
+      <div data-num-class="fin" class="topic-row current"><div class="t-num cur">14</div><div><div class="t-text">Concluding lesson on section «General Physiology» <span class="tag tag-concluding" style="margin-left:8px;">concluding</span><span class="current-badge">◉ now</span></div><div class="t-date">11.05 – 15.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">15</div><div><div class="t-text">The role and functions of spinal cord, brain stem, and cerebellum.</div><div class="t-date">18.05 – 22.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">16</div><div><div class="t-text">The role and functions of mesencephalon, forebrain.</div><div class="t-date">25.05 – 29.05</div></div></div>
       <div data-num-class="reg" class="topic-row"><div class="t-num reg">17</div><div><div class="t-text">Physiology of autonomic nervous system.</div><div class="t-date">01.06 – 05.06</div></div></div>
@@ -185,9 +187,9 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <span class="sec-count">Groups 6147EN, 6148EN, 6149EN, 6150EN, 6151EN, 6152EN</span>
       </div>
       <div class="group-teacher-bar">
-        <div class="t-chip">Grigoriyan A.L. — 6148EN (Mon 13:00, aud. 102), 6149EN (Fri 10:30, aud. 129), 6152EN (Tue 13:00, aud. 133)</div>
-        <div class="t-chip">Pupa T.A. — 6151EN (Thu 08:00, aud. 142-2)</div>
-        <div class="t-chip">Fomenko V.N. — 6150EN (Thu 10:30, aud. 142-2)</div>
+        <div class="t-chip"><span class="tname-badge" style="background:#fde8f8;color:#6a1a5a;border-color:#6a1a5a33;">Grigoryan A.L.</span> — 6148EN, 6149EN, 6152EN</div>
+        <div class="t-chip"><span class="tname-badge" style="background:#daf5f5;color:#1a6a7a;border-color:#1a6a7a33;">Pupa T.A.</span> — 6151EN</div>
+        <div class="t-chip"><span class="tname-badge" style="background:#fae0c8;color:#7a4010;border-color:#7a401033;">Fomenko V.N.</span> — 6150EN</div>
       </div>
       <table class="group-table">
         <thead>
@@ -446,7 +448,7 @@ function show(id, btn) {
   btn.classList.add('active');
 }
 
-// Dynamic current week highlight
+// Dynamic current week highlight (sat-fri week)
 document.addEventListener('DOMContentLoaded', function() {
   var WEEKS = [
     ["2026-02-09","2026-02-13"],
@@ -468,14 +470,19 @@ document.addEventListener('DOMContentLoaded', function() {
     ["2026-06-01","2026-06-05"],
     ["2026-06-08","2026-06-12"]
   ];
+  var BADGE = '◉ now';
   var today = new Date(); today.setHours(0,0,0,0);
-  if (today.getDay() === 6) today.setDate(today.getDate() + 2);
+  var dow = today.getDay();
+  if (dow === 6) today.setDate(today.getDate() + 2);
+  else if (dow === 0) today.setDate(today.getDate() + 1);
   var cur = -1;
   for (var i = 0; i < WEEKS.length; i++) {
     var s = new Date(WEEKS[i][0]); var e = new Date(WEEKS[i][1]); e.setHours(23,59,59,999);
     if (today >= s && today <= e) { cur = i; break; }
   }
   if (cur < 0) return;
+  var staticCur = 13;
+  if (cur === staticCur) return;
   var rows = document.querySelectorAll('#schedule .topic-row');
   rows.forEach(function(row, idx) {
     row.classList.remove('current');
@@ -484,9 +491,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var badge = row.querySelector('.current-badge'); if (badge) badge.remove();
     if (idx === cur) {
       row.classList.add('current');
-      if (num) { num.classList.remove('reg','fin'); num.classList.add('cur'); }
+      if (num) { num.classList.remove('reg','fin','zan'); num.classList.add('cur'); }
       var t = row.querySelector('.t-text');
-      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = '◉ now'; t.appendChild(b); }
+      if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = BADGE; t.appendChild(b); }
     }
   });
 });
