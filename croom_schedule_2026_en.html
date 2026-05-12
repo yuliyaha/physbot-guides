@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer class — Normal Physiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0; --bg-muted: #eeece7; --border: #ddd9d0; --border-light: #e8e5de;
+    --ink: #1a1916; --ink-2: #4a4740; --ink-3: #8a8680;
+    --accent: #2d5a8e; --accent-light: #e8eef6; --accent-muted: #c8d8ed;
+    --tag-eng: #2d5a8e; --tag-eng-bg: #dde8f5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;padding:14px 12px 60px}
+  h1{font-family:'Lora',serif;font-size:26px;font-weight:700;color:var(--accent);margin-bottom:6px}
+  .subt{font-size:15px;font-weight:600;color:var(--ink-2);margin-bottom:14px}
+
+  .filters{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:14px}
+  .filter-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  .filter-row:last-child{margin-bottom:0}
+  .filter-row label{font-size:11px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px}
+  .filter-col{flex:1;min-width:140px}
+  input{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:#fff;font-family:inherit;font-size:13.5px;color:var(--ink)}
+  input:focus{outline:none;border-color:var(--accent)}
+  .reset-btn{padding:8px 14px;background:var(--bg-muted);border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;color:var(--ink-2);cursor:pointer;width:100%}
+  .reset-btn:active{background:var(--border-light)}
+  .stat{font-size:12px;color:var(--ink-3);margin:10px 2px 12px}
+  .stat b{color:var(--accent);font-weight:600}
+
+  .tabs{display:flex;gap:4px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .tab{flex:0 0 auto;padding:8px 14px;background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:7px;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .15s}
+  .tab:active{transform:scale(.97)}
+  .tab.active{background:#fff;color:var(--accent);border-color:var(--accent-muted);font-weight:600}
+  .tab .tab-cnt{font-size:11px;background:rgba(255,255,255,.25);color:#fff;padding:1px 6px;border-radius:9px;min-width:18px;text-align:center}
+  .tab.active .tab-cnt{background:var(--accent-light);color:var(--accent)}
+
+  .row{background:#fff;border:1px solid var(--border-light);border-radius:7px;padding:8px 10px;margin-bottom:5px;display:grid;grid-template-columns:88px 1fr;gap:8px;align-items:center}
+  .row-time{font-family:'Lora',serif;font-size:13px;color:var(--accent);font-weight:600;line-height:1.2}
+  .row-main{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+  .grp{font-weight:600;color:var(--ink);font-size:14px}
+  .grp.eng{background:var(--tag-eng-bg);color:var(--tag-eng);padding:1px 6px;border-radius:4px;font-size:13px}
+  .tch{color:var(--ink);font-size:15px;font-weight:600}
+
+  .empty{text-align:center;padding:40px 20px;color:var(--ink-3);font-style:italic}
+  .footer{text-align:center;color:var(--ink-3);font-size:11px;margin-top:24px}
+</style>
+</head>
+<body>
+
+<h1>Computer class</h1>
+<div class="subt">Schedule · room 104</div>
+
+<div class="filters">
+  <div class="filter-row">
+    <div class="filter-col">
+      <label>Group</label>
+      <input id="f-grp" type="text" placeholder="e.g. 6217">
+    </div>
+    <div class="filter-col">
+      <label>Teacher</label>
+      <input id="f-tch" type="text" placeholder="e.g. Haikovich">
+    </div>
+  </div>
+  <div class="filter-row">
+    <div class="filter-col"><button class="reset-btn" onclick="resetFilters()">Reset filters</button></div>
+  </div>
+</div>
+
+<div class="stat" id="stat"></div>
+<div class="tabs" id="tabs"></div>
+<div id="content"></div>
+<div class="footer">Department of Normal Physiology, BSMU</div>
+
+<script>
+const DATA = [{"day": "Tuesday", "t1": "08:00", "t2": "08:35", "grp": "3104+3108", "tch": "Pechursky A.I."}, {"day": "Tuesday", "t1": "08:35", "t2": "08:55", "grp": "7102", "tch": "Golodok T.P."}, {"day": "Tuesday", "t1": "08:55", "t2": "09:15", "grp": "6143", "tch": "Vacancy"}, {"day": "Tuesday", "t1": "09:15", "t2": "09:40", "grp": "6201+6203", "tch": "Fomenko V.N."}, {"day": "Tuesday", "t1": "09:40", "t2": "10:05", "grp": "6215ая", "tch": "Pupa T.A."}, {"day": "Tuesday", "t1": "10:05", "t2": "10:30", "grp": "6202+6203", "tch": "Grigoryan A.L."}, {"day": "Tuesday", "t1": "10:30", "t2": "11:00", "grp": "6207+6203", "tch": "Gaptar M.I."}, {"day": "Tuesday", "t1": "11:00", "t2": "11:20", "grp": "3105", "tch": "Pechursky A.I."}, {"day": "Tuesday", "t1": "11:20", "t2": "11:40", "grp": "8104", "tch": "Vacancy"}, {"day": "Tuesday", "t1": "11:40", "t2": "12:00", "grp": "6145", "tch": "Vacancy"}, {"day": "Tuesday", "t1": "12:00", "t2": "12:25", "grp": "7109", "tch": "Vacancy"}, {"day": "Tuesday", "t1": "12:25", "t2": "12:45", "grp": "6225", "tch": "Abaimova M.O."}, {"day": "Tuesday", "t1": "12:45", "t2": "13:05", "grp": "1207", "tch": "Semenenya I.N."}, {"day": "Tuesday", "t1": "13:05", "t2": "13:25", "grp": "1208", "tch": "Golodok T.P."}, {"day": "Tuesday", "t1": "13:25", "t2": "13:45", "grp": "6224", "tch": "Gaptar M.I."}, {"day": "Tuesday", "t1": "13:45", "t2": "14:05", "grp": "1204", "tch": "Pereverzev V.A."}, {"day": "Tuesday", "t1": "14:05", "t2": "14:25", "grp": "1209", "tch": "Chaban A.G."}, {"day": "Tuesday", "t1": "14:25", "t2": "14:50", "grp": "6235ая", "tch": "Fomenko V.N."}, {"day": "Tuesday", "t1": "14:50", "t2": "15:15", "grp": "6152ая", "tch": "Grigoryan A.L."}, {"day": "Tuesday", "t1": "15:15", "t2": "15:40", "grp": "6231ая", "tch": "Haikovich Y.V."}, {"day": "Tuesday", "t1": "15:40", "t2": "16:05", "grp": "6163ая", "tch": "Pupa T.A."}, {"day": "Tuesday", "t1": "16:05", "t2": "16:25", "grp": "1228", "tch": "Chaban A.G."}, {"day": "Tuesday", "t1": "16:25", "t2": "16:50", "grp": "2215+2214", "tch": "Semenenya I.N."}, {"day": "Tuesday", "t1": "16:50", "t2": "17:15", "grp": "2216+2214", "tch": "Abaimova M.O."}, {"day": "Tuesday", "t1": "17:15", "t2": "17:40", "grp": "6144", "tch": "Yushkevich Y.Y."}, {"day": "Tuesday", "t1": "17:40", "t2": "18:10", "grp": "5102", "tch": "Severina T.G."}, {"day": "Monday", "t1": "08:00", "t2": "08:30", "grp": "4204+4203", "tch": "Vlasenko V.I."}, {"day": "Monday", "t1": "08:30", "t2": "09:00", "grp": "6206+4203", "tch": "Pereverzev V.A."}, {"day": "Monday", "t1": "09:00", "t2": "09:20", "grp": "3101", "tch": "Vacancy"}, {"day": "Monday", "t1": "09:20", "t2": "09:45", "grp": "3102", "tch": "Grigoryan A.L."}, {"day": "Monday", "t1": "09:45", "t2": "10:15", "grp": "7101+7104", "tch": "Pupa T.A."}, {"day": "Monday", "t1": "10:15", "t2": "10:45", "grp": "6217ая", "tch": "Haikovich Y.V."}, {"day": "Monday", "t1": "10:45", "t2": "11:10", "grp": "3106", "tch": "Gaptar M.I."}, {"day": "Monday", "t1": "11:10", "t2": "11:35", "grp": "8106", "tch": "Golodok T.P."}, {"day": "Monday", "t1": "11:35", "t2": "12:05", "grp": "6230ая", "tch": "Severina T.G."}, {"day": "Monday", "t1": "12:05", "t2": "12:25", "grp": "6155", "tch": "Grigoryan A.L."}, {"day": "Monday", "t1": "12:25", "t2": "12:45", "grp": "6147", "tch": "Chaban A.G."}, {"day": "Monday", "t1": "12:45", "t2": "13:05", "grp": "2207", "tch": "Vlasenko V.I."}, {"day": "Monday", "t1": "13:05", "t2": "13:25", "grp": "2209", "tch": "Abaimova M.O."}, {"day": "Monday", "t1": "13:25", "t2": "13:50", "grp": "6232ая", "tch": "Alexandrov D.A."}, {"day": "Monday", "t1": "13:50", "t2": "14:15", "grp": "6233ая", "tch": "Haikovich Y.V."}, {"day": "Monday", "t1": "14:15", "t2": "14:35", "grp": "2208", "tch": "Pupa T.A."}, {"day": "Monday", "t1": "14:35", "t2": "14:55", "grp": "6148ая", "tch": "Grigoryan A.L."}, {"day": "Monday", "t1": "14:55", "t2": "15:15", "grp": "1227", "tch": "Semenenya I.N."}, {"day": "Monday", "t1": "15:15", "t2": "15:35", "grp": "1226", "tch": "Golodok T.P."}, {"day": "Monday", "t1": "15:35", "t2": "15:55", "grp": "6226", "tch": "Fomenko V.N."}, {"day": "Monday", "t1": "15:55", "t2": "16:15", "grp": "6227", "tch": "Pechursky A.I."}, {"day": "Monday", "t1": "16:15", "t2": "16:40", "grp": "2211+2212", "tch": "Alexandrov D.A."}, {"day": "Monday", "t1": "16:40", "t2": "17:05", "grp": "2213+2212", "tch": "Abaimova M.O."}, {"day": "Monday", "t1": "17:05", "t2": "17:25", "grp": "7115", "tch": "Yushkevich Y.Y."}, {"day": "Monday", "t1": "17:25", "t2": "17:45", "grp": "7116", "tch": "Korniyenko E.M.O."}, {"day": "Monday", "t1": "17:45", "t2": "18:15", "grp": "5102", "tch": "Severina T.G."}, {"day": "Friday", "t1": "08:00", "t2": "08:20", "grp": "1203", "tch": "Vlasenko V.I."}, {"day": "Friday", "t1": "08:20", "t2": "08:40", "grp": "1206", "tch": "Golodok T.P."}, {"day": "Friday", "t1": "08:40", "t2": "09:00", "grp": "1205", "tch": "Iman Ali Azzadi"}, {"day": "Friday", "t1": "09:00", "t2": "09:20", "grp": "7105", "tch": "Pechursky A.I."}, {"day": "Friday", "t1": "09:20", "t2": "09:40", "grp": "7106", "tch": "Vacancy"}, {"day": "Friday", "t1": "09:40", "t2": "10:00", "grp": "1217", "tch": "Danchenko A.D."}, {"day": "Friday", "t1": "10:00", "t2": "10:20", "grp": "1216", "tch": "Chaban A.G."}, {"day": "Friday", "t1": "10:20", "t2": "10:40", "grp": "6212ая", "tch": "Pupa T.A."}, {"day": "Friday", "t1": "10:40", "t2": "11:00", "grp": "6216ая", "tch": "Haikovich Y.V."}, {"day": "Friday", "t1": "11:00", "t2": "11:25", "grp": "6146", "tch": "Gaptar M.I."}, {"day": "Friday", "t1": "11:25", "t2": "11:50", "grp": "6149ая", "tch": "Grigoryan A.L."}, {"day": "Friday", "t1": "11:50", "t2": "12:15", "grp": "1211", "tch": "Semenenya I.N."}, {"day": "Friday", "t1": "12:15", "t2": "12:40", "grp": "1218", "tch": "Pereverzev V.A."}, {"day": "Friday", "t1": "12:40", "t2": "13:05", "grp": "1219", "tch": "Golodok T.P."}, {"day": "Friday", "t1": "13:05", "t2": "13:30", "grp": "1220", "tch": "Chaban A.G."}, {"day": "Friday", "t1": "13:30", "t2": "13:55", "grp": "6221", "tch": "Fomenko V.N."}, {"day": "Friday", "t1": "13:55", "t2": "14:20", "grp": "6222", "tch": "Pupa T.A."}, {"day": "Friday", "t1": "14:20", "t2": "14:40", "grp": "6154", "tch": "Danchenko A.D."}, {"day": "Friday", "t1": "14:40", "t2": "15:00", "grp": "7114", "tch": "Iman Ali Azzadi"}, {"day": "Friday", "t1": "15:00", "t2": "15:25", "grp": "8103", "tch": "Abaimova M.O."}, {"day": "Friday", "t1": "15:25", "t2": "15:50", "grp": "1210+1213", "tch": "Pereverzev V.A."}, {"day": "Friday", "t1": "15:50", "t2": "16:15", "grp": "1212+1213", "tch": "Grigoryan A.L."}, {"day": "Friday", "t1": "16:15", "t2": "16:40", "grp": "6213ая", "tch": "Fomenko V.N."}, {"day": "Friday", "t1": "16:40", "t2": "17:05", "grp": "6142", "tch": "Korniyenko E.M.O."}, {"day": "Friday", "t1": "17:05", "t2": "17:35", "grp": "6214ая", "tch": "Severina T.G."}, {"day": "Wednesday", "t1": "08:00", "t2": "08:25", "grp": "4202", "tch": "Vlasenko V.I."}, {"day": "Wednesday", "t1": "08:25", "t2": "08:50", "grp": "7103+7107", "tch": "Pechursky A.I."}, {"day": "Wednesday", "t1": "08:50", "t2": "09:10", "grp": "8101", "tch": "Fomenko V.N."}, {"day": "Wednesday", "t1": "09:10", "t2": "09:30", "grp": "2206", "tch": "Danchenko A.D."}, {"day": "Wednesday", "t1": "09:30", "t2": "09:50", "grp": "2205", "tch": "Chaban A.G."}, {"day": "Wednesday", "t1": "09:50", "t2": "10:10", "grp": "2210", "tch": "Abaimova M.O."}, {"day": "Wednesday", "t1": "10:10", "t2": "10:35", "grp": "4201", "tch": "Grigoryan A.L."}, {"day": "Wednesday", "t1": "10:35", "t2": "11:00", "grp": "6228ая", "tch": "Pupa T.A."}, {"day": "Wednesday", "t1": "11:00", "t2": "11:25", "grp": "6204", "tch": "Gaptar M.I."}, {"day": "Wednesday", "t1": "11:25", "t2": "11:50", "grp": "1222", "tch": "Semenenya I.N."}, {"day": "Wednesday", "t1": "11:50", "t2": "12:15", "grp": "1225", "tch": "Pereverzev V.A."}, {"day": "Wednesday", "t1": "12:15", "t2": "12:40", "grp": "1224", "tch": "Chaban A.G."}, {"day": "Wednesday", "t1": "12:40", "t2": "13:05", "grp": "1223", "tch": "Alexandrov D.A."}, {"day": "Wednesday", "t1": "13:05", "t2": "13:30", "grp": "8102", "tch": "Golodok T.P."}, {"day": "Wednesday", "t1": "13:30", "t2": "14:00", "grp": "6218ая", "tch": "Severina T.G."}, {"day": "Wednesday", "t1": "14:00", "t2": "14:25", "grp": "6219ая", "tch": "Haikovich Y.V."}, {"day": "Wednesday", "t1": "14:25", "t2": "14:50", "grp": "7110", "tch": "Pechursky A.I."}, {"day": "Wednesday", "t1": "14:50", "t2": "15:10", "grp": "2217+2202", "tch": "Semenenya I.N."}, {"day": "Wednesday", "t1": "15:10", "t2": "15:35", "grp": "6205", "tch": "Pereverzev V.A."}, {"day": "Wednesday", "t1": "15:35", "t2": "16:00", "grp": "2204+2202", "tch": "Golodok T.P."}, {"day": "Wednesday", "t1": "16:00", "t2": "16:25", "grp": "2201+2202", "tch": "Haikovich Y.V."}, {"day": "Wednesday", "t1": "16:25", "t2": "16:50", "grp": "6229ая", "tch": "Alexandrov D.A."}, {"day": "Wednesday", "t1": "16:50", "t2": "17:15", "grp": "6236ая", "tch": "Grigoryan A.L."}, {"day": "Wednesday", "t1": "17:15", "t2": "17:40", "grp": "6141", "tch": "Yushkevich Y.Y."}, {"day": "Wednesday", "t1": "17:40", "t2": "18:10", "grp": "5102", "tch": "Severina T.G."}, {"day": "Thursday", "t1": "08:00", "t2": "08:25", "grp": "1215+6223", "tch": "Vlasenko V.I."}, {"day": "Thursday", "t1": "08:25", "t2": "08:50", "grp": "1211+6223", "tch": "Pereverzev V.A."}, {"day": "Thursday", "t1": "08:50", "t2": "09:15", "grp": "1214", "tch": "Iman Ali Azzadi"}, {"day": "Thursday", "t1": "09:15", "t2": "09:40", "grp": "3103+3107", "tch": "Danchenko A.D."}, {"day": "Thursday", "t1": "09:40", "t2": "10:00", "grp": "6151ая", "tch": "Pupa T.A."}, {"day": "Thursday", "t1": "10:00", "t2": "10:20", "grp": "6161ая", "tch": "Haikovich Y.V."}, {"day": "Thursday", "t1": "10:20", "t2": "10:50", "grp": "2203+6223", "tch": "Grigoryan A.L."}, {"day": "Thursday", "t1": "10:50", "t2": "11:20", "grp": "1201", "tch": "Semenenya I.N."}, {"day": "Thursday", "t1": "11:20", "t2": "11:50", "grp": "1202", "tch": "Gaptar M.I."}, {"day": "Thursday", "t1": "11:50", "t2": "12:15", "grp": "6151ая", "tch": "Fomenko V.N."}, {"day": "Thursday", "t1": "12:15", "t2": "12:40", "grp": "8105", "tch": "Abaimova M.O."}, {"day": "Thursday", "t1": "12:40", "t2": "13:10", "grp": "6211ая", "tch": "Haikovich Y.V."}, {"day": "Thursday", "t1": "13:10", "t2": "13:35", "grp": "7113", "tch": "Pechursky A.I."}, {"day": "Thursday", "t1": "13:35", "t2": "14:00", "grp": "7112", "tch": "Golodok T.P."}, {"day": "Thursday", "t1": "14:00", "t2": "14:25", "grp": "7111", "tch": "Abaimova M.O."}, {"day": "Thursday", "t1": "14:25", "t2": "14:50", "grp": "6160", "tch": "Pupa T.A."}, {"day": "Thursday", "t1": "14:50", "t2": "15:15", "grp": "6209", "tch": "Semenenya I.N."}, {"day": "Thursday", "t1": "15:15", "t2": "15:40", "grp": "6208", "tch": "Chaban A.G."}, {"day": "Thursday", "t1": "15:40", "t2": "16:05", "grp": "6220ая", "tch": "Fomenko V.N."}, {"day": "Thursday", "t1": "16:05", "t2": "16:30", "grp": "6234ая", "tch": "Alexandrov D.A."}, {"day": "Thursday", "t1": "16:30", "t2": "16:55", "grp": "7108", "tch": "Abaimova M.O."}, {"day": "Thursday", "t1": "16:55", "t2": "17:20", "grp": "6140", "tch": "Pechursky A.I."}, {"day": "Thursday", "t1": "17:20", "t2": "17:50", "grp": "5102", "tch": "Severina T.G."}];
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+const DAYS_SHORT = ['Mon','Tue','Wed','Thu','Fri'];
+let activeDay = 'Monday';
+
+function norm(s){return (s||'').toString().toLowerCase().trim();}
+
+function getFilteredRows(){
+  const grp = norm(document.getElementById('f-grp').value);
+  const tch = norm(document.getElementById('f-tch').value);
+  return DATA.filter(r=>{
+    if(grp && !norm(r.grp).includes(grp)) return false;
+    if(tch && !norm(r.tch).includes(tch)) return false;
+    return true;
+  });
+}
+
+function renderTabs(rows){
+  const t = document.getElementById('tabs');
+  t.innerHTML = '';
+  DAYS.forEach((day,i)=>{
+    const cnt = rows.filter(r=>r.day===day).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (day===activeDay?' active':'');
+    btn.innerHTML = DAYS_SHORT[i] + ' <span class="tab-cnt">'+cnt+'</span>';
+    btn.onclick = ()=>{activeDay = day; render();};
+    t.appendChild(btn);
+  });
+}
+
+function render(){
+  const rows = getFilteredRows();
+  document.getElementById('stat').innerHTML = 'Found: <b>'+rows.length+'</b> entries';
+  renderTabs(rows);
+
+  const dayRows = rows.filter(r=>r.day===activeDay);
+  dayRows.sort((a,b)=>(a.t1||'').localeCompare(b.t1||''));
+
+  const c = document.getElementById('content');
+  c.innerHTML = '';
+  if(dayRows.length === 0){c.innerHTML = '<div class="empty">No entries for selected filters on '+activeDay+'</div>';return;}
+
+  dayRows.forEach(r=>{
+    const isEng = /en/.test(r.grp)||/ая/.test(r.grp);
+    const div = document.createElement('div');
+    div.className = 'row';
+    div.innerHTML =
+      '<div class="row-time">'+(r.t1||'')+' – '+(r.t2||'')+'</div>'+
+      '<div class="row-main">'+
+        '<span class="grp '+(isEng?'eng':'')+'">'+(r.grp||'—')+'</span>'+
+        '<span class="tch">'+(r.tch||'—')+'</span>'+
+      '</div>';
+    c.appendChild(div);
+  });
+}
+
+function resetFilters(){
+  document.getElementById('f-grp').value='';
+  document.getElementById('f-tch').value='';
+  render();
+}
+
+['f-grp','f-tch'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',render);
+});
+render();
+</script>
+</body>
+</html>
