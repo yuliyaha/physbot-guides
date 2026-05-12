@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultations (retakes) · Normal Physiology · 2025/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1816;
+    --ink-2: #5a544a;
+    --ink-3: #8a8175;
+    --accent: #c84a1e;
+    --accent-soft: #f4e4dc;
+    --accent-strong: #a23a15;
+    --tag-eng: #2d5f7a;
+    --tag-eng-bg: #e3edf3;
+    --tag-eng-border: #b8ccd6;
+    --hero-bg: linear-gradient(135deg, #5a544a 0%, #3a342e 100%);
+    --section-disc: #c84a1e;
+    --section-usr: #2d5f7a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body {
+    font-family: 'Onest', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.5;
+    padding-bottom: 40px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 14px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--hero-bg);
+    color: #fff;
+    padding: 26px 18px 22px;
+    margin: 0 -14px 16px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 14px;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+  .hero-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* ── HOW TO READ ── */
+  .howto {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .howto-title {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .howto ul { margin: 4px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 5px; }
+  .howto li:last-child { margin-bottom: 0; }
+
+  /* ── CATEGORY SWITCH ── */
+  .cat-switch {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .cat-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 14px 12px;
+    font-family: 'Onest', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-2);
+    transition: background 0.15s, color 0.15s;
+    border-right: 1px solid var(--border);
+  }
+  .cat-btn:last-child { border-right: none; }
+  .cat-btn:hover { background: var(--bg-muted); }
+  .cat-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .cat-btn.active.usr {
+    background: var(--section-usr);
+  }
+  .cat-btn small {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap { margin-bottom: 14px; }
+  .search-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Onest', sans-serif;
+    font-size: 15px;
+    background: #fff;
+    color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200,74,30,0.1);
+  }
+
+  #search-panel { display: none; margin-bottom: 16px; }
+  #search-panel.active { display: block; }
+  .search-result-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .tab-nav::-webkit-scrollbar { height: 4px; }
+  .tab-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 13px 16px 11px;
+    font-family: 'Onest', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-3);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tab-btn .tb-day { font-size: 12px; font-weight: 500; opacity: 0.85; display: block; margin-top: 2px; }
+  .tab-btn:hover { color: var(--accent); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 700;
+  }
+  .cat-usr .tab-btn:hover { color: var(--section-usr); }
+  .cat-usr .tab-btn.active {
+    color: var(--section-usr);
+    border-bottom-color: var(--section-usr);
+  }
+
+  /* ── CONTENT ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .date-header {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .date-meta {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .summary-bar strong { font-weight: 700; color: var(--ink); }
+
+  /* ── GROUP CARD ── */
+  .group-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 14px;
+    align-items: start;
+    transition: box-shadow 0.15s;
+  }
+  .group-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+  .gc-time-col {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+    padding-top: 2px;
+  }
+  .gc-time {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .cat-usr .gc-time { color: var(--section-usr); }
+  .gc-time-end {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .gc-teacher {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .gc-teacher::before {
+    content: '👤';
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  .gc-room {
+    font-size: 14px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .gc-room::before {
+    content: '🚪';
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  .room-badge {
+    background: var(--bg-muted);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-3);
+    font-size: 15px;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    color: var(--ink-3);
+    font-size: 12px;
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">BSMU · Department of Normal Physiology</div>
+    <div class="hero-title">Consultations (retakes)</div>
+    <div class="hero-sub">Normal Physiology · Spring term 2025/2026</div>
+    <div class="hero-chips">
+      <span class="hero-chip" id="chip-period">May – June 2026</span>
+      <span class="hero-chip" id="chip-dates"></span>
+      <span class="hero-chip" id="chip-rows"></span>
+    </div>
+  </div>
+
+  <div class="howto">
+    <div class="howto-title">How to read this</div>
+    <ul>
+      <li>The switch at the top toggles between two consultation types: <strong>Course consultations</strong> (for missed classes) and <strong>SSIW</strong> (student supervised independent work).</li>
+      <li>Inside each category, tabs show dates. Tap a date to see all lecturers available that day.</li>
+      <li>You can search by lecturer surname or date (e.g. <strong>Haikovich</strong> or <strong>14.05</strong>).</li>
+    </ul>
+  </div>
+
+  <div class="cat-switch">
+    <button class="cat-btn active" id="cat-disc" onclick="switchCat('disc')">
+      Course
+      <small>class retakes</small>
+    </button>
+    <button class="cat-btn usr" id="cat-usr" onclick="switchCat('usr')">
+      SSIW
+      <small>supervised work</small>
+    </button>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput"
+      placeholder="🔍 Find lecturer or date, e.g. Haikovich or 14.05" autocomplete="off">
+  </div>
+
+  <div id="search-panel">
+    <div class="search-result-title" id="searchResultTitle"></div>
+    <div id="searchResults"></div>
+  </div>
+
+  <div id="main-content">
+    <nav class="tab-nav" id="tabNav"></nav>
+    <div id="tabPanels"></div>
+  </div>
+
+  <div class="page-footer">Department of Normal Physiology, BSMU · 2025/2026</div>
+</div>
+
+<script>
+const DATA_DISC = [
+  {date:"12.05.2026",iso:"2026-05-12",weekday:"Tue",time:"11.00-11.40",room:"№5, room 138",teacher:"Haikovich Y.V."},
+  {date:"12.05.2026",iso:"2026-05-12",weekday:"Tue",time:"11.20-12.00",room:"№5, room 136",teacher:"Grigoryan A.L."},
+  {date:"12.05.2026",iso:"2026-05-12",weekday:"Tue",time:"12.55-13.35",room:"№5, room 139",teacher:"Severina T.G."},
+  {date:"14.05.2026",iso:"2026-05-14",weekday:"Thu",time:"18.00-18.40",room:"№5, room 123",teacher:"Alexandrov D.A."},
+  {date:"18.05.2026",iso:"2026-05-18",weekday:"Mon",time:"10.20-11.00",room:"№5, room 138",teacher:"Pupa T.A."},
+  {date:"19.05.2026",iso:"2026-05-19",weekday:"Tue",time:"11.00-11.40",room:"№5, room 138",teacher:"Haikovich Y.V."},
+  {date:"19.05.2026",iso:"2026-05-19",weekday:"Tue",time:"12.55-13.35",room:"№5, room 139",teacher:"Severina T.G."},
+  {date:"21.05.2026",iso:"2026-05-21",weekday:"Thu",time:"13.30-14.34",room:"№5, room 123",teacher:"Alexandrov D.A."},
+  {date:"25.05.2026",iso:"2026-05-25",weekday:"Mon",time:"13.50-14.30",room:"№5, room 140",teacher:"Fomenko V.N."},
+  {date:"26.05.2026",iso:"2026-05-26",weekday:"Tue",time:"11.00-11.40",room:"№5, room 138",teacher:"Haikovich Y.V."},
+  {date:"26.05.2026",iso:"2026-05-26",weekday:"Tue",time:"11.20-12.00",room:"№5, room 136",teacher:"Grigoryan A.L."},
+  {date:"26.05.2026",iso:"2026-05-26",weekday:"Tue",time:"12.55-13.35",room:"№5, room 139",teacher:"Severina T.G."},
+  {date:"28.05.2026",iso:"2026-05-28",weekday:"Thu",time:"13.30-14.10",room:"№5, room 123",teacher:"Alexandrov D.A."},
+  {date:"01.06.2026",iso:"2026-06-01",weekday:"Mon",time:"10.20-11.24",room:"№5, room 138",teacher:"Pupa T.A."},
+  {date:"01.06.2026",iso:"2026-06-01",weekday:"Mon",time:"13.26-14.30",room:"№5, room 140",teacher:"Fomenko V.N."},
+  {date:"02.06.2026",iso:"2026-06-02",weekday:"Tue",time:"11.00-12.04",room:"№5, room 138",teacher:"Haikovich Y.V."},
+  {date:"02.06.2026",iso:"2026-06-02",weekday:"Tue",time:"11.20-12.20",room:"№5, room 136",teacher:"Grigoryan A.L."},
+  {date:"02.06.2026",iso:"2026-06-02",weekday:"Tue",time:"12.55-13.55",room:"№5, room 139",teacher:"Severina T.G."}
+];
+
+const DATA_USR = [
+  {date:"19.05.2026",iso:"2026-05-19",weekday:"Tue",time:"11.20-12.00",room:"№5, room 140",teacher:"Fomenko V.N."},
+  {date:"26.05.2026",iso:"2026-05-26",weekday:"Tue",time:"13.00-13.40",room:"№5, room 138",teacher:"Pupa T.A."},
+  {date:"29.05.2026",iso:"2026-05-29",weekday:"Fri",time:"12.20-13.00",room:"№5, room 123",teacher:"Alexandrov D.A."},
+  {date:"04.06.2026",iso:"2026-06-04",weekday:"Thu",time:"10.20-11.08",room:"№5, room 138",teacher:"Haikovich Y.V."}
+];
+
+const MONTH_NAMES = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+const SHORT_MONTHS = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+// Parse date "dd.mm.yyyy" → object
+function parseDay(str) {
+  const [d, m, y] = str.split('.').map(Number);
+  return { d, m, y };
+}
+function formatFull(str) {
+  const { d, m } = parseDay(str);
+  return `${d} ${MONTH_NAMES[m]}`;
+}
+function formatShort(str) {
+  const { d, m } = parseDay(str);
+  return `${d} ${SHORT_MONTHS[m]}`;
+}
+
+let currentCat = 'disc';
+let currentTab = null;
+
+function getCurrentData() {
+  return currentCat === 'disc' ? DATA_DISC : DATA_USR;
+}
+
+function groupByDate(rows) {
+  const byDate = {};
+  const order = [];
+  rows.forEach(r => {
+    if (!byDate[r.date]) {
+      byDate[r.date] = [];
+      order.push(r.date);
+    }
+    byDate[r.date].push(r);
+  });
+  // Сортировка времени внутри даты
+  Object.values(byDate).forEach(arr => {
+    arr.sort((a, b) => {
+      const toMin = t => {
+        const m = t.split('-')[0].replace(':', '.').split('.').map(Number);
+        return (m[0] || 0) * 60 + (m[1] || 0);
+      };
+      return toMin(a.time) - toMin(b.time);
+    });
+  });
+  // Сортировка дат
+  order.sort((a, b) => {
+    const da = parseDay(a), db = parseDay(b);
+    return new Date(da.y, da.m - 1, da.d) - new Date(db.y, db.m - 1, db.d);
+  });
+  return { byDate, order };
+}
+
+function renderCard(row) {
+  const [start, end] = row.time.split('-');
+  return `
+<div class="group-card">
+  <div class="gc-time-col">
+    <div class="gc-time">${start || row.time}</div>
+    <div class="gc-time-end">${end || ''}</div>
+  </div>
+  <div class="gc-teacher">${row.teacher}</div>
+  <div class="gc-room">${''} <span class="room-badge">${row.room}</span></div>
+</div>`;
+}
+
+function renderTabs() {
+  const data = getCurrentData();
+  const { byDate, order } = groupByDate(data);
+  const tabNav = document.getElementById('tabNav');
+  const tabPanels = document.getElementById('tabPanels');
+  tabNav.innerHTML = '';
+  tabPanels.innerHTML = '';
+
+  // Применяю класс к контейнерам для цвета акцента
+  const main = document.getElementById('main-content');
+  main.className = currentCat === 'usr' ? 'cat-usr' : '';
+
+  // Обновляю чипы
+  document.getElementById('chip-dates').textContent = order.length + ' dates';
+  document.getElementById('chip-rows').textContent = data.length + ' consultations';
+
+  if (!order.length) {
+    tabPanels.innerHTML = '<div class="empty-state">No entries</div>';
+    return;
+  }
+
+  order.forEach((date, di) => {
+    const rows = byDate[date];
+    const wd = rows[0].weekday;
+
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (di === 0 ? ' active' : '');
+    btn.setAttribute('data-tab', 'd' + di);
+    btn.innerHTML = `<span>${formatShort(date)}</span><span class="tb-day">${wd}</span>`;
+    btn.onclick = () => switchTab('d' + di);
+    tabNav.appendChild(btn);
+
+    const panel = document.createElement('div');
+    panel.className = 'tab-panel' + (di === 0 ? ' active' : '');
+    panel.id = 'panel-d' + di;
+    panel.innerHTML = `
+      <div class="date-header">${formatFull(date)}</div>
+      <div class="date-meta">${wd} · ${rows[0].date}</div>
+      <div class="summary-bar"><span>Lecturers: <strong>${rows.length}</strong></span></div>
+      ${rows.map(renderCard).join('')}
+    `;
+    tabPanels.appendChild(panel);
+  });
+
+  currentTab = 'd0';
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === id));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === ('panel-' + id)));
+  const btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+  if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  currentTab = id;
+}
+
+function switchCat(cat) {
+  currentCat = cat;
+  document.getElementById('cat-disc').classList.toggle('active', cat === 'disc');
+  document.getElementById('cat-usr').classList.toggle('active', cat === 'usr');
+  // Сбрасываем поиск при переключении
+  const si = document.getElementById('searchInput');
+  si.value = '';
+  document.getElementById('search-panel').classList.remove('active');
+  document.getElementById('main-content').style.display = '';
+  renderTabs();
+}
+
+// Search across CURRENT category only
+const searchInput = document.getElementById('searchInput');
+const searchPanel = document.getElementById('search-panel');
+const mainContent = document.getElementById('main-content');
+const searchResults = document.getElementById('searchResults');
+const searchResultTitle = document.getElementById('searchResultTitle');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) {
+    searchPanel.classList.remove('active');
+    mainContent.style.display = '';
+    return;
+  }
+  searchPanel.classList.add('active');
+  mainContent.style.display = 'none';
+
+  const data = getCurrentData();
+  const found = data.filter(r =>
+    r.teacher.toLowerCase().includes(q) ||
+    r.date.toLowerCase().includes(q) ||
+    r.weekday.toLowerCase().includes(q)
+  );
+
+  if (!found.length) {
+    searchResultTitle.textContent = 'No results for «' + q + '»';
+    searchResults.innerHTML = '<div class="empty-state">Check spelling of the surname or date format.</div>';
+    return;
+  }
+
+  searchResultTitle.textContent = 'Found: ' + found.length;
+  searchResults.innerHTML = found.map(r => {
+    const [start, end] = r.time.split('-');
+    return `
+<div class="group-card">
+  <div class="gc-time-col">
+    <div class="gc-time">${start || r.time}</div>
+    <div class="gc-time-end">${end || ''}</div>
+    <div style="font-size:11px;color:var(--ink-3);margin-top:4px;">${formatShort(r.date)}</div>
+  </div>
+  <div class="gc-teacher">${r.teacher} <span style="font-size:12px;color:var(--ink-3);font-weight:400;">${r.weekday}</span></div>
+  <div class="gc-room">${''} <span class="room-badge">${r.room}</span></div>
+</div>`;
+  }).join('');
+});
+
+// Initial render
+renderTabs();
+</script>
+</body>
+</html>
