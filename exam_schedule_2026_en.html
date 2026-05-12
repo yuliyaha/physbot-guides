@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Schedule · Normal Physiology · Summer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1816;
+    --ink-2: #5a544a;
+    --ink-3: #8a8175;
+    --accent: #c84a1e;
+    --accent-soft: #f4e4dc;
+    --accent-strong: #a23a15;
+    --eng: #2d5f7a;
+    --eng-soft: #d8e6ee;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Onest', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    padding: 16px 14px 50px;
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 22px 0 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .hero::before {
+    content: 'Exams';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Lora', serif;
+    font-size: 88px;
+    font-weight: 600;
+    color: var(--accent);
+    opacity: 0.06;
+    letter-spacing: -2px;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-3);
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-chips {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-chip {
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  /* ── HOW TO READ ── */
+  .howto {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .howto-title {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .howto ul {
+    margin: 4px 0 0;
+    padding-left: 20px;
+  }
+  .howto li { margin-bottom: 5px; }
+  .howto li:last-child { margin-bottom: 0; }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    background: transparent;
+    border: none;
+    padding: 11px 16px 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-3);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 72px;
+  }
+  .tab-btn:hover { color: var(--ink-2); }
+  .tab-btn.active {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 14%;
+    right: 14%;
+    height: 2px;
+    background: var(--accent);
+  }
+  .tb-day {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn.active .tb-day { color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .date-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+  .date-big {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .date-meta { font-size: 13px; color: var(--ink-2); }
+  .date-weekday { font-weight: 500; }
+
+  /* ── SLOT CARD ── */
+  .slot-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .slot-card:hover { box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+  .slot-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .slot-time {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 50px;
+  }
+  .slot-groups {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .group-tag {
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .group-tag.eng {
+    background: var(--eng-soft);
+    border-color: #c5d3da;
+    color: var(--eng);
+  }
+  .slot-toggle {
+    color: var(--ink-3);
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .slot-card.open .slot-toggle { transform: rotate(180deg); }
+  .slot-body {
+    display: none;
+    padding: 0 14px 14px;
+    border-top: 1px solid var(--border-light);
+    background: #fbfaf8;
+  }
+  .slot-card.open .slot-body { display: block; }
+
+  .commission-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-3);
+    margin: 12px 0 8px;
+    font-weight: 500;
+  }
+  .commission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .commission-item {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-2);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .commission-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .commission-item:first-child { color: var(--ink); font-weight: 700; }
+  .commission-item:first-child::before { background: var(--accent); }
+
+  .no-commission {
+    font-size: 13px;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .summary-bar strong { color: var(--ink); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    margin-bottom: 14px;
+  }
+  .search-input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200,74,30,0.08);
+  }
+  .search-input::placeholder { color: var(--ink-3); }
+
+  #search-panel { display: none; }
+  #search-panel.active { display: block; }
+  .search-result-wrap { margin-bottom: 16px; }
+  .search-result-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .search-result-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+  .src-date { font-size: 11px; color: var(--ink-3); margin-bottom: 3px; }
+  .src-time { font-family: 'Lora', serif; font-weight: 600; font-size: 15px; color: var(--accent); margin-bottom: 4px; }
+  .src-groups { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+  .src-commission { font-size: 12px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">BSMU · Department of Normal Physiology</div>
+    <div class="hero-title">Exam Schedule</div>
+    <div class="hero-sub">Normal Physiology · Summer session 2025/2026</div>
+    <div class="hero-chips">
+      <span class="hero-chip">11 June – 26 June</span>
+      <span class="hero-chip">3 dates</span>
+      <span class="hero-chip">10 slots</span>
+    </div>
+  </div>
+
+  <div class="howto">
+    <div class="howto-title">How to read this</div>
+    <ul>
+      <li>Tabs at the top — exam dates. Tap a date to see all slots for that day.</li>
+      <li>Each card shows the exam time and the groups scheduled for that slot. Tap a card to see the examination commission.</li>
+      <li>Use the search field to find your group quickly — type the number, for example <strong>6219ENG</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="🔍 Find your group, e.g. 6219ENG…" autocomplete="off">
+  </div>
+
+  <div id="search-panel">
+    <div class="search-result-wrap">
+      <div class="search-result-title" id="searchResultTitle"></div>
+      <div id="searchResults"></div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <nav class="tab-nav" id="tabNav"></nav>
+    <div id="tabPanels"></div>
+  </div>
+
+  <div class="page-footer">
+    Department of Normal Physiology, BSMU · 2025/2026
+  </div>
+</div>
+
+<script>
+const EXAM_DATA = [
+  {date:"2026-06-11",weekday:"Thursday",slots:[
+    {time:"08:30",groups:["6219ENG","6220ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"09:00",groups:["6228ENG","6229ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]}
+  ]},
+  {date:"2026-06-16",weekday:"Tuesday",slots:[
+    {time:"09:00",groups:["6211ENG","6212ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"09:30",groups:["6213ENG","6214ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"10:00",groups:["6231ENG","6232ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"10:30",groups:["6233ENG","6234ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"11:00",groups:["6235ENG","6236ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]}
+  ]},
+  {date:"2026-06-26",weekday:"Friday",slots:[
+    {time:"11:30",groups:["6215ENG","6216ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"12:00",groups:["6217ENG","6218ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]},
+    {time:"12:30",groups:["6230ENG","6161ENG","6163ENG"],commission:["Alexandrov D.A.","Severina T.G.","Haikovich Y.V.","Pupa T.A.","Fomenko V.N."]}
+  ]}
+];
+
+const MONTH_NAMES = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+const SHORT_MONTHS = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const WEEKDAYS_SHORT = {Monday:"Mon",Tuesday:"Tue",Wednesday:"Wed",Thursday:"Thu",Friday:"Fri",Saturday:"Sat",Sunday:"Sun"};
+
+function parseDate(str) {
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
+function formatDay(str) {
+  const [,m,d] = str.split('-').map(Number);
+  return `${d} ${SHORT_MONTHS[m]}`;
+}
+function formatDayFull(str) {
+  const [,m,d] = str.split('-').map(Number);
+  return `${d} ${MONTH_NAMES[m]}`;
+}
+
+function isEng(g) { return /ENG/i.test(g); }
+
+function groupTag(g) {
+  const cls = isEng(g) ? 'group-tag eng' : 'group-tag';
+  return `<span class="${cls}">${g}</span>`;
+}
+
+function slotCard(slot, idx, dateId) {
+  const id = `slot-${dateId}-${idx}`;
+  const groups = slot.groups.map(g => groupTag(g)).join(' ');
+  const commission = slot.commission.length
+    ? slot.commission.map((name,i) =>
+        `<div class="commission-item">${name}</div>`
+      ).join('')
+    : '<div class="no-commission">Commission to be confirmed</div>';
+
+  return `
+<div class="slot-card" id="${id}">
+  <div class="slot-header" onclick="toggleSlot('${id}')">
+    <div class="slot-time">${slot.time}</div>
+    <div class="slot-groups">${groups}</div>
+    <div class="slot-toggle">▼</div>
+  </div>
+  <div class="slot-body">
+    <div class="commission-label">Examination commission</div>
+    <div class="commission-list">${commission}</div>
+  </div>
+</div>`;
+}
+
+function toggleSlot(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function totalGroups(day) {
+  return day.slots.reduce((s,slot) => s + slot.groups.length, 0);
+}
+
+// Build tabs
+const tabNav = document.getElementById('tabNav');
+const tabPanels = document.getElementById('tabPanels');
+
+EXAM_DATA.forEach((day, di) => {
+  const dateId = `d${di}`;
+  const dayLabel = formatDay(day.date);
+  const wdShort = WEEKDAYS_SHORT[day.weekday] || day.weekday;
+
+  // Tab button
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (di === 0 ? ' active' : '');
+  btn.setAttribute('data-tab', dateId);
+  btn.innerHTML = `<span>${dayLabel}</span><span class="tb-day">${wdShort}</span>`;
+  btn.onclick = () => switchTab(dateId);
+  tabNav.appendChild(btn);
+
+  // Panel
+  const groupCount = totalGroups(day);
+  const slots = day.slots.map((s,i) => slotCard(s,i,dateId)).join('');
+  const panel = document.createElement('div');
+  panel.className = 'tab-panel' + (di === 0 ? ' active' : '');
+  panel.id = `panel-${dateId}`;
+  panel.innerHTML = `
+    <div class="date-header">
+      <div class="date-big">${formatDayFull(day.date)}</div>
+      <div class="date-meta"><span class="date-weekday">${day.weekday}</span></div>
+    </div>
+    <div class="summary-bar">
+      <span>Slots: <strong>${day.slots.length}</strong></span>
+      <span>Groups: <strong>${groupCount}</strong></span>
+    </div>
+    ${slots}
+  `;
+  tabPanels.appendChild(panel);
+});
+
+function switchTab(dateId) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-tab') === dateId);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === `panel-${dateId}`);
+  });
+  // Scroll tab into view
+  const activeBtn = document.querySelector(`.tab-btn[data-tab="${dateId}"]`);
+  if (activeBtn) activeBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchPanel = document.getElementById('search-panel');
+const mainContent = document.getElementById('main-content');
+const searchResults = document.getElementById('searchResults');
+const searchResultTitle = document.getElementById('searchResultTitle');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) {
+    searchPanel.classList.remove('active');
+    mainContent.style.display = '';
+    return;
+  }
+  searchPanel.classList.add('active');
+  mainContent.style.display = 'none';
+
+  const found = [];
+  EXAM_DATA.forEach(day => {
+    day.slots.forEach(slot => {
+      const match = slot.groups.some(g => g.toLowerCase().includes(q));
+      if (match) found.push({day, slot});
+    });
+  });
+
+  if (!found.length) {
+    searchResultTitle.textContent = `No results for "${q}"`;
+    searchResults.innerHTML = '<div style="font-size:13px;color:var(--ink-3);padding:8px 0;">Please check the group number.</div>';
+    return;
+  }
+
+  searchResultTitle.textContent = `Found: ${found.length} ${found.length === 1 ? 'entry' : 'entries'}`;
+  searchResults.innerHTML = found.map(({day,slot}) => {
+    const groups = slot.groups.map(g => groupTag(g)).join(' ');
+    const commission = slot.commission.length
+      ? slot.commission.join(', ')
+      : 'Commission to be confirmed';
+    return `
+<div class="search-result-card">
+  <div class="src-date">${formatDayFull(day.date)} · ${day.weekday}</div>
+  <div class="src-time">${slot.time}</div>
+  <div class="src-groups">${groups}</div>
+  <div class="src-commission">${commission}</div>
+</div>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
