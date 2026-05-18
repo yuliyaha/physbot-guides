@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (cur < 0) return;
   var staticCur = 13;
   if (cur === staticCur) return;
-  var rows = document.querySelectorAll('#schedule .topic-row');
+  var rows = document.querySelectorAll('#topics .topic-row');
   rows.forEach(function(row, idx) {
     row.classList.remove('current');
     var num = row.querySelector('.t-num');
