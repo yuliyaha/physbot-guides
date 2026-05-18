@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (dow === 0) today.setDate(today.getDate() + 1);
   var cur = -1;
   for (var i = 0; i < WEEKS.length; i++) {
-    var s = new Date(WEEKS[i][0]); var e = new Date(WEEKS[i][1]); e.setHours(23,59,59,999);
+    var p0=WEEKS[i][0].split('-'),p1=WEEKS[i][1].split('-'); var s=new Date(+p0[0],+p0[1]-1,+p0[2]); var e=new Date(+p1[0],+p1[1]-1,+p1[2]); e.setHours(23,59,59,999);
     if (today >= s && today <= e) { cur = i; break; }
   }
   if (cur < 0) return;
