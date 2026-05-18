@@ -477,7 +477,7 @@ function showLec(id, btn) {
 }
 
 // Dynamic current week highlight (sat-fri week)
-document.addEventListener('DOMContentLoaded', function() {
+function __runWeekHighlight() {
   var WEEKS = [
     ["2026-02-09","2026-02-13"],
     ["2026-02-16","2026-02-20"],
@@ -523,7 +523,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (t) { var b = document.createElement('span'); b.className = 'current-badge'; b.textContent = BADGE; t.appendChild(b); }
     }
   });
-});
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', __runWeekHighlight);
+} else {
+  __runWeekHighlight();
+}
 </script>
 </body>
 </html>
