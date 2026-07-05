@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прошедший семестр — Нормальная физиология</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1916;
+    --ink-2: #4a4740;
+    --ink-3: #8a8680;
+    --accent: #2d5a8e;
+    --accent-light: #e8eef6;
+    --accent-muted: #c8d8ed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Onest',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;padding:14px 12px 60px}
+  h1{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--accent);margin-bottom:4px}
+  .subt{font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:4px}
+  .note{font-size:12.5px;color:var(--ink-3);background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-bottom:14px}
+
+  .tabs{display:flex;gap:4px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .tab{flex:0 0 auto;padding:8px 13px;background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:7px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .15s}
+  .tab:active{transform:scale(.97)}
+  .tab.active{background:#fff;color:var(--accent);border-color:var(--accent-muted)}
+  .tab .tab-cnt{font-size:10.5px;background:rgba(255,255,255,.25);color:#fff;padding:1px 6px;border-radius:9px;min-width:16px;text-align:center}
+  .tab.active .tab-cnt{background:var(--accent-light);color:var(--accent)}
+
+  .sectiontabs{display:flex;gap:8px;margin-bottom:14px}
+  .sectiontab{flex:1;padding:11px 10px;background:#fff;border:1.5px solid var(--border);border-radius:9px;font-family:'Lora',serif;font-size:14.5px;font-weight:600;color:var(--ink-2);cursor:pointer;text-align:center;transition:all .15s}
+  .sectiontab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sectiontab .sec-cnt{font-family:'Onest',sans-serif;font-size:11.5px;font-weight:600;opacity:.75;margin-left:4px}
+
+  .subtabs{display:flex;gap:4px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px}
+  .subtab{flex:0 0 auto;padding:5px 10px;background:var(--bg-muted);border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+  .subtab.active{background:var(--accent-light);color:var(--accent);border-color:var(--accent-muted)}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 12px;margin-bottom:7px}
+  .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px}
+  .card-date{font-weight:700;color:var(--accent);font-size:13.5px}
+  .card-time{font-size:12.5px;color:var(--ink-2);font-weight:600}
+  .card-grp{display:inline-block;background:var(--accent-light);color:var(--accent);font-weight:700;font-size:12px;padding:1px 7px;border-radius:5px;margin-right:6px}
+  .card-line{font-size:13px;color:var(--ink-2);margin-top:2px}
+  .card-topic{font-size:13px;color:var(--ink);margin-top:4px;padding-top:4px;border-top:1px dashed var(--border-light)}
+  .empty{color:var(--ink-3);font-size:13px;padding:14px 4px}
+  .footer{text-align:center;font-size:11.5px;color:var(--ink-3);margin-top:26px}
+</style>
+</head>
+<body>
+
+<h1>🕓 Прошедший семестр</h1>
+<div class="subt">Весна 2025/2026 — архив лекций и занятий</div>
+
+<div class="tabs" id="facTabs"></div>
+<div id="content"></div>
+<div class="footer">Кафедра нормальной физиологии БГМУ</div>
+
+<script>
+const LECTURES = [{"fac": "МПФ", "date": "2026-02-09", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Переверзев В.А", "rm": "107", "topic": "1. Гомеостаз. Физико-химические свойства крови. Группы крови."}, {"fac": "Стоматологический факультет", "date": "2026-02-11", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Переверзев В.А", "rm": "6", "topic": "1. Предмет и задачи нормальной физиологии. Жидкие среды. Физиология системы крови."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-02-11", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Голодок Т.П", "rm": "6", "topic": "1. Предмет и задачи нормальной физиологии. Жидкие среды. Физиология системы крови."}, {"fac": "Стоматологический факультет", "date": "2026-02-12", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Переверзев В.А", "rm": "5", "topic": "1. Предмет и задачи нормальной физиологии. Жидкие среды. Физиология системы крови."}, {"fac": "МПФ", "date": "2026-03-09", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Переверзев В.А", "rm": "107", "topic": "2. Основы информационного обмена клетки с окружающей средой.: химическая сигнализация. Физиология эндокринной системы."}, {"fac": "Стоматологический факультет", "date": "2026-03-18", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Переверзев В.А", "rm": "6", "topic": "3. Физиология эндокринной системы. Физиология костной ткани и регуляций кальций-фосфорного обмена."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-03-18", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Чабан А.Г", "rm": "6", "topic": "3. Физиология эндокринной системы. Физиология костной ткани и регуляций кальций-фосфорного обмена."}, {"fac": "Стоматологический факультет", "date": "2026-03-19", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Чабан А.Г", "rm": "5", "topic": "3. Физиология эндокринной системы. Физиология костной ткани и регуляций кальций-фосфорного обмена."}, {"fac": "МПФ", "date": "2026-04-06", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Чабан А.Г", "rm": "107", "topic": "3. Электрическая сигнализация. Законы реагирования возбудимых тканей. Биологические потенциалы. Изменение возбудимости при возбуждении."}, {"fac": "МПФ", "date": "2026-04-13", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Чабан А.Г", "rm": "107", "topic": "4. Проведение возбуждения по нервным волокнам. Синаптическая передача."}, {"fac": "Стоматологический факультет", "date": "2026-04-15", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Гаптарь М.И", "rm": "6", "topic": "5. Проведение возбуждения по нервным волокнам. Синаптическая передача."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-04-15", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Фоменко В.Н", "rm": "6", "topic": "5. Проведение возбуждения по нервным волокнам. Синаптическая передача."}, {"fac": "Стоматологический факультет", "date": "2026-04-16", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Гаптарь М.И", "rm": "5", "topic": "5. Проведение возбуждения по нервным волокнам. Синаптическая передача."}, {"fac": "МПФ", "date": "2026-04-20", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Чабан А.Г", "rm": "107", "topic": "5. Физиология мышц."}, {"fac": "Стоматологический факультет", "date": "2026-04-22", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Чабан А.Г", "rm": "6", "topic": "6. Физиология скелетных и гладких мышц. Особенности мышц челюстно-лицевой области."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-04-22", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Гаптарь М.И", "rm": "6", "topic": "6. Физиология скелетных и гладких мышц. Особенности мышц челюстно-лицевой области."}, {"fac": "Стоматологический факультет", "date": "2026-04-23", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Гаптарь М.И", "rm": "5", "topic": "6. Физиология скелетных и гладких мышц. Особенности мышц челюстно-лицевой области."}, {"fac": "МПФ", "date": "2026-04-27", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Переверзев В.А", "rm": "107", "topic": "6. Физиология автономной (вегетативной) нервной системы."}, {"fac": "МПФ", "date": "2026-05-04", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Переверзев В.А", "rm": "107", "topic": "7. Физиологические свойства и особенности миокарда."}, {"fac": "Стоматологический факультет", "date": "2026-05-06", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Чабан А.Г", "rm": "6", "topic": "7. Понятие о регуляции физиологических функций. Общая физиология ЦНС."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-05-06", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Фоменко В.Н", "rm": "6", "topic": "7. Понятие о регуляции физиологических функций. Общая физиология ЦНС."}, {"fac": "Стоматологический факультет", "date": "2026-05-07", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Фоменко В.Н", "rm": "5", "topic": "7. Понятие о регуляции физиологических функций. Общая физиология ЦНС."}, {"fac": "МПФ", "date": "2026-05-11", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Переверзев В.А", "rm": "107", "topic": "8. Сердечный цикл. Методы исследования сердечной деятельности."}, {"fac": "Стоматологический факультет", "date": "2026-05-13", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Абаимова М.О", "rm": "6", "topic": "8. Нервная регуляция вегетативных функций."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-05-13", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Чабан А.Г", "rm": "6", "topic": "8. Нервная регуляция вегетативных функций."}, {"fac": "Стоматологический факультет", "date": "2026-05-14", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Абаимова М.О", "rm": "5", "topic": "8. Нервная регуляция вегетативных функций."}, {"fac": "МПФ", "date": "2026-05-18", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Александров Д.А", "rm": "107", "topic": "9. Гемодинамика. Функциональные показатели кровообращения. Микроциркуляция."}, {"fac": "Стоматологический факультет", "date": "2026-05-20", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Переверзев В.А", "rm": "6", "topic": "9. Законы гемодинамики. Давление крови."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-05-20", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Фоменко В.Н", "rm": "6", "topic": "9. Законы гемодинамики. Давление крови."}, {"fac": "Стоматологический факультет", "date": "2026-05-21", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Фоменко В.Н", "rm": "5", "topic": "9. Законы гемодинамики. Давление крови."}, {"fac": "МПФ", "date": "2026-05-25", "weekday": "Понедельник", "t1": "13:10", "t2": "14:10", "grp": "", "tch": "Александров Д.А", "rm": "107", "topic": "10. Регуляция кровообращения."}, {"fac": "Стоматологический факультет", "date": "2026-05-27", "weekday": "Среда", "t1": "11:40", "t2": "12:40", "grp": "", "tch": "Переверзев В.А", "rm": "6", "topic": "10. Физиологические свойства и особенности миокарда. Регуляция сердечной деятельности."}, {"fac": "Стом. МФИУ (рус)", "date": "2026-05-27", "weekday": "Среда", "t1": "14:40", "t2": "15:40", "grp": "", "tch": "Фоменко В.Н", "rm": "6", "topic": "10. Физиологические свойства и особенности миокарда. Регуляция сердечной деятельности."}, {"fac": "Стоматологический факультет", "date": "2026-05-28", "weekday": "Четверг", "t1": "08:25", "t2": "09:25", "grp": "", "tch": "Фоменко В.Н", "rm": "5", "topic": "10. Физиологические свойства и особенности миокарда. Регуляция сердечной деятельности."}];
+const CLASSES = [{"fac": "МПФ", "weekday": "Понедельник", "t1": "08:00", "t2": "10:15", "grp": "3101", "tch": "Данченко А.Д.", "rm": "142-2"}, {"fac": "МПФ", "weekday": "Понедельник", "t1": "08:00", "t2": "10:15", "grp": "3102", "tch": "Григорьян А.Л.", "rm": "128"}, {"fac": "Стоматологический факультет", "weekday": "Понедельник", "t1": "08:00", "t2": "10:15", "grp": "7101", "tch": "Пупа Т.А.", "rm": "129"}, {"fac": "Стоматологический факультет", "weekday": "Понедельник", "t1": "08:00", "t2": "10:15", "grp": "7104", "tch": "Пупа Т.А.", "rm": "129"}, {"fac": "МПФ", "weekday": "Понедельник", "t1": "10:30", "t2": "12:45", "grp": "3106", "tch": "Гаптарь М.И.", "rm": "128"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Понедельник", "t1": "10:30", "t2": "12:45", "grp": "6147", "tch": "Чабан А.Г.", "rm": "127"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Понедельник", "t1": "10:30", "t2": "12:45", "grp": "6155", "tch": "Григорьян А.Л.", "rm": "102"}, {"fac": "Стоматологический факультет", "weekday": "Понедельник", "t1": "15:30", "t2": "17:45", "grp": "7115", "tch": "Юшкевич Ю.Ю.", "rm": "102"}, {"fac": "Стоматологический факультет", "weekday": "Понедельник", "t1": "15:30", "t2": "17:45", "grp": "7116", "tch": "Корниенко Е.М.О.", "rm": "129"}, {"fac": "МПФ", "weekday": "Вторник", "t1": "08:00", "t2": "10:15", "grp": "3104", "tch": "Печурский А.И.", "rm": "129"}, {"fac": "МПФ", "weekday": "Вторник", "t1": "08:00", "t2": "10:15", "grp": "3108", "tch": "Печурский А.И.", "rm": "129"}, {"fac": "Стоматологический факультет", "weekday": "Вторник", "t1": "08:00", "t2": "10:15", "grp": "7102", "tch": "Голодок Т.П.", "rm": "142-1"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Вторник", "t1": "08:00", "t2": "10:15", "grp": "6143", "tch": "Данченко А.Д.", "rm": "142-2"}, {"fac": "МПФ", "weekday": "Вторник", "t1": "10:25", "t2": "12:40", "grp": "3105", "tch": "Печурский А.И.", "rm": "129"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Вторник", "t1": "10:30", "t2": "12:45", "grp": "6145", "tch": "Данченко А.Д.", "rm": "142-1"}, {"fac": "Стоматологический факультет", "weekday": "Вторник", "t1": "10:45", "t2": "13:00", "grp": "7109", "tch": "Вакансия / не закреплено", "rm": "142-2"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Вторник", "t1": "16:00", "t2": "18:15", "grp": "6144", "tch": "Юшкевич Ю.Ю.", "rm": "130"}, {"fac": "Стоматологический факультет", "weekday": "Среда", "t1": "08:00", "t2": "10:15", "grp": "7103", "tch": "Печурский А.И.", "rm": "128"}, {"fac": "Стоматологический факультет", "weekday": "Среда", "t1": "08:00", "t2": "10:15", "grp": "7107", "tch": "Печурский А.И.", "rm": "128"}, {"fac": "Стоматологический факультет", "weekday": "Среда", "t1": "13:05", "t2": "15:20", "grp": "7110", "tch": "Печурский А.И.", "rm": "127"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Среда", "t1": "16:00", "t2": "18:15", "grp": "6141", "tch": "Юшкевич Ю.Ю.", "rm": "127"}, {"fac": "МПФ", "weekday": "Четверг", "t1": "08:00", "t2": "10:15", "grp": "3103", "tch": "Данченко А.Д.", "rm": "143"}, {"fac": "МПФ", "weekday": "Четверг", "t1": "08:00", "t2": "10:15", "grp": "3107", "tch": "Данченко А.Д.", "rm": "143"}, {"fac": "Стоматологический факультет", "weekday": "Четверг", "t1": "13:05", "t2": "15:20", "grp": "7111", "tch": "Абаимова М.О.", "rm": "102"}, {"fac": "Стоматологический факультет", "weekday": "Четверг", "t1": "13:05", "t2": "15:20", "grp": "7112", "tch": "Голодок Т.П.", "rm": "130"}, {"fac": "Стоматологический факультет", "weekday": "Четверг", "t1": "13:05", "t2": "15:20", "grp": "7113", "tch": "Печурский А.И.", "rm": "129"}, {"fac": "Стоматологический факультет", "weekday": "Четверг", "t1": "15:30", "t2": "17:45", "grp": "7108", "tch": "Абаимова М.О.", "rm": "102"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Четверг", "t1": "15:30", "t2": "17:45", "grp": "6140", "tch": "Печурский А.И.", "rm": "129"}, {"fac": "Стоматологический факультет", "weekday": "Пятница", "t1": "08:00", "t2": "10:10", "grp": "7105", "tch": "Печурский А.И.", "rm": "128"}, {"fac": "Стоматологический факультет", "weekday": "Пятница", "t1": "08:00", "t2": "10:10", "grp": "7106", "tch": "Печурский А.И.", "rm": "128"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Пятница", "t1": "10:30", "t2": "12:45", "grp": "6146", "tch": "Гаптарь М.И.", "rm": "128"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Пятница", "t1": "13:00", "t2": "15:15", "grp": "6154", "tch": "Данченко А.Д.", "rm": "129"}, {"fac": "Стоматологический факультет", "weekday": "Пятница", "t1": "13:05", "t2": "15:20", "grp": "7114", "tch": "Данченко А.Д.", "rm": "129"}, {"fac": "Стом. МФИУ (рус)", "weekday": "Пятница", "t1": "15:30", "t2": "17:45", "grp": "6142", "tch": "Корниенко Е.М.О.", "rm": "102"}];
+const FACULTIES = ["МПФ", "Стоматологический факультет", "Стом. МФИУ (рус)"];
+const DAYS = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+const DAYS_SHORT = ['Пн','Вт','Ср','Чт','Пт','Сб'];
+
+let activeFac = null;
+let activeSection = 'lectures'; // 'lectures' | 'classes'
+let activeDay = null;
+
+function facCount(fac){
+  return LECTURES.filter(r=>r.fac===fac).length + CLASSES.filter(r=>r.fac===fac).length;
+}
+
+function renderFacTabs(){
+  const t = document.getElementById('facTabs');
+  t.innerHTML = '';
+  FACULTIES.forEach(fac=>{
+    const cnt = facCount(fac);
+    if(cnt===0) return;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (fac===activeFac?' active':'');
+    btn.innerHTML = fac + ' <span class="tab-cnt">'+cnt+'</span>';
+    btn.onclick = ()=>{ activeFac = fac; activeSection = 'lectures'; activeDay = null; renderFacTabs(); renderContent(); };
+    t.appendChild(btn);
+  });
+}
+
+function renderLectures(c){
+  const lecs = LECTURES.filter(r=>r.fac===activeFac).sort((a,b)=> a.date.localeCompare(b.date) || a.t1.localeCompare(b.t1));
+  if(lecs.length===0){
+    const e = document.createElement('div'); e.className='empty'; e.textContent='Лекций не найдено.'; c.appendChild(e);
+    return;
+  }
+  lecs.forEach(r=>{
+    const card = document.createElement('div'); card.className = 'card';
+    const [y,m,dd] = (r.date||'').split('-');
+    const dateStr = (y && m && dd) ? (dd+'.'+m+'.'+y) : r.date;
+    card.innerHTML =
+      '<div class="card-top"><span class="card-date">'+dateStr+' ('+ (r.weekday||'') +')</span>'+
+      '<span class="card-time">'+r.t1+'–'+r.t2+'</span></div>'+
+      '<div class="card-line">'+ (r.grp? '<span class="card-grp">'+r.grp+'</span>' : '') + (r.tch||'') + (r.rm? ' · ауд. '+r.rm : '') + '</div>'+
+      (r.topic? '<div class="card-topic">'+r.topic+'</div>' : '');
+    c.appendChild(card);
+  });
+}
+
+function renderClasses(c){
+  const clsAll = CLASSES.filter(r=>r.fac===activeFac);
+  if(clsAll.length===0){
+    const e = document.createElement('div'); e.className='empty'; e.textContent='Занятий не найдено.'; c.appendChild(e);
+    return;
+  }
+  if(!activeDay || !DAYS.includes(activeDay)){
+    activeDay = DAYS.find(d=>clsAll.some(r=>r.weekday===d)) || DAYS[0];
+  }
+  const subtabs = document.createElement('div'); subtabs.className = 'subtabs';
+  DAYS.forEach((day,i)=>{
+    const cnt = clsAll.filter(r=>r.weekday===day).length;
+    if(cnt===0) return;
+    const b = document.createElement('button');
+    b.className = 'subtab' + (day===activeDay?' active':'');
+    b.textContent = DAYS_SHORT[i] + ' (' + cnt + ')';
+    b.onclick = ()=>{ activeDay = day; renderContent(); };
+    subtabs.appendChild(b);
+  });
+  c.appendChild(subtabs);
+
+  const dayRows = clsAll.filter(r=>r.weekday===activeDay).sort((a,b)=>a.t1.localeCompare(b.t1));
+  dayRows.forEach(r=>{
+    const card = document.createElement('div'); card.className = 'card';
+    card.innerHTML =
+      '<div class="card-top"><span class="card-time">'+r.t1+'–'+r.t2+'</span></div>'+
+      '<div class="card-line">'+ (r.grp? '<span class="card-grp">'+r.grp+'</span>' : '') + (r.tch||'') + (r.rm? ' · ауд. '+r.rm : '') + '</div>';
+    c.appendChild(card);
+  });
+}
+
+function renderContent(){
+  const c = document.getElementById('content');
+  c.innerHTML = '';
+  if(!activeFac){ c.innerHTML = '<div class="empty">Выберите факультет.</div>'; return; }
+
+  const lecCount = LECTURES.filter(r=>r.fac===activeFac).length;
+  const clsCount = CLASSES.filter(r=>r.fac===activeFac).length;
+
+  const sec = document.createElement('div'); sec.className = 'sectiontabs';
+  const b1 = document.createElement('button');
+  b1.className = 'sectiontab' + (activeSection==='lectures'?' active':'');
+  b1.innerHTML = '🎓 Лекции<span class="sec-cnt">'+lecCount+'</span>';
+  b1.onclick = ()=>{ activeSection = 'lectures'; renderContent(); };
+  const b2 = document.createElement('button');
+  b2.className = 'sectiontab' + (activeSection==='classes'?' active':'');
+  b2.innerHTML = '📋 Занятия<span class="sec-cnt">'+clsCount+'</span>';
+  b2.onclick = ()=>{ activeSection = 'classes'; activeDay = null; renderContent(); };
+  sec.appendChild(b1); sec.appendChild(b2);
+  c.appendChild(sec);
+
+  if(activeSection === 'lectures'){
+    renderLectures(c);
+  } else {
+    renderClasses(c);
+  }
+}
+
+activeFac = FACULTIES.find(f=>facCount(f)>0);
+renderFacTabs();
+renderContent();
+</script>
+</body>
+</html>
