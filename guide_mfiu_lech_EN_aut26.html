@@ -177,30 +177,67 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
     <div id="groups" class="section" style="display:none;">
       <div class="sec-header">
         <div class="sec-title">Class Schedule</div>
-        <span class="sec-count">Batch 3 · Batch 4 · Batch 5</span>
+        <span class="sec-count">14 groups · Batch 1 · Batch 2</span>
       </div>
-      <p class="empty-note">Schedule will be updated at the start of the autumn semester.</p>
+      <table class="group-table">
+        <tr><th>Batch</th><th>Group</th><th>Day / Time</th><th>Teacher</th><th>Room</th></tr>
+        <tr><td>Batch 1</td><td class="group-num">6217ая</td><td>Tuesday 11:40–14:40</td><td>Severina T.G.</td><td><span class="room-badge">133</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6218ая</td><td>Thursday 08:00–11:00</td><td>Grigoryan A.L.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6219ая</td><td>Thursday 08:00–11:00</td><td>Pupa T.A.</td><td><span class="room-badge">102</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6220ая</td><td>Friday 13:00–16:00</td><td>Grigoryan A.L.</td><td><span class="room-badge">102</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6221ая</td><td>Wednesday 11:40–14:40</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6222ая</td><td>Monday 12:10–15:10</td><td>Severina T.G.</td><td><span class="room-badge">133</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6223ая</td><td>Monday 08:00–11:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 1</td><td class="group-num">6224ая</td><td>Wednesday 13:50–16:50</td><td>Severina T.G.</td><td><span class="room-badge">127</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6225ая</td><td>Friday 11:20–14:20</td><td>Pupa T.A.</td><td><span class="room-badge">142-2</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6226ая</td><td>Friday 11:20–14:20</td><td>Severina T.G.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6227ая</td><td>Wednesday 08:00–11:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6228ая</td><td>Tuesday 08:00–11:00</td><td>Alexandrov D.A.</td><td><span class="room-badge">142-2</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6229ая</td><td>Tuesday 08:00–11:00</td><td>Haikovich Y.V.</td><td><span class="room-badge">142-1</span></td></tr>
+        <tr><td>Batch 2</td><td class="group-num">6232ая</td><td>Thursday 11:20–14:20</td><td>Alexandrov D.A.</td><td><span class="room-badge">133</span></td></tr>
+      </table>
     </div>
 
     <!-- LECTURES -->
     <div id="lectures" class="section" style="display:none;">
       <div class="sec-header">
         <div class="sec-title">Lectures</div>
-        <span class="sec-count">Autumn 2026</span>
+        <span class="sec-count">20 lectures · 2 batches</span>
+      </div>
+      <div class="rule-block" style="margin-bottom:16px;">
+        <p class="rule-title">Managed Independent Work (MIW) — no lecture, notes required for credit admission</p>
+        <div class="rule-item">The hemostatic system. Blood types</div>
+        <div class="rule-item">Physiology of the CNS. Physiology of the spinal cord</div>
+        <div class="rule-item">Physiology of the CNS. Physiology of the brainstem</div>
+        <div class="rule-item">Physiology of the CNS. Physiology of diencephalon and telencephalon</div>
       </div>
       <div class="lec-subnav">
-        <button class="lec-tab active" onclick="showLec('b3',this)">Batch 3</button>
-        <button class="lec-tab" onclick="showLec('b4',this)">Batch 4</button>
-        <button class="lec-tab" onclick="showLec('b5',this)">Batch 5</button>
+        <button class="lec-tab active" onclick="showLec('b1',this)">Batch 1</button>
+        <button class="lec-tab" onclick="showLec('b2',this)">Batch 2</button>
       </div>
-      <div id="b3" class="lec-panel">
-        <p class="empty-note">Lecture schedule will be updated at the start of the autumn semester.</p>
+      <div id="b1" class="lec-panel">
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">01.09</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">The subject and tasks of Normal Physiology. Homeostasis. Physical and chemical constants of blood</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">15.09</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Bases of information exchange of the cell with the environment. Chemical signaling. General physiology of the endocrine system</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">29.09</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of endocrine system</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">13.10</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Electrical signaling. Biological potentials. Conduction of excitation along the nerve fibers</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">20.10</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Synaptic transmission. Neuromuscular junction</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">03.11</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Muscle physiology</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">17.11</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the CNS. Systemic mechanisms of muscle tone and movement regulation</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">01.12</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the visual sensory system</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">15.12</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the auditory and vestibular sensory systems</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">22.12</div><div class="lec-date-w">TUE</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Hemodynamics. Blood flow indices</div><div class="t-date">10:25–11:25, Lecture hall 2</div></div></div>
       </div>
-      <div id="b4" class="lec-panel" style="display:none;">
-        <p class="empty-note">Lecture schedule will be updated at the start of the autumn semester.</p>
-      </div>
-      <div id="b5" class="lec-panel" style="display:none;">
-        <p class="empty-note">Lecture schedule will be updated at the start of the autumn semester.</p>
+      <div id="b2" class="lec-panel" style="display:none;">
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">02.09</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">The subject and tasks of Normal Physiology. Homeostasis. Physical and chemical constants of blood</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">16.09</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Bases of information exchange of the cell with the environment. Chemical signaling. General physiology of the endocrine system</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">30.09</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of endocrine system</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">14.10</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Electrical signaling. Biological potentials. Conduction of excitation along the nerve fibers</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">21.10</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Synaptic transmission. Neuromuscular junction</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">28.10</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Muscle physiology</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">18.11</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the CNS. Systemic mechanisms of muscle tone and movement regulation</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">09.12</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the visual sensory system</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">16.12</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Physiology of the auditory and vestibular sensory systems</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
+        <div class="lec-row"><div class="lec-date"><div class="lec-date-d">23.12</div><div class="lec-date-w">WED</div></div><div class="lec-body"><div class="lec-teacher">Severina T.G.</div><div class="lec-topic">Hemodynamics. Blood flow indices</div><div class="t-date">11:35–12:35, Lecture hall 3</div></div></div>
       </div>
     </div>
 
