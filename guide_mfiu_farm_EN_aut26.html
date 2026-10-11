@@ -200,7 +200,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
         <div class="sec-title">Grading Criteria</div>
         <span class="sec-count">10-point scale</span>
       </div>
-      <div class="cr-row"><div class="cr-mark cm10">10</div><div class="cr-text">Systematised, deep and complete knowledge across all sections; precise terminology; impeccable practical skills; creative solution of non-standard tasks; active creative work. <span class="tag tag-accent">confirmed at the exam by head of department</span></div></div>
+      <div class="cr-row"><div class="cr-mark cm10">10</div><div class="cr-text">Systematised, deep and complete knowledge across all sections; precise terminology; impeccable practical skills; creative solution of non-standard tasks; active creative work.</div></div>
       <div class="cr-row"><div class="cr-mark cm9">9</div><div class="cr-text">Deep and complete knowledge; creative solution of complex tasks; active independent work. No more than one minor inaccuracy per question.</div></div>
       <div class="cr-row"><div class="cr-mark cm8">8</div><div class="cr-text">Deep and complete knowledge; independent solution of complex tasks. No more than two minor errors per question.</div></div>
       <div class="cr-row"><div class="cr-mark cm7">7</div><div class="cr-text">Good systematised knowledge; independent solution of standard tasks. No more than three minor errors or one major error per question.</div></div>
@@ -211,21 +211,25 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div class="cr-row"><div class="cr-mark cm2">2</div><div class="cr-text">Fragmentary knowledge; gross logical errors; cannot solve standard tasks.</div></div>
       <div class="cr-row"><div class="cr-mark cm1">1</div><div class="cr-text">No knowledge; refusal to answer; absent without valid reason; disciplinary violation.</div></div>
 
+      <p class="note" style="margin-top:10px;">Marks 9 and 10, as well as 3, 2 and 1, are awarded by joint decision of the examiner and the head of department.</p>
       <div class="divider"></div>
       <div class="sec-header"><div class="sec-title">Bonus Points (B)</div><span class="sec-count">max 1 point</span></div>
       <div class="rule-block">
         <p class="rule-title">For what bonuses are awarded</p>
-        <div class="rule-item hi">Tables, visual aids, teaching videos, computer programs, flash-cards (≥ 20 per topic) approved by the department — <b class="bonus-num">0.1 per item</b></div>
-        <div class="rule-item hi">Presenting a report at the department's Student Scientific Circle meetings — <b class="bonus-num">0.05 per presentation</b></div>
-        <div class="rule-item hi">Presenting an abstract report at the Student Scientific Conference of BSMU — <b class="bonus-num">0.1 per presentation</b></div>
-        <div class="rule-item hi">Presenting a report at BSMU Conference or in another organisation based on research results — <b class="bonus-num">0.2 per presentation</b><br><span style="font-size:12px;color:var(--ink-3);">Diploma winners additionally: 1st place / laureate +0.3 · 2nd place +0.2 · 3rd place +0.1</span></div>
-        <div class="rule-item hi">Preparation of work for the Republican competition of student scientific works — <b class="bonus-num">0.4 points</b></div>
+        <div class="rule-item hi">Development and production of tables, visual aids, teaching videos, computer programs, flash-cards, etc. approved by the department — <b class="bonus-num">0.1 per item</b><br><span style="font-size:12px;color:var(--ink-3);">Tables: canvas 55×78 cm, portrait or landscape; 300 px/inch; fonts Chianti WGL4 BT Roman and Bold; save as layered .psd (Adobe Photoshop or similar) and as .jpg in maximum quality. Flash-cards: at least 20 per topic of one class, printed or electronic (www.znzn.ru or similar).</span></div>
+        <div class="rule-item hi">Test items: a block of at least 50 final test items on one class topic, validated to department requirements, MoodleXML format — <b class="bonus-num">0.1 per block</b></div>
+        <div class="rule-item hi">Report or other activity at the department's Student Scientific Circle meeting (analysis of clinical-physiological problems, quiz, video, physiology news review, running a department social network for a year, etc.) — <b class="bonus-num">0.1 per item</b></div>
+        <div class="rule-item hi">Presentation at the BSMU Student Scientific Conference (Normal Physiology section, including abstracts) or at another conference with results on normal physiology: abstract report — <b class="bonus-num">0.15</b>, research results — <b class="bonus-num">0.20</b> per presentation</div>
+        <div class="rule-item hi">Diploma for a scientific work in normal physiology — additionally: 1st place / laureate <b class="bonus-num">+0.3</b> · 2nd place <b class="bonus-num">+0.2</b> · 3rd place <b class="bonus-num">+0.1</b></div>
+        <div class="rule-item hi">Publication of research results in normal physiology: up to 2 printed pages inclusive — <b class="bonus-num">0.05</b>, more than 2 pages — <b class="bonus-num">0.1</b> per publication; for papers co-authored with a department teacher an additional <b class="bonus-num">+0.1</b></div>
+        <div class="rule-item hi">Preparation of work for the Republican competition of student scientific works, accepted by the teacher — <b class="bonus-num">0.4 points</b></div>
       </div>
       <div class="divider"></div>
       <div class="sec-header"><div class="sec-title">Penalty Points (P)</div><span class="sec-count">max 1 point</span></div>
       <div class="rule-block">
         <p class="rule-title">For what penalties are charged</p>
-        <div class="rule-item" style="color:var(--red-ink);">Violation of discipline during lectures and classes — <b class="bonus-num">0.5 per violation</b></div>
+        <div class="rule-item" style="color:var(--red-ink);">Violation of conduct rules during lectures, practical classes and in the computer room — <b class="bonus-num">0.5 per violation</b></div>
+        <div class="rule-item" style="color:var(--red-ink);">Missing more than 50 % of lectures in the semester — <b class="bonus-num">0.2 points</b></div>
       </div>
     </div>
 
@@ -258,9 +262,15 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
     <div id="credit" class="section" style="display:none;">
       <div class="sec-header"><div class="sec-title">Credit-test</div></div>
       <div class="rule-block">
+        <p class="rule-title">Current certification and admission</p>
+        <div class="rule-item">Concluding class: computer test (up to 28 minutes) and oral or written interview; two separate marks — theory and practical skills. Passed = both marks positive.</div>
+        <div class="rule-item">Retakes are taken by the teacher who conducted the colloquium, as a rule within two weeks.</div>
+        <div class="rule-item">Unsatisfactory current-certification mark: MFIU students take a control test to be admitted to the credit.</div>
+      </div>
+      <div class="rule-block">
         <p class="rule-title">Admission to Credit</p>
         <div class="rule-item hi">Positive current certification — all concluding classes / colloquiums passed</div>
-        <div class="rule-item hi">No unworked-off absences from classes and lectures</div>
+        <div class="rule-item hi">No absences from classes and lectures (or they have been worked off)</div>
         <div class="rule-item hi">Notes of MIW lectures (managed independent work) presented</div>
         <div class="rule-item hi">Protocols of practical classes completed and signed</div>
         <div class="rule-item">No violations of discipline and safety rules</div>
@@ -268,8 +278,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-page); min-height:
       <div class="rule-block">
         <p class="rule-title">Credit Procedure</p>
         <div class="rule-item">Passed current certification on the <strong>first attempt</strong> — "passed" mark based on current assessment results.</div>
-        <div class="rule-item">Passed on the <strong>second attempt or later</strong> — oral or written interview on all semester sections.</div>
-        <div class="rule-item">Second retake — before the commission in accordance with the Certification Rules.</div>
+        <div class="rule-item">Passed on the <strong>second attempt or later</strong> — computer test on all semester sections (up to 28 minutes).</div>
+        <div class="rule-item">First retake — with the teacher who conducted the classes, in the same form. Second retake — before the commission, orally, in accordance with the Certification Rules.</div>
       </div>
       <div class="rule-block">
         <p class="rule-title">Credit Schedule</p>
