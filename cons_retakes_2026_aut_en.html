@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultations and make-up sessions · Normal Physiology · 2026/2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --bg-muted: #eeece7;
+    --border: #ddd9d0;
+    --border-light: #e8e5de;
+    --ink: #1a1816;
+    --ink-2: #5a544a;
+    --ink-3: #8a8175;
+    --accent: #c84a1e;
+    --accent-soft: #f4e4dc;
+    --accent-strong: #a23a15;
+    --hero-bg: linear-gradient(135deg, #5a544a 0%, #3a342e 100%);
+    --section-disc: #c84a1e;
+    --section-miss: #7a5c2e;
+    --section-usr: #2d5f7a;
+    --cur: var(--section-disc);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body {
+    font-family: 'Onest', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.5;
+    padding-bottom: 40px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 14px; }
+
+  .hero {
+    background: var(--hero-bg);
+    color: #fff;
+    padding: 26px 18px 22px;
+    margin: 0 -14px 16px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; opacity: 0.8; margin-bottom: 8px;
+  }
+  .hero-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .hero-sub { font-size: 15px; font-weight: 500; opacity: 0.9; margin-bottom: 14px; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .hero-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px; padding: 5px 12px; font-size: 14px; font-weight: 600;
+  }
+
+  .howto {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 18px;
+    font-size: 15px; font-weight: 500; color: var(--ink-2); line-height: 1.55;
+  }
+  .howto-title { font-weight: 700; color: var(--ink); margin-bottom: 8px; font-size: 16px; }
+  .howto ul { margin: 4px 0 0; padding-left: 20px; }
+  .howto li { margin-bottom: 5px; }
+  .howto li:last-child { margin-bottom: 0; }
+
+  .cat-switch {
+    display: flex; gap: 0; margin-bottom: 16px;
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #fff;
+  }
+  .cat-btn {
+    flex: 1; background: transparent; border: none; cursor: pointer;
+    padding: 12px 6px; font-family: 'Onest', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--ink-2); transition: background 0.15s, color 0.15s;
+    border-right: 1px solid var(--border);
+  }
+  .cat-btn:last-child { border-right: none; }
+  .cat-btn:hover { background: var(--bg-muted); }
+  .cat-btn.active { color: #fff; }
+  .cat-btn.active.disc { background: var(--section-disc); }
+  .cat-btn.active.miss { background: var(--section-miss); }
+  .cat-btn.active.usr  { background: var(--section-usr); }
+  .cat-btn small { display: block; font-size: 12px; font-weight: 500; opacity: 0.8; margin-top: 2px; }
+
+  .notice {
+    display: none;
+    background: #fff; border: 1px solid var(--border);
+    border-left: 3px solid var(--cur);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 14px;
+    font-size: 14px; color: var(--ink-2); line-height: 1.5;
+  }
+  .notice.show { display: block; }
+
+  .search-wrap { margin-bottom: 14px; }
+  .search-input {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+    font-family: 'Onest', sans-serif; font-size: 15px; background: #fff; color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus { outline: none; border-color: var(--cur); box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
+
+  #search-panel { display: none; margin-bottom: 16px; }
+  #search-panel.active { display: block; }
+  .search-result-title {
+    font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 10px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  .tab-nav {
+    display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+    scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  }
+  .tab-nav::-webkit-scrollbar { height: 4px; }
+  .tab-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .tab-btn {
+    flex-shrink: 0; background: none; border: none; cursor: pointer;
+    padding: 13px 16px 11px; font-family: 'Onest', sans-serif; font-size: 16px; font-weight: 600;
+    color: var(--ink-3); border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s; line-height: 1.3; text-align: center; white-space: nowrap;
+  }
+  .tab-btn .tb-day { font-size: 12px; font-weight: 500; opacity: 0.85; display: block; margin-top: 2px; }
+  .tab-btn:hover { color: var(--cur); }
+  .tab-btn.active { color: var(--cur); border-bottom-color: var(--cur); font-weight: 700; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .date-header { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .date-meta { font-size: 14px; color: var(--ink-2); margin-bottom: 14px; }
+  .summary-bar { display: flex; gap: 12px; margin-bottom: 14px; font-size: 13px; color: var(--ink-2); }
+  .summary-bar strong { font-weight: 700; color: var(--ink); }
+
+  .group-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 8px; padding: 12px 14px; display: grid;
+    grid-template-columns: auto 1fr; gap: 0 14px; align-items: start; transition: box-shadow 0.15s;
+  }
+  .group-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .gc-time-col {
+    grid-row: span 2; display: flex; flex-direction: column; align-items: center;
+    min-width: 60px; padding-top: 2px;
+  }
+  .gc-time { font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: var(--cur); line-height: 1; }
+  .gc-time-end { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .gc-teacher {
+    font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .gc-teacher::before { content: '👤'; font-size: 13px; opacity: 0.7; }
+  .gc-room { font-size: 14px; color: var(--ink-2); display: flex; align-items: center; gap: 5px; }
+  .gc-room::before { content: '🚪'; font-size: 13px; opacity: 0.7; }
+  .room-badge {
+    background: var(--bg-muted); border-radius: 4px; padding: 2px 8px;
+    font-size: 13px; font-weight: 600; color: var(--ink);
+  }
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--ink-3); font-size: 15px; }
+  .page-footer {
+    text-align: center; color: var(--ink-3); font-size: 12px; margin-top: 26px;
+    padding-top: 16px; border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">BSMU · Department of Normal Physiology</div>
+    <div class="hero-title">Consultations and make-up sessions</div>
+    <div class="hero-sub">Normal Physiology · Autumn term 2026/2027</div>
+    <div class="hero-chips">
+      <span class="hero-chip">September – December 2026</span>
+      <span class="hero-chip" id="chip-dates"></span>
+      <span class="hero-chip" id="chip-rows"></span>
+    </div>
+  </div>
+
+  <div class="howto">
+    <div class="howto-title">How to read this</div>
+    <ul>
+      <li>The switch at the top has three sections: <strong>Consultations</strong> on the course, <strong>Working off</strong> classes missed without a valid reason, and individual consultations on <strong>SSIW</strong> (student supervised independent work).</li>
+      <li>Inside each section, tabs show dates. Tap a date to see all lecturers available that day. The page opens on the nearest date.</li>
+      <li>You can search by lecturer surname or date (e.g. <strong>Haikovich</strong> or <strong>14.10</strong>).</li>
+    </ul>
+  </div>
+
+  <div class="cat-switch">
+    <button class="cat-btn disc active" id="cat-disc" onclick="switchCat('disc')">Consultations<small>on the course</small></button>
+    <button class="cat-btn miss" id="cat-miss" onclick="switchCat('miss')">Working off<small>no valid reason</small></button>
+    <button class="cat-btn usr" id="cat-usr" onclick="switchCat('usr')">SSIW<small>supervised work</small></button>
+  </div>
+
+  <div class="notice" id="notice"></div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="🔍 Surname or date, e.g. 14.10" autocomplete="off">
+  </div>
+
+  <div id="search-panel">
+    <div class="search-result-title" id="searchResultTitle"></div>
+    <div id="searchResults"></div>
+  </div>
+
+  <div id="main-content">
+    <nav class="tab-nav" id="tabNav"></nav>
+    <div id="tabPanels"></div>
+  </div>
+
+  <div class="page-footer">Department of Normal Physiology, BSMU · 2026/2027</div>
+</div>
+
+<script>
+const DATA = {"disc": [{"date": "28.09.2026", "iso": "2026-09-28", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "29.09.2026", "iso": "2026-09-29", "weekday": "Tue", "time": "11.10-11.30", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "29.09.2026", "iso": "2026-09-29", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "30.09.2026", "iso": "2026-09-30", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "01.10.2026", "iso": "2026-10-01", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "05.10.2026", "iso": "2026-10-05", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "06.10.2026", "iso": "2026-10-06", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "12.10.2026", "iso": "2026-10-12", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "15.10.2026", "iso": "2026-10-15", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "19.10.2026", "iso": "2026-10-19", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "19.10.2026", "iso": "2026-10-19", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "20.10.2026", "iso": "2026-10-20", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "21.10.2026", "iso": "2026-10-21", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "02.11.2026", "iso": "2026-11-02", "weekday": "Mon", "time": "15.30-16.10", "room": "139", "teacher": "Severina T.G."}, {"date": "03.11.2026", "iso": "2026-11-03", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "09.11.2026", "iso": "2026-11-09", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "16.11.2026", "iso": "2026-11-16", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "16.11.2026", "iso": "2026-11-16", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "25.11.2026", "iso": "2026-11-25", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "07.12.2026", "iso": "2026-12-07", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "07.12.2026", "iso": "2026-12-07", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "08.12.2026", "iso": "2026-12-08", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "14.12.2026", "iso": "2026-12-14", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "14.12.2026", "iso": "2026-12-14", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "15.12.2026", "iso": "2026-12-15", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "15.12.2026", "iso": "2026-12-15", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "16.12.2026", "iso": "2026-12-16", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "17.12.2026", "iso": "2026-12-17", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "22.12.2026", "iso": "2026-12-22", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "23.12.2026", "iso": "2026-12-23", "weekday": "Wed", "time": "12.50-13.10", "room": "139", "teacher": "Severina T.G."}, {"date": "24.12.2026", "iso": "2026-12-24", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "29.12.2026", "iso": "2026-12-29", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "29.12.2026", "iso": "2026-12-29", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "31.12.2026", "iso": "2026-12-31", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}], "miss": [{"date": "28.09.2026", "iso": "2026-09-28", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "26.10.2026", "iso": "2026-10-26", "weekday": "Mon", "time": "15.30-16.10", "room": "139", "teacher": "Severina T.G."}, {"date": "05.11.2026", "iso": "2026-11-05", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "17.11.2026", "iso": "2026-11-17", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "01.12.2026", "iso": "2026-12-01", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "21.12.2026", "iso": "2026-12-21", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}], "usr": [{"date": "05.10.2026", "iso": "2026-10-05", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "06.10.2026", "iso": "2026-10-06", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "07.10.2026", "iso": "2026-10-07", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "08.10.2026", "iso": "2026-10-08", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "13.10.2026", "iso": "2026-10-13", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "13.10.2026", "iso": "2026-10-13", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "14.10.2026", "iso": "2026-10-14", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "20.10.2026", "iso": "2026-10-20", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "22.10.2026", "iso": "2026-10-22", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "26.10.2026", "iso": "2026-10-26", "weekday": "Mon", "time": "11.30-11.50", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "02.11.2026", "iso": "2026-11-02", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "02.11.2026", "iso": "2026-11-02", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "03.11.2026", "iso": "2026-11-03", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "09.11.2026", "iso": "2026-11-09", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "10.11.2026", "iso": "2026-11-10", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}, {"date": "11.11.2026", "iso": "2026-11-11", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "17.11.2026", "iso": "2026-11-17", "weekday": "Tue", "time": "15.30-16.10", "room": "140", "teacher": "Fomenko V.N."}, {"date": "18.11.2026", "iso": "2026-11-18", "weekday": "Wed", "time": "12.50-13.30", "room": "139", "teacher": "Severina T.G."}, {"date": "19.11.2026", "iso": "2026-11-19", "weekday": "Thu", "time": "11.10-11.50", "room": "138", "teacher": "Pupa T.A."}, {"date": "23.11.2026", "iso": "2026-11-23", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "30.11.2026", "iso": "2026-11-30", "weekday": "Mon", "time": "11.20-12.00", "room": "136", "teacher": "Grigoryan A.L."}, {"date": "30.11.2026", "iso": "2026-11-30", "weekday": "Mon", "time": "11.30-12.10", "room": "138", "teacher": "Haikovich Y.V."}, {"date": "01.12.2026", "iso": "2026-12-01", "weekday": "Tue", "time": "11.10-11.50", "room": "123", "teacher": "Alexandrov D.A."}]};
+const T = {"room": "room", "dates": "dates", "lecturers": "Lecturers", "empty": "No entries", "noResultsFor": "No results for", "checkSpelling": "Check spelling of the surname or date format.", "found": "Found", "entries": {"disc": "consultations", "miss": "sessions", "usr": "consultations"}, "notice": {"disc": "", "miss": "Working off of classes missed without a valid reason is done by sign-up in person (offline) according to the approved schedule.", "usr": ""}};
+const MONTH_NAMES = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const SHORT_MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function parseDay(str) { const [d, m, y] = str.split('.').map(Number); return { d, m, y }; }
+function formatFull(str) { const { d, m } = parseDay(str); return `${d} ${MONTH_NAMES[m]}`; }
+function formatShort(str) { const { d, m } = parseDay(str); return `${d} ${SHORT_MONTHS[m]}`; }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+let currentCat = 'disc';
+
+function getCurrentData() { return DATA[currentCat]; }
+
+function toMin(t) {
+  const m = t.split('-')[0].replace(':', '.').split('.').map(Number);
+  return (m[0] || 0) * 60 + (m[1] || 0);
+}
+
+function groupByDate(rows) {
+  const byDate = {}; const order = [];
+  rows.forEach(r => {
+    if (!byDate[r.date]) { byDate[r.date] = []; order.push(r.date); }
+    byDate[r.date].push(r);
+  });
+  Object.values(byDate).forEach(arr => arr.sort((a, b) => toMin(a.time) - toMin(b.time)));
+  order.sort((a, b) => {
+    const da = parseDay(a), db = parseDay(b);
+    return new Date(da.y, da.m - 1, da.d) - new Date(db.y, db.m - 1, db.d);
+  });
+  return { byDate, order };
+}
+
+function renderCard(row, withDate) {
+  const [start, end] = row.time.split('-');
+  return `
+<div class="group-card">
+  <div class="gc-time-col">
+    <div class="gc-time">${esc(start || row.time)}</div>
+    <div class="gc-time-end">${esc(end || '')}</div>
+    ${withDate ? `<div style="font-size:11px;color:var(--ink-3);margin-top:4px;">${formatShort(row.date)}</div>` : ''}
+  </div>
+  <div class="gc-teacher">${esc(row.teacher)}${withDate ? ` <span style="font-size:12px;color:var(--ink-3);font-weight:400;">${esc(row.weekday)}</span>` : ''}</div>
+  <div class="gc-room"><span class="room-badge">${esc(T.room)} ${esc(row.room)}</span></div>
+</div>`;
+}
+
+function todayIso() {
+  const n = new Date();
+  const p = x => String(x).padStart(2, '0');
+  return n.getFullYear() + '-' + p(n.getMonth() + 1) + '-' + p(n.getDate());
+}
+
+function renderTabs() {
+  const data = getCurrentData();
+  const { byDate, order } = groupByDate(data);
+  const tabNav = document.getElementById('tabNav');
+  const tabPanels = document.getElementById('tabPanels');
+  tabNav.innerHTML = ''; tabPanels.innerHTML = '';
+
+  const colors = { disc: 'var(--section-disc)', miss: 'var(--section-miss)', usr: 'var(--section-usr)' };
+  document.documentElement.style.setProperty('--cur', colors[currentCat]);
+
+  const notice = document.getElementById('notice');
+  notice.textContent = T.notice[currentCat] || '';
+  notice.classList.toggle('show', !!T.notice[currentCat]);
+
+  document.getElementById('chip-dates').textContent = order.length + ' ' + T.dates;
+  document.getElementById('chip-rows').textContent = data.length + ' ' + T.entries[currentCat];
+
+  if (!order.length) { tabPanels.innerHTML = '<div class="empty-state">' + T.empty + '</div>'; return; }
+
+  // открыть ближайшую дату (сегодня или позже); если все прошли — последнюю
+  const tIso = todayIso();
+  let startIdx = order.findIndex(d => byDate[d][0].iso >= tIso);
+  if (startIdx < 0) startIdx = order.length - 1;
+
+  order.forEach((date, di) => {
+    const rows = byDate[date];
+    const wd = rows[0].weekday;
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (di === startIdx ? ' active' : '');
+    btn.setAttribute('data-tab', 'd' + di);
+    btn.innerHTML = `<span>${formatShort(date)}</span><span class="tb-day">${esc(wd)}</span>`;
+    btn.onclick = () => switchTab('d' + di);
+    tabNav.appendChild(btn);
+
+    const panel = document.createElement('div');
+    panel.className = 'tab-panel' + (di === startIdx ? ' active' : '');
+    panel.id = 'panel-d' + di;
+    panel.innerHTML = `
+      <div class="date-header">${formatFull(date)}</div>
+      <div class="date-meta">${esc(wd)} · ${rows[0].date}</div>
+      <div class="summary-bar"><span>${T.lecturers}: <strong>${rows.length}</strong></span></div>
+      ${rows.map(r => renderCard(r, false)).join('')}`;
+    tabPanels.appendChild(panel);
+  });
+  const act = tabNav.querySelector('.tab-btn.active');
+  if (act) tabNav.scrollLeft = Math.max(0, act.offsetLeft - 20);
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === id));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === ('panel-' + id)));
+  const btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+  if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function switchCat(cat) {
+  currentCat = cat;
+  ['disc', 'miss', 'usr'].forEach(c => document.getElementById('cat-' + c).classList.toggle('active', c === cat));
+  document.getElementById('searchInput').value = '';
+  document.getElementById('search-panel').classList.remove('active');
+  document.getElementById('main-content').style.display = '';
+  renderTabs();
+}
+
+const searchInput = document.getElementById('searchInput');
+const searchPanel = document.getElementById('search-panel');
+const mainContent = document.getElementById('main-content');
+const searchResults = document.getElementById('searchResults');
+const searchResultTitle = document.getElementById('searchResultTitle');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) { searchPanel.classList.remove('active'); mainContent.style.display = ''; return; }
+  searchPanel.classList.add('active');
+  mainContent.style.display = 'none';
+  const found = getCurrentData().filter(r =>
+    r.teacher.toLowerCase().includes(q) || r.date.toLowerCase().includes(q) || r.weekday.toLowerCase().includes(q));
+  if (!found.length) {
+    searchResultTitle.textContent = T.noResultsFor + ' «' + q + '»';
+    searchResults.innerHTML = '<div class="empty-state">' + T.checkSpelling + '</div>';
+    return;
+  }
+  searchResultTitle.textContent = T.found + ': ' + found.length;
+  searchResults.innerHTML = found.map(r => renderCard(r, true)).join('');
+});
+
+renderTabs();
+</script>
+</body>
+</html>
